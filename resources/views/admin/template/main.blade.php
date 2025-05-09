@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-11">
                         {{-- <h4 class="brand-text text-center -mr-3">{{ config('app.name') }}</h4> --}}
-                        <h4 class="brand-text text-center">Tasna Laundry</h4>
+                        <h4 class="brand-text text-center"># Laundry</h4>
                     </div>
                 </div>
                 {{-- <i class="fas fa-tshirt brand-image mt-1 ml-3"></i> --}}

@@ -61,7 +61,7 @@
                                 <div class="tab-pane fade show active" id="satuan" role="tabpanel"
                                     aria-labelledby="satuan-tab">
                                     <form action="{{ route('admin.transactions.session.store.satuan') }}" method="post"
-                                        onsubmit="return showAddOrderAlert('kiloan')">
+                                        onsubmit="return showAddOrderAlert('satuan')">
                                         @csrf
                                         <div class="form-group row">
                                             <label for="phone_number" class="col-sm-2 col-form-label">Data Member</label>
@@ -145,7 +145,7 @@
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        {{-- <tbody>
                                             @if (isset($sessionTransaction))
                                                 @foreach ($sessionTransaction as $transaction)
                                                     <tr>
@@ -162,6 +162,27 @@
                                                                     class="fa-solid fa-trash-can"></i></a>
                                                         </td>
                                                     </tr>
+                                                @endforeach
+                                            @endif
+                                        </tbody> --}}
+                                        <tbody>
+                                            @if (isset($sessionTransaction))
+                                                @foreach ($sessionTransaction as $transaction)
+                                                    @if (isset($transaction['subTotal']))
+                                                        <tr>
+                                                            <td>{{ $loop->iteration }}</td>
+                                                            <td>{{ $transaction['itemName'] }}</td>
+                                                            <td>{{ $transaction['serviceName'] }}</td>
+                                                            <td>{{ $transaction['categoryName'] }}</td>
+                                                            <td>{{ $transaction['quantity'] }}</td>
+                                                            <td>{{ $transaction['subTotal'] }}</td>
+                                                            <td>
+                                                                <a href="#"
+                                                                    onclick="confirmAndDelete('{{ route('admin.transactions.session.destroy', ['rowId' => $transaction['rowId']]) }}');"
+                                                                    class="btn btn-danger">Hapus</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             @endif
                                         </tbody>

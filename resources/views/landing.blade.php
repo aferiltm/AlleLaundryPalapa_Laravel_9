@@ -49,7 +49,7 @@
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="p-4 flex flex-row items-center justify-between">
                 <a href="#"
-                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">Tasna
+                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">#
                     Laundry</a>
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
@@ -75,7 +75,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
                 <h1 class="text-5xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                    data-aos="fade-up">Tasna Laundry</h1>
+                    data-aos="fade-up"># Laundry</h1>
                 <h1 class="text-5xl font-bold tracking-widest text-white rounded-lg focus:outline-none focus:shadow-outline"
                     data-aos="fade-up">Dry Cleaning</h1>
                 <p class="font-poppins text-lg mt-3 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
@@ -262,7 +262,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                &copy; <a href="#" class="text-white hover:text-blue-600">Tasna Laundry</a> <i
+                &copy; <a href="#" class="text-white hover:text-blue-600"># Laundry</a> <i
                     class="fa-solid fa-gamepad text-blue-600"></i></i>
             </p>
         </div>

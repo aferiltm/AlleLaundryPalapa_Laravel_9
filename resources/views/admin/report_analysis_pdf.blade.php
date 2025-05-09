@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan Tasna Laundry</title>
+    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan # Laundry</title>
     <style>
         table {
             width: 100%;

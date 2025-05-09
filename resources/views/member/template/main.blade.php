@@ -38,7 +38,7 @@
             <a href="" class="brand-link mt-2 text-white">
                 <i class="fas fa-tshirt brand-image mt-1 ml-3"></i>
                 {{-- <h4 class="brand-text text-center">{{ config('app.name') }}</h4> --}}
-                <h4 class="brand-text text-center">Tasna Laundry</h4>
+                <h4 class="brand-text text-center"># Laundry</h4>
             </a>
 
             <!-- Sidebar -->

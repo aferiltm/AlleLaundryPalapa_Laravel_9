@@ -30,7 +30,7 @@
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="-mt-4 flex flex-row items-center justify-between">
                 <a href="#"
-                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">Tasna
+                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">#
                     Laundry</a>
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
