@@ -283,7 +283,15 @@ class TransactionController extends Controller
         }
 
         $user = User::where('id', $memberId)->firstOrFail();
-        $user->point = $user->point + 1;
+        // $user->point = $user->point + 1;
+        if ($totalPrice > 100000) {
+            $user->point += 7;
+        } elseif ($totalPrice > 50000) {
+            $user->point += 5;
+        } else {
+            $user->point += 2;
+        }
+        
         $user->save();
 
         $request->session()->forget('transaction');
