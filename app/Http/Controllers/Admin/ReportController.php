@@ -53,6 +53,11 @@ class ReportController extends Controller
         $yearInput = $request->input('year');
         $dateObj = DateTime::createFromFormat('!m', $monthInput);
 
+        $transactions = Transaction::with(['transaction_details.price_list.category', 'member'])
+            ->whereMonth('created_at', $monthInput)
+            ->whereYear('created_at', $yearInput)
+            ->get();
+
         if ($dateObj) {
             $month = $dateObj->format('F');
         } else {
@@ -70,6 +75,7 @@ class ReportController extends Controller
                 'yearInput',
                 'revenue',
                 'transactionsCount',
+                'transactions'
             )
         );
 
