@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan # Laundry</title>
+    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan Alle Laundry Palapa</title>
     <style>
         table {
             width: 100%;

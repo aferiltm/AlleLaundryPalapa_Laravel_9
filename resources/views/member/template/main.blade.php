@@ -7,7 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{{ config('app.name') }} - Member</title>
-    <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png">
+    {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
+    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
 
     {{-- Tailwind CSS --}}
     {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}
@@ -36,9 +37,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-cyan-600">
             <!-- Brand Logo -->
             <a href="" class="brand-link mt-2 text-white">
-                <i class="fas fa-tshirt brand-image mt-1 ml-3"></i>
+                {{-- <i class="fas fa-tshirt brand-image mt-1 ml-3"></i> --}}
                 {{-- <h4 class="brand-text text-center">{{ config('app.name') }}</h4> --}}
-                <h4 class="brand-text text-center"># Laundry</h4>
+                <h4 class="brand-text text-center">Alle Laundry Palapa</h4>
             </a>
 
             <!-- Sidebar -->

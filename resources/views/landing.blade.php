@@ -8,8 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ config('app.name', 'Laundry XYZ') }}</title>
-    <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png">
+    <title>{{ config('app.name', 'Alle Laundry Palapa') }}</title>
+    {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
+    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
 
     <!-- Bootstrap core CSS -->
     {{-- <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
@@ -49,8 +50,9 @@
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="p-4 flex flex-row items-center justify-between">
                 <a href="#"
-                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">#
-                    Laundry</a>
+                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">Alle
+                    Laundry Palapa
+                </a>
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path x-show="!open" fill-rule="evenodd"
@@ -75,7 +77,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
                 <h1 class="text-5xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                    data-aos="fade-up"># Laundry</h1>
+                    data-aos="fade-up">Alle Laundry Palapa</h1>
                 <h1 class="text-5xl font-bold tracking-widest text-white rounded-lg focus:outline-none focus:shadow-outline"
                     data-aos="fade-up">Dry Cleaning</h1>
                 <p class="font-poppins text-lg mt-3 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
@@ -84,7 +86,7 @@
                 </p>
 
                 <a href="#games"
-                    class="font-poppins bg-blue-900 hover:bg-black duration-200 text-white hover:text-sky-600 rounded-full py-3 px-24 md:py-3 md:px-20 w-auto text-2xl md:text-xl"
+                    class="font-poppins bg-blue-900 hover:bg-black duration-200 text-white rounded-full py-3 px-24 md:py-3 md:px-20 w-auto text-2xl md:text-xl"
                     data-aos="zoom-out">Selengkapnya</a>
             </div>
 
@@ -153,7 +155,7 @@
     <section class="pakaian section" id="pakaian">
         <div class="bg-white h-auto">
             <div class="mx-auto pb-10 pt-8">
-                <h1 class="font-semibold text-2xl text-green-900 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">Apa saja yang
+                <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">Apa saja yang
                     bisa kami laundry?</h1>
                 <!-- Narutanaka AKA Aferil -->
                 <p class="text-center text-sm text-gray-400 pb-2"><i class="fa-solid fa-arrow-left"></i>
@@ -262,7 +264,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                &copy; <a href="#" class="text-white hover:text-blue-600"># Laundry</a> <i
+                &copy; <a href="#" class="text-white hover:text-blue-600">Alle Laundry Palapa</a> <i
                     class="fa-solid fa-gamepad text-blue-600"></i></i>
             </p>
         </div>

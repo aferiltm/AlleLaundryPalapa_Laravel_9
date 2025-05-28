@@ -57,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">No. Telpon/HP</label>
-                                <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
+                                <input type="tel" class="form-control @error('phone_number') is-invalid @enderror"
                                     id="phone_number" name="phone_number" placeholder="Masukkan No.Telpon/HP"
                                     value="{{ old('phone_number') }}" required>
                                 @error('phone_number')

@@ -7,7 +7,8 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{{ config('app.name') }} - Admin</title>
-    <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png">
+    {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
+    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
@@ -39,13 +40,12 @@
             <!-- Brand Logo -->
             <a href="" class="brand-link mt-2">
                 <div class="row text-white">
-                    <div class="col-1">
-                        {{-- <i class="fa-solid fa-person-rifle mt-1 ml-3"></i> --}}
+                    {{-- <div class="col-1">
                         <i class="fas fa-tshirt brand-image mt-1 ml-3"></i>
-                    </div>
+                    </div> --}}
                     <div class="col-11">
                         {{-- <h4 class="brand-text text-center -mr-3">{{ config('app.name') }}</h4> --}}
-                        <h4 class="brand-text text-center"># Laundry</h4>
+                        <h4 class="brand-text text-center">Alle Laundry Palapa</h4>
                     </div>
                 </div>
                 {{-- <i class="fas fa-tshirt brand-image mt-1 ml-3"></i> --}}
