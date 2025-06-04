@@ -145,13 +145,14 @@
                 <p>No Transaksi: {{ $transaction->id }}</p>
             </div>
             <div class="col-6 text-right">
-                <p>{{ date('d F Y', strtotime($transaction->created_at)) }}</p>
+                <p>{{ \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('l, d F Y') }}</p>
                 <p>{{ $transaction->member->name }}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <p>Kode Transaksi: {{ $transaction->transaction_code }}</p>
+                <p>Estimasi Selesai: {{ \Carbon\Carbon::parse($transaction->estimated_finish_at)->translatedFormat('l, d F Y') }}</p>
             </div>
         </div>
 
@@ -228,7 +229,7 @@
                     <td>{{ 'Rp ' . number_format($tot, 0, ',', '.') }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" class="text-right"><b>{{ $transaction->service_type->name }}</b></td>
+                    <td colspan="6" class="text-right"><b>{{ $transaction->serviceType->name }}</b></td>
                     <td>{{ $transaction->getFormattedServiceCost() }}</td>
                 </tr>
                 <tr>
@@ -256,13 +257,13 @@
         {{-- Tanda tangan --}}
         <div class="row mt-3">
             <div class="col-4 text-center">
-                <p>Jakarta, {{ date('d F Y') }}</p>
+                <p>Jakarta, {{ \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('d F Y') }}</p>
                 <br><br><br>
                 <p>{{ $transaction->admin->name }}</p>
             </div>
             <div class="col-4"></div>
             <div class="col-4 text-center">
-                <p>Jakarta, {{ date('d F Y') }}</p>
+                <p>Jakarta, {{ \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('d F Y') }}</p>
                 <br><br><br>
                 <p>{{ $transaction->member->name }}</p>
             </div>

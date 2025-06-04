@@ -24,7 +24,7 @@
                                 <option value="" selected hidden disabled>Pilih tipe service</option>
                                 @foreach ($serviceTypes as $type)
                                     <option value="{{ $type->id }}" data-type-cost="{{ $type->cost }}">
-                                        {{ $type->name }} ({{ $type->getFormattedCost() }})
+                                        {{ $type->name }} ({{ $type->getFormattedCost() }}) 
                                     </option>
                                 @endforeach
                             </select>

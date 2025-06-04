@@ -116,6 +116,7 @@ Route::group([
     Route::get('/', [VoucherController::class, 'index'])->name('index');
     Route::post('/', [VoucherController::class, 'store'])->name('store');
     Route::patch('/{voucher}', [VoucherController::class, 'update'])->name('update');
+    Route::delete('/{voucher}', [VoucherController::class, 'destroy'])->name('destroy');
 });
 
 Route::group([

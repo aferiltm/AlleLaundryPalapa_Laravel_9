@@ -36,6 +36,7 @@ class VoucherController extends Controller
         $input = $request->validate([
             'discount_value' => ['required'],
             'point_need'     => ['required'],
+            'details'       => ['required'],
         ]);
 
         // Cek apakah potongan ada yang sama di database
@@ -51,6 +52,7 @@ class VoucherController extends Controller
             'name'           => 'Potongan ' . number_format($input['discount_value'], 0, ',', '.'),
             'discount_value' => $input['discount_value'],
             'point_need'     => $input['point_need'],
+            'details'     => $input['details'],
             'description'    => 'Mendapatkan potongan harga ' . number_format($input['discount_value'], 0, ',', '.') . ' dari total transaksi',
             'active_status'  => 1,
         ]);
@@ -79,5 +81,13 @@ class VoucherController extends Controller
         }
 
         return response()->json();
+    }
+
+    public function destroy(Voucher $voucher): RedirectResponse
+    {
+        $voucher->delete();
+
+        return redirect()->route('admin.vouchers.index')
+            ->with('success', 'Voucher berhasil dihapus!');
     }
 }

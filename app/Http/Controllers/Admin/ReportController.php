@@ -174,7 +174,12 @@ class ReportController extends Controller
             ->whereBetween(DB::raw('MONTH(created_at)'), [$bulanAwal, $bulanAkhir])
             ->count();
 
-        $priorityTransactions = Transaction::where('service_type_id', 2)
+        $kilatTransactions = Transaction::where('service_type_id', 2)
+            ->whereYear('created_at', $tahun)
+            ->whereBetween(DB::raw('MONTH(created_at)'), [$bulanAwal, $bulanAkhir])
+            ->count();
+
+        $expressTransactions = Transaction::where('service_type_id', 3)
             ->whereYear('created_at', $tahun)
             ->whereBetween(DB::raw('MONTH(created_at)'), [$bulanAwal, $bulanAkhir])
             ->count();
@@ -182,7 +187,8 @@ class ReportController extends Controller
         // Siapkan data untuk chart
         $transactionData = [
             'Regular' => $regularTransactions,
-            'Priority' => $priorityTransactions,
+            'Express' => $expressTransactions,
+            'Kilat' => $kilatTransactions,
         ];
         // Pie Chart
         $transactionChartUrl = "https://quickchart.io/chart?c=" . urlencode(json_encode([
@@ -192,12 +198,14 @@ class ReportController extends Controller
                 'datasets' => [[
                     'data' => array_values($transactionData),
                     'backgroundColor' => [
-                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(0, 255, 106, 0.5)',
                         'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
                     ],
                     'borderColor' => [
-                        'rgba(255, 99, 132, 1)',
+                        'rgba(0, 255, 106, 1)',
                         'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
                     ],
                     'borderWidth' => 1
                 ]]
@@ -217,14 +225,17 @@ class ReportController extends Controller
         // Prepare data for line chart
         $lineChartData = [
             'Regular' => array_fill($bulanAwal, $bulanAkhir - $bulanAwal + 1, 0),
-            'Priority' => array_fill($bulanAwal, $bulanAkhir - $bulanAwal + 1, 0),
+            'Kilat' => array_fill($bulanAwal, $bulanAkhir - $bulanAwal + 1, 0),
+            'Express' => array_fill($bulanAwal, $bulanAkhir - $bulanAwal + 1, 0),
         ];
         foreach ($monthlyData as $transaction) {
             $month = $transaction->month;
             if ($transaction->service_type_id == 1) {
                 $lineChartData['Regular'][$month] = $transaction->count;
             } elseif ($transaction->service_type_id == 2) {
-                $lineChartData['Priority'][$month] = $transaction->count;
+                $lineChartData['Kilat'][$month] = $transaction->count;
+            } elseif ($transaction->service_type_id == 3) {
+                $lineChartData['Express'][$month] = $transaction->count;
             }
         }
         // Prepare month names for labels
@@ -242,14 +253,21 @@ class ReportController extends Controller
                         'label' => 'Jumlah Transaksi Reguler',
                         'data' => array_values($lineChartData['Regular']),
                         'fill' => false,
-                        'borderColor' => 'rgba(255, 99, 132, 1)',
+                        'borderColor' => 'rgba(0, 255, 106, 1)',
                         'tension' => 0.1
                     ],
                     [
-                        'label' => 'Jumlah Transaksi Priority',
-                        'data' => array_values($lineChartData['Priority']),
+                        'label' => 'Jumlah Transaksi Express',
+                        'data' => array_values($lineChartData['Express']),
                         'fill' => false,
-                        'borderColor' => 'rgba(75, 192, 192, 1)',
+                        'borderColor' => 'rgba(54, 162, 235, 1)',
+                        'tension' => 0.1
+                    ],
+                     [
+                        'label' => 'Jumlah Transaksi Kilat',
+                        'data' => array_values($lineChartData['Kilat']),
+                        'fill' => false,
+                        'borderColor' => 'rgba(255, 99, 132, 1)',
                         'tension' => 0.1
                     ]
                 ]
@@ -262,7 +280,6 @@ class ReportController extends Controller
                 ]
             ]
         ]));
-
 
         // Laporan Komplain
         $complaintData = ComplaintSuggestion::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
@@ -300,7 +317,6 @@ class ReportController extends Controller
                 ]
             ]
         ]));
-
 
         // Fetch voucher usage data
         $voucherData = UserVoucher::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))

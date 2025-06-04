@@ -85,6 +85,52 @@
                 </div>
             </div>
 
+            {{-- <section class="pakaian section" id="pakaian">
+                <div class="bg-white h-auto">
+                    <div class="mx-auto pb-10 pt-8">
+                        <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">PROMO</h1>
+
+                        <p class="text-center text-sm text-gray-400 pb-4">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Geser untuk lihat promo lain
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </p>
+
+                        <div class="carousel flex w-full overflow-x-auto space-x-4 px-4 md:px-10">
+                            @foreach ($vouchers as $voucher)
+                                <div class="carousel-item flex-shrink-0 w-64">
+                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
+                                        data-aos="fade-up">
+                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
+                                            {{ $voucher->details }}
+                                        </h1>
+                                        @guest
+                                            <a href="{{ route('login.show') }}"
+                                                class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
+                                                Klaim
+                                            </a>
+                                        @endguest
+
+                                        @auth
+                                            <a href="{{ route('member.points.index') }}"
+                                                class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
+                                                Klaim
+                                            </a>
+                                        @endauth
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <p class="text-center text-sm text-gray-400 pt-6">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Geser untuk lihat promo lain
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </p>
+                    </div>
+                </div>
+            </section> --}}
+
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card">
@@ -106,7 +152,8 @@
                                     @foreach ($latestTransactions as $item)
                                         <tr>
                                             <td style="padding-top: 20px;">{{ $loop->iteration }}</td>
-                                            <td style="padding-top: 20px;">{{ date('d F Y', strtotime($item->created_at)) }}
+                                            <td style="padding-top: 20px;">
+                                                {{ date('d F Y', strtotime($item->created_at)) }}
                                             </td>
                                             <td style="padding-top: 20px;">
                                                 {{-- @if ($item->status_id != '3')
@@ -155,6 +202,9 @@
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+
+
+
     @foreach ($latestTransactions as $item)
         <!-- Modal Ulasan -->
         <div class="modal fade" id="reviewModal{{ $item->id }}" tabindex="-1" role="dialog"
@@ -181,10 +231,10 @@
                                     <option value="1">⭐ - Buruk</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="review">Ulasan Pelayanan</label>
                                 <textarea name="review" class="form-control" rows="3" required></textarea>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>Saran atau Komplain Laundry</label>
                                 <select class="form-control" id="tipe" name="type">
@@ -193,12 +243,13 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" id="form_sarankomplain" rows="4" name="body"></textarea>
+                                <textarea class="form-control" id="form_sarankomplain" rows="4" name="feedback"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Kirim Ulasan <i class="fa-solid fa-paper-plane"></i></button>
+                            <button type="submit" class="btn btn-primary">Kirim Ulasan <i
+                                    class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </div>

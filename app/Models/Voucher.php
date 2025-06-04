@@ -15,6 +15,7 @@ class Voucher extends Model
         'description',
         'discount_value',
         'point_need',
+        'details',
     ];
 
 

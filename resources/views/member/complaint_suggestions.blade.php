@@ -29,12 +29,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-blue-600 active" id="semuaUlasan-tab" data-toggle="tab"
                                         href="#semuaUlasan" role="tab" aria-controls="semuaUlasan"
-                                        aria-selected="true">Semua Ulasan</a>
+                                        aria-selected="true">Semua Feedback</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-blue-600" id="ulasanAnda-tab" data-toggle="tab"
                                         href="#ulasanAnda" role="tab" aria-controls="ulasanAnda"
-                                        aria-selected="false">Ulasan Anda</a>
+                                        aria-selected="false">Feedback Anda</a>
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
@@ -60,7 +60,7 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Rating</th>
-                                                <th>Review</th>
+                                                <th>Feedback</th>
                                                 {{-- <th>Tipe</th>
                                                 <th>Isi</th>
                                                 <th>Balasan</th> --}}
@@ -82,7 +82,7 @@
                                                             @endif
                                                         @endfor
                                                     </td>
-                                                    <td>{{ $item->review }}</td>
+                                                    <td>{{ $item->feedback}}</td>
                                                     {{-- <td>{{ $item->type == 1 ? 'Saran' : 'Komplain' }}</td>
                                                     <td>{{ $item->body }}</td>
                                                     <td>
@@ -98,9 +98,9 @@
                                                             data-nama="{{ $item->user->name ?? '-' }}"
                                                             data-tanggal="{{ date('d F Y', strtotime($item->created_at)) }}"
                                                             data-rating="{{ $item->rating }}"
-                                                            data-review="{{ $item->review }}"
+                                                            {{-- data-review="{{ $item->review }}" --}}
                                                             data-tipe="{{ $item->type == 1 ? 'Saran' : 'Komplain' }}"
-                                                            data-isi="{{ $item->body }}"
+                                                            data-isi="{{ $item->feedback }}"
                                                             data-balasan="{{ $item->reply ?? 'Belum ada balasan' }}">
                                                             <i class="fa-solid fa-circle-info"></i>
                                                         </a>
@@ -131,7 +131,7 @@
                                                 <th>No</th>
                                                 <th>Tanggal</th>
                                                 <th>Rating</th>
-                                                <th>Review</th>
+                                                <th>Feedback</th>
                                                 {{-- <th>Tipe</th>
                                                 <th>Isi</th>
                                                 <th>Balasan</th> --}}
@@ -155,7 +155,7 @@
                                                             @endif
                                                         @endfor
                                                     </td>
-                                                    <td>{{ $complaintSuggestion->review }}</td>
+                                                    <td>{{ $complaintSuggestion->feedback }}</td>
                                                     {{-- <td>
                                                         @if ($complaintSuggestion->type == 1)
                                                             Saran
@@ -179,9 +179,9 @@
                                                             data-nama="{{ $complaintSuggestion->user->name ?? '-' }}"
                                                             data-tanggal="{{ date('d F Y', strtotime($complaintSuggestion->created_at)) }}"
                                                             data-rating="{{ $complaintSuggestion->rating }}"
-                                                            data-review="{{ $complaintSuggestion->review }}"
+                                                            {{-- data-review="{{ $complaintSuggestion->review }}" --}}
                                                             data-tipe="{{ $complaintSuggestion->type == 1 ? 'Saran' : 'Komplain' }}"
-                                                            data-isi="{{ $complaintSuggestion->body }}"
+                                                            data-isi="{{ $complaintSuggestion->feedback }}"
                                                             data-balasan="{{ $complaintSuggestion->reply ?? 'Belum ada balasan' }}">
                                                             <i class="fa-solid fa-circle-info"></i>
                                                         </a>
@@ -216,7 +216,7 @@
                     <div class="mb-2"><strong>Nama:</strong> <span id="detail-nama"></span></div>
                     <div class="mb-2"><strong>Tanggal:</strong> <span id="detail-tanggal"></span></div>
                     <div class="mb-2"><strong>Rating:</strong> <span id="detail-rating"></span></div>
-                    <div class="mb-2"><strong>Review:</strong> <span id="detail-review"></span></div>
+                    {{-- <div class="mb-2"><strong>Review:</strong> <span id="detail-review"></span></div> --}}
                     <div class="mb-2"><strong>Tipe:</strong> <span id="detail-tipe"></span></div>
                     <div class="mb-2"><strong>Isi:</strong> <span id="detail-isi"></span></div>
                     <div class="mb-2"><strong>Balasan:</strong> <span id="detail-balasan"></span></div>
@@ -246,7 +246,7 @@
             $('#detail-nama').text($(this).data('nama'));
             $('#detail-tanggal').text($(this).data('tanggal'));
             $('#detail-rating').html(renderStars($(this).data('rating')));
-            $('#detail-review').text($(this).data('review'));
+            // $('#detail-review').text($(this).data('review'));
             $('#detail-tipe').text($(this).data('tipe'));
             $('#detail-isi').text($(this).data('isi'));
             $('#detail-balasan').text($(this).data('balasan'));

@@ -70,9 +70,14 @@
                             <h4>Data Transaksi Berjalan</h4>
                             <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link text-blue-600 active" id="priorityService-tab" data-toggle="tab"
-                                        href="#priorityService" role="tab" aria-controls="priorityService"
-                                        aria-selected="true">Priority Service</a>
+                                    <a class="nav-link text-blue-600 active" id="kilatService-tab" data-toggle="tab"
+                                        href="#kilatService" role="tab" aria-controls="kilatService"
+                                        aria-selected="true">Kilat Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-blue-600" id="expressService-tab" data-toggle="tab"
+                                        href="#expressService" role="tab" aria-controls="expressService"
+                                        aria-selected="false">Express Service</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-blue-600" id="regulerService-tab" data-toggle="tab"
@@ -86,9 +91,9 @@
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
-                                <div class="tab-pane fade show active" id="priorityService" role="tabpanel"
-                                    aria-labelledby="priorityService-tab">
-                                    <table id="tbl-transaksi-priority" class="table dataTable dt-responsive nowrap"
+                                <div class="tab-pane fade show active" id="kilatService" role="tabpanel"
+                                    aria-labelledby="kilatService-tab">
+                                    <table id="tbl-transaksi-kilat" class="table dataTable dt-responsive nowrap"
                                         style="width:100%">
                                         <thead class="thead-light">
                                             <tr>
@@ -102,7 +107,66 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($ongoingPriorityTransactions as $item)
+                                            @foreach ($ongoingKilatTransactions as $item)
+                                                <tr>
+                                                    <td>{{ $item->transaction_code }}</td>
+                                                    <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
+                                                    <td>{{ $item->member->name }}</td>
+                                                    <td>
+                                                        @if ($item->status_id == 3)
+                                                            <span class="text-success">Selesai</span>
+                                                        @else
+                                                            <select name="" id="status"
+                                                                data-id="{{ $item->id }}"
+                                                                data-val="{{ $item->status_id }}"
+                                                                class="select-status px-2 rounded">
+                                                                @foreach ($status as $s)
+                                                                    @if ($item->status_id == $s->id)
+                                                                        <option selected value="{{ $s->id }}">
+                                                                            {{ $s->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $s->id }}">
+                                                                            {{ $s->name }}
+                                                                        </option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $item->getFormattedServiceCost() }}</td>
+                                                    <td>{{ $item->getFormattedTotal() }}</td>
+                                                    <td>
+                                                        <a href="#"
+                                                            class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
+                                                            data-toggle="modal" data-target="#transactionDetailModal"
+                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                                class="fa-solid fa-circle-info"></i></a>
+                                                        <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
+                                                            class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
+                                                            target="_blank"><i class="fa-solid fa-print"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="expressService" role="tabpanel"
+                                    aria-labelledby="expressService-tab">
+                                    <table id="tbl-transaksi-express" class="table dataTable dt-responsive nowrap"
+                                        style="width:100%">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Kode Transaksi</th>
+                                                <th>Tanggal</th>
+                                                <th>Nama Member</th>
+                                                <th>Status</th>
+                                                <th>Biaya Service</th>
+                                                <th>Total Harga</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($ongoingExpressTransactions as $item)
                                                 <tr>
                                                     <td>{{ $item->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
@@ -288,7 +352,8 @@
         $(document).ready(function() {
             $('#tbl-transaksi-selesai').DataTable();
             $('#tbl-transaksi-reguler').DataTable();
-            $('#tbl-transaksi-priority').DataTable();
+            $('#tbl-transaksi-express').DataTable();
+            $('#tbl-transaksi-kilat').DataTable();
         });
     </script>
 @endsection

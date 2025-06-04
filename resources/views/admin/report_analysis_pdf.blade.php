@@ -120,7 +120,7 @@
         </div>
     </section>
     <section>
-        <h4>B. Laporan Transaksi Reguler dan Prioritas</h4>
+        <h4>B. Laporan Transaksi Reguler, Express, dan Kilat</h4>
         {{-- Table data --}}
         <table>
             <thead>
@@ -135,8 +135,12 @@
                     <td>{{ $transactionData['Regular'] }}</td>
                 </tr>
                 <tr>
-                    <td>Priority</td>
-                    <td>{{ $transactionData['Priority'] }}</td>
+                    <td>Express</td>
+                    <td>{{ $transactionData['Express'] }}</td>
+                </tr>
+                <tr>
+                    <td>Kilat</td>
+                    <td>{{ $transactionData['Kilat'] }}</td>
                 </tr>
             </tbody>
         </table>

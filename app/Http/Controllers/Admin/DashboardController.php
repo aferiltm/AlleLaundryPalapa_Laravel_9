@@ -41,9 +41,16 @@ class DashboardController extends Controller
         // Menambahkan transaksi yang sudah selesai
         $completedTransactionsCount = Transaction::whereNotNull('finish_date')->count();
 
-        $priorityTransactions = Transaction::whereNull('finish_date')
+        $expressTransactions = Transaction::whereNull('finish_date')
             ->with('status')
             ->where('service_type_id', 2)
+            ->orderByDesc('created_at')
+            ->limit(10)
+            ->get();
+
+        $kilatTransactions = Transaction::whereNull('finish_date')
+            ->with('status')
+            ->where('service_type_id', 3)
             ->orderByDesc('created_at')
             ->limit(10)
             ->get();
@@ -54,7 +61,8 @@ class DashboardController extends Controller
             'membersCount',
             'transactionsCount',
             'completedTransactionsCount',
-            'priorityTransactions',
+            'expressTransactions',
+            'kilatTransactions',
             'transactionsRunCount',
         ));
     }
@@ -129,7 +137,8 @@ class DashboardController extends Controller
 
             // Ambil data transaksi berdasarkan bulan dalam tahun berjalan
             $transactions = Transaction::selectRaw('MONTH(created_at) as month,
-                    SUM(CASE WHEN service_type_id = 2 THEN 1 ELSE 0 END) as priority,
+                    SUM(CASE WHEN service_type_id = 3 THEN 1 ELSE 0 END) as kilat,
+                    SUM(CASE WHEN service_type_id = 2 THEN 1 ELSE 0 END) as express,
                     SUM(CASE WHEN service_type_id = 1 THEN 1 ELSE 0 END) as regular')
                 ->whereYear('created_at', date('Y'))
                 ->groupBy('month')
@@ -141,7 +150,8 @@ class DashboardController extends Controller
             $formattedData = collect(range(1, 12))->map(function ($month) use ($transactions, $months) {
                 return [
                     'labels' => $months[$month],
-                    'priority' => $transactions[$month]->priority ?? 0,
+                    'kilat' => $transactions[$month]->kilat ?? 0,
+                    'express' => $transactions[$month]->express ?? 0,
                     'regular' => $transactions[$month]->regular ?? 0
                 ];
             });
@@ -158,7 +168,8 @@ class DashboardController extends Controller
 
             // Ambil data transaksi berdasarkan tahun
             $transactions = Transaction::selectRaw('YEAR(created_at) as year,
-                    SUM(CASE WHEN service_type_id = 2 THEN 1 ELSE 0 END) as priority,
+                    SUM(CASE WHEN service_type_id = 3 THEN 1 ELSE 0 END) as kilat,
+                    SUM(CASE WHEN service_type_id = 2 THEN 1 ELSE 0 END) as express,
                     SUM(CASE WHEN service_type_id = 1 THEN 1 ELSE 0 END) as regular')
                 ->whereBetween(DB::raw('YEAR(created_at)'), [$startYear, $endYear])
                 ->groupBy('year')
@@ -170,7 +181,8 @@ class DashboardController extends Controller
             $formattedData = collect(range($startYear, $endYear))->map(function ($year) use ($transactions) {
                 return [
                     'labels' => (string) $year,
-                    'priority' => $transactions[$year]->priority ?? 0,
+                    'kilat' => $transactions[$year]->kilat ?? 0,
+                    'express' => $transactions[$year]->express ?? 0,
                     'regular' => $transactions[$year]->regular ?? 0
                 ];
             });
@@ -178,7 +190,8 @@ class DashboardController extends Controller
 
         return response()->json([
             'labels' => $formattedData->pluck('labels'),
-            'priority' => $formattedData->pluck('priority'),
+            'kilat' => $formattedData->pluck('kilat'),
+            'express' => $formattedData->pluck('express'),
             'regular' => $formattedData->pluck('regular')
         ]);
     }

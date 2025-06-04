@@ -180,9 +180,14 @@
                             <h4>Transaksi Berjalan</h4>
                             <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-blue-600" id="priorityService-tab" data-toggle="tab"
-                                        href="#priorityService" role="tab" aria-controls="priorityService"
-                                        aria-selected="true">Priority Service</a>
+                                    <a class="nav-link active text-blue-600" id="kilatService-tab" data-toggle="tab"
+                                        href="#kilatService" role="tab" aria-controls="kilatService"
+                                        aria-selected="true">Kilat Service</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-blue-600" id="expressService-tab" data-toggle="tab"
+                                        href="#expressService" role="tab" aria-controls="expressService"
+                                        aria-selected="true">Express Service</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-blue-600" id="regulerService-tab" data-toggle="tab" href="#regulerService"
@@ -190,43 +195,65 @@
                                         Service</a>
                                 </li>
                             </ul>
-                            {{-- <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active {{ request()->is('priorityService') ? 'active text-blue-600' : '' }}"
-                                        id="priorityService-tab" data-toggle="tab" href="#priorityService"
-                                        role="tab" aria-controls="priorityService" aria-selected="true">Priority
-                                        Service</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->is('regulerService') ? 'active text-blue-600' : '' }}"
-                                        id="regulerService-tab" data-toggle="tab" href="#regulerService" role="tab"
-                                        aria-controls="regulerService" aria-selected="false">Reguler
-                                        Service</a>
-                                </li>
-                            </ul> --}}
                             <div class="tab-content mt-3" id="myTabContent">
-                                <div class="tab-pane fade show active" id="priorityService" role="tabpanel"
-                                    aria-labelledby="priorityService-tab">
-                                    <table id="tbl-transaksi-priority" class="table dataTable dt-responsive nowrap"
+                                <div class="tab-pane fade show active" id="kilatService" role="tabpanel"
+                                    aria-labelledby="kilatService-tab">
+                                    <table id="tbl-transaksi-kilat" class="table dataTable dt-responsive nowrap"
                                         style="width:100%">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>No</th>
+                                                <th>Kode Transaksi</th>
                                                 <th>Tanggal</th>
+                                                <th>Estimasi Selesai</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($priorityTransactions as $transaction)
+                                            @foreach ($kilatTransactions as $transaction)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $transaction->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
+                                                    <td>{{ date('d F Y', strtotime($transaction->estimated_finish_at)) }}</td>
                                                     <td>
-                                                        {{-- @if ($transaction->status_id != '3')
-                                                    <span class="text-danger">{{ $transaction->status->name }}</span>
-                                                @else
-                                                    <span class="text-success">{{ $transaction->status->name }}</span>
-                                                @endif --}}
+                                                        @if ($transaction->status_id == 3)
+                                                            <span
+                                                                class="p-1 bg-success text-white rounded">{{ $transaction->status->name }}</span>
+                                                        @elseif ($transaction->status_id == 2)
+                                                            <span
+                                                                class="p-1 bg-warning text-white rounded">{{ $transaction->status->name }}</span>
+                                                        @else
+                                                            <span
+                                                                class="p-1 bg-danger text-white rounded">{{ $transaction->status->name }}</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="expressService" role="tabpanel"
+                                    aria-labelledby="expressService-tab">
+                                    <table id="tbl-transaksi-express" class="table dataTable dt-responsive nowrap"
+                                        style="width:100%">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Kode Transaksi</th>
+                                                <th>Tanggal</th>
+                                                <th>Estimasi Selesai</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($expressTransactions as $transaction)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $transaction->transaction_code }}</td>
+                                                    <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
+                                                    <td>{{ date('d F Y', strtotime($transaction->estimated_finish_at)) }}</td>
+                                                    <td>
                                                         @if ($transaction->status_id == 3)
                                                             <span
                                                                 class="p-1 bg-success text-white rounded">{{ $transaction->status->name }}</span>
@@ -250,7 +277,9 @@
                                         <thead class="thead-light">
                                             <tr>
                                                 <th>No</th>
+                                                <th>Kode Transaksi</th>
                                                 <th>Tanggal</th>
+                                                <th>Estimasi Selesai</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
@@ -258,13 +287,10 @@
                                             @foreach ($recentTransactions as $transaction)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $transaction->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
+                                                    <td>{{ date('d F Y', strtotime($transaction->estimated_finish_at)) }}</td>
                                                     <td>
-                                                        {{-- @if ($transaction->status_id != '3')
-                                                    <span class="text-danger">{{ $transaction->status->name }}</span>
-                                                @else
-                                                    <span class="text-success">{{ $transaction->status->name }}</span>
-                                                @endif --}}
                                                         @if ($transaction->status_id == 3)
                                                             <span
                                                                 class="p-1 bg-success text-white rounded">{{ $transaction->status->name }}</span>
@@ -400,10 +426,17 @@
                                 fill: true
                             },
                             {
-                                label: 'Transaksi Priority',
-                                data: data.priority,
+                                label: 'Transaksi Express',
+                                data: data.express,
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                fill: true
+                            },
+                            {
+                                label: 'Transaksi Kilat',
+                                data: data.kilat,
+                                borderColor: 'rgb(33, 194, 71)',
+                                backgroundColor: 'rgb(33, 255, 149)',
                                 fill: true
                             }
                         ]

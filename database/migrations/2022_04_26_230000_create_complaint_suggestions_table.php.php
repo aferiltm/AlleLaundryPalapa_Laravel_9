@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('complaint_suggestions', function (Blueprint $table) {
             $table->id();
-            $table->text('body');
+            $table->text('feedback');
             $table->char('type');
             $table->integer('rating')->check('rating BETWEEN 1 AND 5');
-            $table->text('review');
+            // $table->text('review');
             $table->foreignId('user_id')->constrained();
             $table->unsignedBigInteger('transaction_id');
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');

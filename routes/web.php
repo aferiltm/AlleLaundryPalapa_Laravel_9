@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\VoucherLandingController;
 
 
 /*
@@ -25,9 +26,13 @@ use App\Http\Controllers\Admin\ReportController;
 */
 
 // Home route
-Route::get('/', function () {
-    return view('landing');
-})->middleware('language');
+// Route::get('/', function () {
+//     return view('landing');
+// })->middleware('language');
+
+// Route::get('/', [VoucherLandingController::class, 'index'])->middleware('language');
+
+Route::get('/', [VoucherLandingController::class, 'index'])->middleware('language');
 
 // Auth routes
 Route::group(['middleware' => 'language'], function () {

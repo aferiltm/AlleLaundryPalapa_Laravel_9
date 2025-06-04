@@ -88,12 +88,12 @@
                                     </table>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="isi-review">Review</label>
                                         <textarea class="form-control" id="isi-review" rows="3" readonly></textarea>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
-                                        <label for="isi-aduan">Isi Aduan</label>
+                                        <label for="isi-aduan">Feedback</label>
                                         <textarea class="form-control" id="isi-aduan" rows="3" disabled></textarea>
                                     </div>
                                     <div class="form-group">

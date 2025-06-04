@@ -11,10 +11,10 @@ class ComplaintSuggestion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'body',
+        'feedback',
         'type',
         'rating',
-        'review',
+        // 'review',
         'transaction_id',
         'user_id',
 

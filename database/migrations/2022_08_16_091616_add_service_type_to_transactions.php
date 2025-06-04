@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->foreignId('service_type_id')->after('status_id')->nullable()->constrained();
-            $table->unsignedInteger('service_cost')->after('finish_date')->default(0);
+            $table->unsignedInteger('service_cost')->after('estimated_finish_at')->default(0);
         });
     }
 

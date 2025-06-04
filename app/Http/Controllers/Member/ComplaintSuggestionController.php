@@ -73,10 +73,10 @@ class ComplaintSuggestionController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'body'       => ['required'],
+            'feedback'       => ['required'],
             'type'       => ['required'],
             'rating'     => 'required|integer|min:1|max:5',
-            'review'     => 'required|string|max:200',
+            // 'review'     => 'required|string|max:200',
             'transaction_id' => 'required|exists:transactions,id', // Pastikan transaksi valid
         ]);
 
@@ -87,10 +87,10 @@ class ComplaintSuggestionController extends Controller
         }
 
         ComplaintSuggestion::create([
-            'body'          => $request->input('body'),
+            'feedback'          => $request->input('feedback'),
             'type'          => $request->input('type'),
             'rating'        => $request->input('rating'),
-            'review'        => $request->input('review'),
+            // 'review'        => $request->input('review'),
             'user_id'       => $user->id,
             'transaction_id' => $request->input('transaction_id'), // Simpan ID transaksi
             'reply'         => '',

@@ -56,6 +56,7 @@
                                         <th>Nama Voucher</th>
                                         <th>Poin Diperlukan</th>
                                         <th>Keterangan</th>
+                                        <th>Detail</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -66,6 +67,7 @@
                                             <td>{{ $voucher->name }}</td>
                                             <td>{{ $voucher->point_need }}</td>
                                             <td>{{ $voucher->description }}</td>
+                                            <td>{{ $voucher->details }}</td>
                                             <td>
                                                 @if ($voucher->active_status != 0)
                                                     <div class="form-check">
@@ -79,7 +81,20 @@
                                                             value="{{ $voucher->id }}">
                                                         <label class="form-check-label">Aktif</label>
                                                     </div>
-                                                @endif
+                                                @endif |
+                                                <a href="#" class="text-danger"
+                                                    onclick="event.preventDefault();
+                                                    if (confirm('Yakin ingin menghapus voucher ini?')) {
+                                                        document.getElementById('delete-form-{{ $voucher->id }}').submit();
+                                                    }">
+                                                    Hapus
+                                                </a>
+                                                <form id="delete-form-{{ $voucher->id }}"
+                                                    action="{{ route('admin.vouchers.destroy', $voucher->id) }}"
+                                                    method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

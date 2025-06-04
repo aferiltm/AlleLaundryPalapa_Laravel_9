@@ -21,6 +21,11 @@
                         <input type="number" class="form-control" id="poin" name="point_need"
                             placeholder="Poin diperlukan" required>
                     </div>
+                    <div class="form-group">
+                        <label for="poin">Detail Promo Voucher</label>
+                        <textarea rows="3" type="text" class="form-control" id="details" name="details"
+                            placeholder="Detail Voucher" required></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

@@ -22,6 +22,7 @@ class Transaction extends Model
         'service_type_id',
         'service_cost',
         'payment_amount',
+        'estimated_finish_at'
     ];
 
     /**
@@ -51,7 +52,7 @@ class Transaction extends Model
      */
     public function status(): BelongsTo
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'status_id');
     }
 
     /**

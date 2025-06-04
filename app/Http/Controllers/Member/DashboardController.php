@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\Voucher;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +24,16 @@ class DashboardController extends Controller
             abort(403);
         }
 
+        $vouchers = Voucher::where('active_status', 1)->get();
+
+        // dd($vouchers);
+
         $latestTransactions = Transaction::with('status')->where('member_id', $user->id)
             ->orderBy('created_at', 'DESC')
             ->orderBy('status_id', 'ASC')
             ->limit(10)
             ->get();
 
-        return view('member.index', compact('user', 'latestTransactions'));
+        return view('member.index', compact('user', 'latestTransactions', 'vouchers'));
     }
 }

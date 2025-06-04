@@ -45,9 +45,16 @@ class TransactionController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
-        $ongoingPriorityTransactions = Transaction::with('member')->whereYear('created_at', '=', $currentYear)
+        $ongoingExpressTransactions = Transaction::with('member')->whereYear('created_at', '=', $currentYear)
             ->whereMonth('created_at', '=', $currentMonth)
             ->where('service_type_id', 2)
+            ->where('finish_date', null)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $ongoingKilatTransactions = Transaction::with('member')->whereYear('created_at', '=', $currentYear)
+            ->whereMonth('created_at', '=', $currentMonth)
+            ->where('service_type_id', 3)
             ->where('finish_date', null)
             ->orderBy('created_at', 'DESC')
             ->get();
@@ -68,7 +75,8 @@ class TransactionController extends Controller
             'currentYear',
             'currentMonth',
             'ongoingTransactions',
-            'ongoingPriorityTransactions',
+            'ongoingExpressTransactions',
+            'ongoingKilatTransactions',
             'finishedTransactions'
         ));
     }
@@ -214,6 +222,20 @@ class TransactionController extends Controller
 
         // Retrieve the service type ID from the request
         $serviceTypeId = $request->input('service-type');
+        // Hitung estimasi selesai
+        switch ($serviceTypeId) {
+            case 1: // Reguler
+                $estimatedFinish = now()->addDays(3);
+                break;
+            case 2: // Priority
+                $estimatedFinish = now()->addDays(2);
+                break;
+            case 3: // Express
+                $estimatedFinish = now()->addDays(1);
+                break;
+            default:
+                $estimatedFinish = now(); // fallback
+        }
 
         // Cek apakah menggunakan service type non reguler
         $cost = 0;
@@ -239,6 +261,7 @@ class TransactionController extends Controller
             'member_id'       => $memberId,
             'admin_id'        => $adminId,
             'finish_date'     => null,
+            'estimated_finish_at' => $estimatedFinish,
             'discount'        => $discount,
             'total'           => $totalPrice,
             // 'service_type_id' => $request->input('service-type'),
@@ -291,7 +314,7 @@ class TransactionController extends Controller
         } else {
             $user->point += 2;
         }
-        
+
         $user->save();
 
         $request->session()->forget('transaction');
@@ -308,21 +331,32 @@ class TransactionController extends Controller
 
     private function generateTransactionCode($serviceTypeId)
     {
-        // Determine the prefix based on service type
-        $prefix = ($serviceTypeId == 1) ? 'TR' : 'TP'; // Assuming 1 is for Reguler and 2 for Priority
+        // Tentukan prefix berdasarkan serviceTypeId
+        if ($serviceTypeId == 1) {
+            $prefix = 'TR'; // Reguler
+        } elseif ($serviceTypeId == 2) {
+            $prefix = 'TE'; // Express
+        } elseif ($serviceTypeId == 3) {
+            $prefix = 'TK'; // Kilat
+        } else {
+            throw new \Exception("Service Type tidak dikenali.");
+        }
 
-        // Get the last transaction code
+        // Ambil transaksi terakhir berdasarkan prefix
         $lastTransaction = Transaction::where('transaction_code', 'like', $prefix . '%')
             ->orderBy('created_at', 'desc')
             ->first();
 
-        // Extract the number from the last transaction code
+        // Ambil angka terakhir, default ke 0 jika tidak ada
         $lastNumber = $lastTransaction ? (int)substr($lastTransaction->transaction_code, 2) : 0;
 
-        // Increment the number and format it to 5 digits
+        // Tambahkan 1 dan format ke 5 digit
         $newNumber = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
-        return $prefix . $newNumber; // Return the new transaction code
+
+        // Gabungkan prefix dan nomor baru
+        return $prefix . $newNumber;
     }
+
 
     /**
      * Return transaction data by id

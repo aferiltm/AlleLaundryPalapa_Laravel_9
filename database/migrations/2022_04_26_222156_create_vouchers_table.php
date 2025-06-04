@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('point_need');
             $table->boolean('active_status')->default(1);
             $table->text('description');
+            $table->text('details');
             $table->timestamps();
         });
     }
