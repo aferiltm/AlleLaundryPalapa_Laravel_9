@@ -203,8 +203,6 @@
         </div><!-- /.container-fluid -->
     </div>
 
-
-
     @foreach ($latestTransactions as $item)
         <!-- Modal Ulasan -->
         <div class="modal fade" id="reviewModal{{ $item->id }}" tabindex="-1" role="dialog"
@@ -220,6 +218,8 @@
                     <form action="{{ route('member.complaints.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
+                            <p class="mb-3 font-semibold"><span class="text-red-500">*</span>Sebelum mengisi ulasan harap
+                                periksa laundry anda, Terima Kasih</p>
                             <input type="hidden" name="transaction_id" value="{{ $item->id }}">
                             <div class="form-group">
                                 <label for="rating">Rating</label>
@@ -231,14 +231,10 @@
                                     <option value="1">⭐ - Buruk</option>
                                 </select>
                             </div>
-                            {{-- <div class="form-group">
-                                <label for="review">Ulasan Pelayanan</label>
-                                <textarea name="review" class="form-control" rows="3" required></textarea>
-                            </div> --}}
                             <div class="form-group">
                                 <label>Saran atau Komplain Laundry</label>
                                 <select class="form-control" id="tipe" name="type">
-                                    <option value="1">Saran</option>
+                                    <option value="1">Saran/Kritik/Review</option>
                                     <option value="2">Komplain</option>
                                 </select>
                             </div>

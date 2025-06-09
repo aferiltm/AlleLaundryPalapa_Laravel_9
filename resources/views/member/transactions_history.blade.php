@@ -40,11 +40,6 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
                                             <td>
-                                                {{-- @if ($transaction->status_id != '3')
-                                                    <span class="text-warning">{{ $transaction->status->name }}</span>
-                                                @else
-                                                    <span class="text-success">{{ $transaction->status->name }}</span>
-                                                @endif --}}
                                                 @if ($transaction->status_id == 3)
                                                     <span
                                                         class="p-1 bg-success text-white rounded">{{ $transaction->status->name }}</span>
@@ -75,6 +70,64 @@
                                                 @endif
                                             </td>
                                         </tr>
+
+                                        @if ($transaction->status_id == 3 && !$transaction->hasReview())
+                                            <!-- Modal Ulasan -->
+                                            <div class="modal fade" id="reviewModal{{ $transaction->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="reviewModalLabel{{ $transaction->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title"
+                                                                id="reviewModalLabel{{ $transaction->id }}">Beri Ulasan
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{ route('member.complaints.store') }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <p class="mb-3 font-semibold"><span
+                                                                        class="text-red-500">*</span>Sebelum mengisi ulasan
+                                                                    harap periksa laundry anda, Terima Kasih</p>
+                                                                <input type="hidden" name="transaction_id"
+                                                                    value="{{ $transaction->id }}">
+                                                                <div class="form-group">
+                                                                    <label for="rating">Rating</label>
+                                                                    <select name="rating" class="form-control" required>
+                                                                        <option value="5">⭐⭐⭐⭐⭐ - Sangat Baik</option>
+                                                                        <option value="4">⭐⭐⭐⭐ - Baik</option>
+                                                                        <option value="3">⭐⭐⭐ - Cukup</option>
+                                                                        <option value="2">⭐⭐ - Kurang</option>
+                                                                        <option value="1">⭐ - Buruk</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Saran atau Komplain Laundry</label>
+                                                                    <select class="form-control" name="type">
+                                                                        <option value="1">Saran/Kritik/Review</option>
+                                                                        <option value="2">Komplain</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" name="body" rows="4"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tutup</button>
+                                                                <button type="submit" class="btn btn-primary">Kirim Ulasan
+                                                                    <i class="fa-solid fa-paper-plane"></i></button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -84,108 +137,6 @@
             </div>
             <!-- /.row -->
         </div><!-- /.container-fluid -->
-        {{-- @foreach ($latestTransactions as $item)
-            <!-- Modal Ulasan -->
-            <div class="modal fade" id="reviewModal{{ $item->id }}" tabindex="-1" role="dialog"
-                aria-labelledby="reviewModalLabel{{ $item->id }}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="reviewModalLabel{{ $item->id }}">Beri Ulasan</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('member.complaints.store') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <input type="hidden" name="transaction_id" value="{{ $item->id }}">
-                                <div class="form-group">
-                                    <label for="rating">Rating</label>
-                                    <select name="rating" class="form-control" required>
-                                        <option value="5">⭐⭐⭐⭐⭐ - Sangat Baik</option>
-                                        <option value="4">⭐⭐⭐⭐ - Baik</option>
-                                        <option value="3">⭐⭐⭐ - Cukup</option>
-                                        <option value="2">⭐⭐ - Kurang</option>
-                                        <option value="1">⭐ - Buruk</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review">Ulasan Pelayanan</label>
-                                    <textarea name="review" class="form-control" rows="3" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Saran atau Komplain Laundry</label>
-                                    <select class="form-control" id="tipe" name="type">
-                                        <option value="1">Saran</option>
-                                        <option value="2">Komplain</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="form_sarankomplain" rows="4" name="body"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Kirim Ulasan <i
-                                        class="fa-solid fa-paper-plane"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach --}}
-        @if ($transaction->status_id == 3 && !$transaction->hasReview())
-            <!-- Modal Ulasan -->
-            <div class="modal fade" id="reviewModal{{ $transaction->id }}" tabindex="-1" role="dialog"
-                aria-labelledby="reviewModalLabel{{ $transaction->id }}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="reviewModalLabel{{ $transaction->id }}">Beri Ulasan</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('member.complaints.store') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
-                                <div class="form-group">
-                                    <label for="rating">Rating</label>
-                                    <select name="rating" class="form-control" required>
-                                        <option value="5">⭐⭐⭐⭐⭐ - Sangat Baik</option>
-                                        <option value="4">⭐⭐⭐⭐ - Baik</option>
-                                        <option value="3">⭐⭐⭐ - Cukup</option>
-                                        <option value="2">⭐⭐ - Kurang</option>
-                                        <option value="1">⭐ - Buruk</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review">Ulasan Pelayanan</label>
-                                    <textarea name="review" class="form-control" rows="3" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Saran atau Komplain Laundry</label>
-                                    <select class="form-control" name="type">
-                                        <option value="1">Saran</option>
-                                        <option value="2">Komplain</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" name="body" rows="4"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Kirim Ulasan <i
-                                        class="fa-solid fa-paper-plane"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
 @endsection
 
