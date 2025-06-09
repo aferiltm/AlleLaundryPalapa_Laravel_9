@@ -41,7 +41,7 @@
                 <a href="{{ route('member.complaints.index') }}"
                     class="nav-link text-white {{ request()->routeIs('member.complaints.index') ? 'active bg-white text-cyan-700' : '' }}">
                     <i class="nav-icon fas fa-sticky-note"></i>
-                    <p>Saran / Komplain</p>
+                    <p>Feedback</p>
                 </a>
             </li>
             <li class="nav-item">
