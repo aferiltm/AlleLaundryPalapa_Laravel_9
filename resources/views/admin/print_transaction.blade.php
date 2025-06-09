@@ -152,7 +152,8 @@
         <div class="row">
             <div class="col-6">
                 <p>Kode Transaksi: {{ $transaction->transaction_code }}</p>
-                <p>Estimasi Selesai: {{ \Carbon\Carbon::parse($transaction->estimated_finish_at)->translatedFormat('l, d F Y') }}</p>
+                <p>Estimasi Selesai:
+                    {{ \Carbon\Carbon::parse($transaction->estimated_finish_at)->translatedFormat('l, d F Y') }}</p>
             </div>
         </div>
 
@@ -191,6 +192,8 @@
                                     $tot += $item->sub_total;
                                 @endphp
                             @endforeach
+                        </tbody>
+                    </table>
                 @endif
 
                 {{-- Jika Transaksi Kiloan --}}
@@ -229,7 +232,7 @@
                     <td>{{ 'Rp ' . number_format($tot, 0, ',', '.') }}</td>
                 </tr>
                 <tr>
-                    <td colspan="6" class="text-right"><b>{{ $transaction->serviceType->name }}</b></td>
+                    <td colspan="6" class="text-right"><b>{{ $transaction->service_type->name }}</b></td>
                     <td>{{ $transaction->getFormattedServiceCost() }}</td>
                 </tr>
                 <tr>
