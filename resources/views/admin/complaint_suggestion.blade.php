@@ -93,6 +93,18 @@
                                         <textarea class="form-control" id="isi-review" rows="3" readonly></textarea>
                                     </div> --}}
                                     <div class="form-group">
+                                        <label for="kode_transaksi">Kode Transaksi</label>
+                                        <textarea class="form-control" id="kode_transaksi" rows="1" disabled></textarea>
+                                    </div>
+                                    {{-- <div class="form-group">
+                                        <label for="category">Kategori</label>
+                                        <textarea class="form-control" id="category" rows="1" disabled></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="total_harga">Total Harga</label>
+                                        <textarea class="form-control" id="total_harga" rows="1" disabled></textarea>
+                                    </div> --}}
+                                    <div class="form-group">
                                         <label for="isi-aduan">Feedback</label>
                                         <textarea class="form-control" id="isi-aduan" rows="3" disabled></textarea>
                                     </div>

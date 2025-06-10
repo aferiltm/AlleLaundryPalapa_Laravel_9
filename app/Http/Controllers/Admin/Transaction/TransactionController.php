@@ -387,12 +387,12 @@ class TransactionController extends Controller
         return response()->json([
             'transaction_code' => $transaction->transaction_code,
             'payment_amount' => $transaction->payment_amount,
+            'total' => $transaction->total,
             'service_type' => $transaction->service_type,
             'transaction_details' => $transaction->transaction_details,
             'transaction_details_kiloan' => $transaction->transaction_details_kiloan,
         ]);
     }
-
 
     /**
      * Change transaction status

@@ -43,6 +43,7 @@ class ComplaintSuggestionController extends Controller
      */
     public function show(ComplaintSuggestion $complaintSuggestion): JsonResponse
     {
+         $complaintSuggestion->load('transaction');
         return response()->json($complaintSuggestion);
     }
 

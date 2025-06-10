@@ -11,35 +11,6 @@
             <div class="modal-body">
                 <h5>ID Transaksi: <span id="id-transaksi-detail"></span></h5>
                 <h5>Kode Transaksi: <span id="code-transaksi-detail"></span></h5>
-                {{-- <table id="tbl-detail-transaksi-satuan" class="table dt-responsive nowrap" style="width: 100%">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>No</th>
-                            <th>Barang</th>
-                            <th>Servis</th>
-                            <th>Kategori</th>
-                            <th>Banyak</th>
-                            <th>Harga</th>
-                            <th>Sub Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-ajax">
-                    </tbody>
-                </table>
-                <br>
-                <table id="tbl-detail-transaksi-kiloan" class="table dt-responsive nowrap" style="width: 100%">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>No</th>
-                            <th>Kategori</th>
-                            <th>Berat</th>
-                            <th>Harga</th>
-                            <th>Sub Total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-ajax-kiloan">
-                    </tbody>
-                </table> --}}
                 <div id="section-satuan">
                     <table class="table dt-responsive nowrap" style="width: 100%">
                         <thead class="thead-light">
@@ -77,7 +48,9 @@
                 <br>
                 <br>
                 <h5>Tipe Service: <span id="service-type"></span></h5>
+                <h5>Total: <span id="total"></span></h5>
                 <h5>Dibayar: <span id="payment-amount"></span></h5>
+                <h5>Kembalian: <span id="kembalian"></span></h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

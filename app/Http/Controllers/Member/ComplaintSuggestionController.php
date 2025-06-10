@@ -34,42 +34,6 @@ class ComplaintSuggestionController extends Controller
         ]);
     }
 
-    /**
-     * Method to process complaint suggestion
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    // public function store(Request $request): RedirectResponse
-    // {
-    //     $request->validate([
-    //         'body' => ['required'],
-    //         'type' => ['required'],
-    //         'rating' => 'required|integer|min:1|max:5',
-    //         'review' => 'required|string|max:200',
-    //     ]);
-
-    //     $user = Auth::user();
-
-    //     if (!$user) {
-    //         abort(403);
-    //     }
-
-    //     $complaintSuggestion = new ComplaintSuggestion([
-    //         'body'    => $request->input('body'),
-    //         'type'    => $request->input('type'),
-    //         'rating'    => $request->input('rating'),
-    //         'review'    => $request->input('review'),
-    //         'user_id' => $user->id,
-    //         'reply'   => '',
-    //     ]);
-
-    //     $complaintSuggestion->save();
-
-    //     return redirect()->route('member.complaints.index')
-    //         ->with('success', 'Saran / komplain berhasil dikirim!');
-    // }
-
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

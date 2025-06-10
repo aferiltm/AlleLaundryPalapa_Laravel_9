@@ -15,74 +15,6 @@ $(document).on("click", ".btn-detail", function () {
         // url: "/transactions/" + id_transaksi,
         method: "GET",
         dataType: "json",
-        // success: function (data) {
-        //     // console.log(data);
-
-        //     // Cek ada transaction_details atau transaction_details_kiloan
-        //     let hasSatuan = data.transaction_details && data.transaction_details.length > 0;
-        //     let hasKiloan = data.transaction_details_kiloan && data.transaction_details_kiloan.length > 0;
-
-        //     // Show/hide tabel berdasarkan jenis transaksi
-        //     if (hasSatuan) {
-        //         $("#tbl-detail-transaksi").eq(0).show(); // Tabel satuan
-        //         $("#tbl-detail-transaksi").eq(1).hide(); // Tabel kiloan
-        //     } else if (hasKiloan) {
-        //         $("#tbl-detail-transaksi").eq(0).hide();
-        //         $("#tbl-detail-transaksi").eq(1).show();
-        //     } else {
-        //         $("#tbl-detail-transaksi").eq(0).hide();
-        //         $("#tbl-detail-transaksi").eq(1).hide();
-        //     }
-
-        //     // Generate tabel satuan
-        //     let table = "";
-        //     if (hasSatuan) {
-        //         let j = 1;
-        //         $.each(data.transaction_details, function (i, val) {
-        //             table += `
-        //                 <tr>
-        //                     <td>${j++}</td>
-        //                     <td>${val.price_list?.item?.name || '-'}</td>
-        //                     <td>${val.price_list?.service?.name || '-'}</td>
-        //                     <td>${val.price_list?.category?.name || '-'}</td>
-        //                     <td>${val.quantity || '0'}</td>
-        //                     <td>${val.price || '0'}</td>
-        //                     <td>${val.sub_total || '0'}</td>
-        //                 </tr>
-        //             `;
-        //         });
-        //     } else {
-        //         table = '<tr><td colspan="7" class="text-center">Tidak ada data transaksi satuan</td></tr>';
-        //     }
-        //     $("#tbl-ajax").html(table);
-
-        //     // Generate tabel kiloan
-        //     let tableKiloan = "";
-        //     if (hasKiloan) {
-        //         let k = 1;
-        //         $.each(data.transaction_details_kiloan, function (i, val) {
-        //             tableKiloan += `
-        //                 <tr>
-        //                     <td>${k++}</td>
-        //                     <td>${val.price_list_kiloan?.category_kiloan?.name || '-'}</td>
-        //                     <td>${val.quantity || '0'}</td>
-        //                     <td>${val.price || '0'}</td>
-        //                     <td>${val.sub_total || '0'}</td>
-        //                 </tr>
-        //             `;
-        //         });
-        //     } else {
-        //         tableKiloan = '<tr><td colspan="7" class="text-center">Tidak ada data transaksi kiloan</td></tr>';
-        //     }
-        //     $("#tbl-ajax-kiloan").html(tableKiloan);
-
-        //     // Data lainnya
-        //     $("#service-type").html(data.service_type?.name || "-");
-        //     $("#payment-amount").html(data.payment_amount ? 'Rp ' + parseInt(data.payment_amount).toLocaleString('id-ID') : "-");
-        //     $("#code-transaksi-detail").html(data.transaction_code || "-");
-
-        //     $("#transactionDetailModal").modal("show");
-        // },
         success: function (data) {
             // console.log(data);
 
@@ -143,11 +75,16 @@ $(document).on("click", ".btn-detail", function () {
             }
             $("#tbl-ajax-kiloan").html(tableKiloan);
 
+            let total = parseInt(data.total) || 0;
+            let payment = parseInt(data.payment_amount) || 0;
+            let change = payment - total;
+
             // Data tambahan
             $("#service-type").html(data.service_type?.name || "-");
             $("#payment-amount").html(data.payment_amount ? 'Rp ' + parseInt(data.payment_amount).toLocaleString('id-ID') : "-");
+            $("#total").html(data.total ? 'Rp ' + parseInt(data.total).toLocaleString('id-ID') : "-");
+            $("#kembalian").html(change >= 0 ? 'Rp ' + change.toLocaleString('id-ID') : "-");
             $("#code-transaksi-detail").html(data.transaction_code || "-");
-
             $("#transactionDetailModal").modal("show");
         },
         error: function (xhr) {

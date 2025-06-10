@@ -16,7 +16,9 @@ $(document).on("click", ".lihat-isi", function () {
         method: "GET",
         dataType: "json",
         success: function (data) {
-            $("#isi-aduan").html(data.body);
+            $("#kode_transaksi").html(data.transaction.transaction_code);
+            $("#total_harga").html(data.transaction.total);
+            $("#isi-aduan").html(data.feedback);
             // $("#isi-review").html(data.review);
             $("#balas").prop("disabled", false);
             $("#balas").val("");
