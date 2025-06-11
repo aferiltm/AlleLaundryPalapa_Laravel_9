@@ -20,20 +20,27 @@ class ComplaintSuggestionController extends Controller
     {
         $user = Auth::user();
 
-        $suggestions = ComplaintSuggestion::where([
-            'type'  => 1,
-            'reply' => null,
-        ])->get();
+        $suggestions = ComplaintSuggestion::where('type', 'Saran')
+            ->where(function($q) {
+                $q->whereNull('reply')->orWhere('reply', '');
+            })
+            ->with('transaction', 'user')
+            ->get();
 
-        $complaints = ComplaintSuggestion::where([
-            'type'  => 2,
-            'reply' => null,
-        ])->get();
+        $complaints = ComplaintSuggestion::where('type', 'Komplain')
+            ->where(function($q) {
+                $q->whereNull('reply')->orWhere('reply', '');
+            })
+            ->with('transaction', 'user')
+            ->get();
 
-        $count = ComplaintSuggestion::whereNull('reply', '')->count();
+
+        $count = $suggestions->count() + $complaints->count();
 
         return view('admin.complaint_suggestion', compact('user', 'suggestions', 'complaints', 'count'));
     }
+
+
 
     /**
      * Get complaint suggestion by id
@@ -54,11 +61,16 @@ class ComplaintSuggestionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ComplaintSuggestion $complaintSuggestion, Request $request): JsonResponse
+    public function update(Request $request, ComplaintSuggestion $complaintSuggestion): JsonResponse
     {
+        $request->validate([
+            'reply' => 'required|string|max:1000',
+        ]);
+
         $complaintSuggestion->reply = $request->input('reply');
         $complaintSuggestion->save();
 
-        return response()->json();
+        return response()->json(['message' => 'Reply saved successfully.']);
     }
+
 }

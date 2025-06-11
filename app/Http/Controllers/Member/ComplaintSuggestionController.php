@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Transaction;
 
 class ComplaintSuggestionController extends Controller
 {
@@ -24,14 +25,19 @@ class ComplaintSuggestionController extends Controller
             abort(403);
         }
 
-        $allComplaintSuggestions = ComplaintSuggestion::with('user')->get(); // Semua ulasan
-        $userComplaintSuggestions = ComplaintSuggestion::where('user_id', $user->id)->get();
+        $transactions = Transaction::with('status')->where('member_id', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->orderBy('status_id', 'ASC')
+            ->get();
 
-        return view('member.complaint_suggestions', [
-            'user' => $user,
-            'complaintSuggestions' => $userComplaintSuggestions,
-            'allComplaintSuggestions' => $allComplaintSuggestions,
-        ]);
+        $transactions = Transaction::with(['service_type', 'complaint_suggestion', 'member'])
+            ->where('member_id', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $latestTransactions = Transaction::where('status_id', 3)->latest()->get();
+
+        return view('member.complaint_suggestions', compact('user', 'transactions', 'latestTransactions'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,7 +45,6 @@ class ComplaintSuggestionController extends Controller
         $request->validate([
             'feedback'       => ['required'],
             'type'       => ['required'],
-            'rating'     => 'required|integer|min:1|max:5',
             // 'review'     => 'required|string|max:200',
             'transaction_id' => 'required|exists:transactions,id', // Pastikan transaksi valid
         ]);
@@ -53,7 +58,6 @@ class ComplaintSuggestionController extends Controller
         ComplaintSuggestion::create([
             'feedback'          => $request->input('feedback'),
             'type'          => $request->input('type'),
-            'rating'        => $request->input('rating'),
             // 'review'        => $request->input('review'),
             'user_id'       => $user->id,
             'transaction_id' => $request->input('transaction_id'), // Simpan ID transaksi
@@ -63,6 +67,7 @@ class ComplaintSuggestionController extends Controller
         return redirect()->route('member.complaints.index')
             ->with('success', 'Ulasan berhasil dikirim!');
     }
+
 
 
 }

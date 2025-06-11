@@ -6,35 +6,37 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ComplaintSuggestion extends Model
+class Review extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'feedback',
-        'type',
-        'reply',
-        // 'review',
+        'review',
+        'rating',
         'transaction_id',
         'user_id',
 
     ];
 
-
-
+    protected $table = 'review';
     /**
      * User relation
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Transaction relation
+     *
+     * @return BelongsTo
+     */
     public function transaction(): BelongsTo
     {
         return $this->belongsTo(Transaction::class);
     }
-
+    
 }

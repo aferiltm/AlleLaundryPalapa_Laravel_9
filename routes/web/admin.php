@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PriceListController;
 use App\Http\Controllers\Admin\PriceListKiloanController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\ComplaintSuggestionController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\Transaction\TransactionController;
 use App\Http\Controllers\Admin\Transaction\PrintTransactionController;
 use App\Http\Controllers\Admin\Transaction\TransactionSessionController;
@@ -137,7 +138,6 @@ Route::group([
     Route::post('/get-month', [ReportController::class, 'getMonth'])->name('get-month');
 });
 
-// Route::get('/laporanview', 'laporanview');
 
 Route::group([
     'prefix' => 'service-types',
@@ -145,4 +145,13 @@ Route::group([
 ], function () {
     Route::get('/{serviceType}', [ServiceTypeController::class, 'show'])->name('show');
     Route::patch('/{serviceType}', [ServiceTypeController::class, 'update'])->name('update');
+});
+
+Route::group([
+    'prefix' => 'review',
+    'as' => 'review.',
+], function () {
+    Route::get('/', [ReviewController::class, 'index'])->name('index');
+    Route::get('/{review}', [ReviewController::class, 'show'])->name('show');
+    Route::patch('/{review}', [ReviewController::class, 'update'])->name('update');
 });

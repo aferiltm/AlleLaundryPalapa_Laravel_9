@@ -11,7 +11,7 @@
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item">
             <a class="nav-link" href="{{ route('member.points.index') }}">
-                <i class="mr-2 fas fa-star" style="color: rgb(255, 149, 0)"></i>Tukar Poin
+                <i class="mr-2 fas fa-ticket" style="color: rgb(255, 149, 0)"></i>Tukar Poin
             </a>
         </li>
         <li class="nav-item dropdown">

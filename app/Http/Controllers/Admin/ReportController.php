@@ -12,6 +12,7 @@ use App\Models\PriceList;
 use App\Models\Service;
 use App\Models\ServiceType;
 use App\Models\Status;
+use App\Models\Review;
 use App\Models\TransactionDetail;
 use App\Models\TransactionDetailKiloan;
 use App\Models\User;
@@ -117,7 +118,7 @@ class ReportController extends Controller
         }
 
         // Ambil data rating dari ComplaintSuggestion
-        $ratings = ComplaintSuggestion::whereYear('created_at', $tahun)
+        $ratings = Review::whereYear('created_at', $tahun)
             ->whereBetween(DB::raw('MONTH(created_at)'), [$bulanAwal, $bulanAkhir])
             ->selectRaw('rating, COUNT(*) as count')
             ->groupBy('rating')
@@ -285,7 +286,7 @@ class ReportController extends Controller
         $complaintData = ComplaintSuggestion::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
             ->whereYear('created_at', $tahun)
             ->whereBetween(DB::raw('MONTH(created_at)'), [$bulanAwal, $bulanAkhir])
-            ->where('type', 2)
+            ->where('type', 'Komplain')
             ->groupBy('month')
             ->get();
         // Prepare data for complaint line chart

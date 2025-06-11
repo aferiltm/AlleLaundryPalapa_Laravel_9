@@ -26,9 +26,16 @@ return new class extends Migration
      */
     public function down()
     {
+        // Schema::table('transactions', function (Blueprint $table) {
+        //     $table->dropColumn('service_type_id');
+        //     $table->dropColumn('service_cost');
+        // });
         Schema::table('transactions', function (Blueprint $table) {
-            $table->dropColumn('service_type_id');
-            $table->dropColumn('service_cost');
+        // Hapus foreign key terlebih dahulu
+        $table->dropForeign(['service_type_id']);
+
+        // Lalu hapus kolomnya
+        $table->dropColumn('service_type_id');
         });
     }
 };

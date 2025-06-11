@@ -80,20 +80,17 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
-                                                                id="reviewModalLabel{{ $transaction->id }}">Beri Feedback
+                                                                id="reviewModalLabel{{ $transaction->id }}">Beri Ulasan/Review
                                                             </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{ route('member.complaints.store') }}"
+                                                        <form action="{{ route('member.review.store') }}"
                                                             method="POST">
                                                             @csrf
                                                             <div class="modal-body">
-                                                                {{-- <p class="mb-3 font-semibold"><span
-                                                                        class="text-red-500">*</span>Sebelum mengisi ulasan
-                                                                    harap periksa laundry anda, Terima Kasih</p> --}}
                                                                 <input type="hidden" name="transaction_id"
                                                                     value="{{ $transaction->id }}">
                                                                 <div class="form-group">
@@ -107,14 +104,7 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label>Saran atau Komplain Laundry</label>
-                                                                    <select class="form-control" name="type">
-                                                                        <option value="1">Saran</option>
-                                                                        <option value="2">Komplain</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control" name="feedback" rows="4"></textarea>
+                                                                    <textarea class="form-control" name="review" rows="4"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
