@@ -33,7 +33,7 @@
                         @endif
                         <form action="" method="POST">
                             @csrf
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="email">@lang('auth.email_label')</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     id="email" name="email" placeholder="@lang('auth.email_placeholder')"
@@ -53,6 +53,14 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="login">Email atau Nomor Telepon</label>
+                                <input type="text" name="login" class="form-control" placeholder="Masukkan email/no.telepon anda" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Masukkan password anda" required>
                             </div>
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
@@ -62,7 +70,8 @@
                         </form>
                         <hr>
                         <div class="text-center mt-5">
-                            <p>Belum Punya Akun? <a class="text-blue-500" href="{{ url('register') }}">@lang('auth.register_link')</a></p>
+                            <p>Belum Punya Akun? <a class="text-blue-500" href="{{ url('register') }}">@lang('auth.register_link')</a>
+                            </p>
                         </div>
                     </div>
                 </div>
