@@ -109,6 +109,7 @@ Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
 
 Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+Route::post('/members', [MemberController::class, 'store'])->name('members.store');
 
 Route::group([
     'prefix' => 'vouchers',
