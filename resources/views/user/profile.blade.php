@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" id="email"
-                                                value="{{ $user->email }}" disabled>
+                                                value="{{ $user->email }}">
                                         </div>
                                         <div class="form-group">
                                             <label for="user_code">Kode Member</label>

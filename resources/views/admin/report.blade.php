@@ -28,13 +28,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link active text-blue-600" id="laporanKeuangan-tab" data-toggle="tab"
                                         href="#laporanKeuangan" role="tab" aria-controls="laporanKeuangan"
-                                        aria-selected="true">Laporan Keuangan Perbulan</a>
+                                        aria-selected="true">Laporan Transaksi Perbulan</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-blue-600" id="analisisLayananDanPerilaku-tab" data-toggle="tab"
                                         href="#analisisLayananDanPerilaku" role="tab"
-                                        aria-controls="analisisLayananDanPerilaku" aria-selected="false">Analisis Layanan
-                                        dan Perilaku</a>
+                                        aria-controls="analisisLayananDanPerilaku" aria-selected="false">Laporan Analisis Kepuasan Pelanggan</a>
                                 </li>
                             </ul>
 

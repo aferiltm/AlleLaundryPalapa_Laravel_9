@@ -89,6 +89,21 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                {{-- <div class="col-3">
+                    <!-- small box -->
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <p>Jumlah Member</p>
+
+                            <h3>{{ $membersCount }}</h3>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-user-group" style="font-size:500%;"></i>
+                        </div>
+                        <a href="{{ route('admin.members.index') }}" class="small-box-footer">Lihat member <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div> --}}
             </div>
 
             <div class="row">
