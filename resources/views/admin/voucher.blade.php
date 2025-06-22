@@ -55,7 +55,7 @@
                                         <th>No</th>
                                         <th>Nama Voucher</th>
                                         <th>Poin Diperlukan</th>
-                                        <th>Keterangan</th>
+                                        {{-- <th>Keterangan</th> --}}
                                         <th>Detail</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -66,7 +66,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $voucher->name }}</td>
                                             <td>{{ $voucher->point_need }}</td>
-                                            <td>{{ $voucher->description }}</td>
+                                            {{-- <td>{{ $voucher->description }}</td> --}}
                                             <td>{{ $voucher->details }}</td>
                                             <td>
                                                 @if ($voucher->active_status != 0)

@@ -100,7 +100,8 @@
     <section class="promo section" id="promo">
         <div class="bg-white h-auto">
             <div class="mx-auto pb-10 pt-8">
-                <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">!!! PROMO !!!</h1>
+                <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">!!! PROMO !!!
+                </h1>
 
                 <p class="text-center text-sm text-gray-400 pb-4">
                     <i class="fa-solid fa-arrow-left mr-2"></i>
@@ -110,7 +111,32 @@
 
                 <div class="carousel flex w-full overflow-x-auto space-x-4 px-4 md:px-10">
                     @foreach ($vouchers as $voucher)
-                        <div class="carousel-item flex-shrink-0 w-64">
+                        @guest
+                            <a href="{{ route('login.show') }}">
+                                <div class="carousel-item flex-shrink-0 w-64">
+                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
+                                        data-aos="fade-up">
+                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
+                                            {{ $voucher->details }}
+                                        </h1>
+                                    </div>
+                                </div>
+                            </a>
+                        @endguest
+
+                        @auth
+                            <a href="{{ route('member.points.index') }}">
+                                <div class="carousel-item flex-shrink-0 w-64">
+                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
+                                        data-aos="fade-up">
+                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
+                                            {{ $voucher->details }}
+                                        </h1>
+                                    </div>
+                                </div>
+                            </a>
+                        @endauth
+                        {{-- <div class="carousel-item flex-shrink-0 w-64">
                             <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
                                 data-aos="fade-up">
                                 <h1 class="font-semibold text-sm md:text-md text-black mb-4">
@@ -130,7 +156,7 @@
                                     </a>
                                 @endauth
                             </div>
-                        </div>
+                        </div> --}}
                     @endforeach
                 </div>
 
@@ -272,7 +298,8 @@
                         data-aos="fade-up">Alamat</h1>
                     <p class="font-poppins text-lg mt-1 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
                         data-aos="fade-up">
-                        Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520
+                        Jl. Palapa Raya, RT.4/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus
+                        Ibukota Jakarta 11520
                     </p>
 
                     <h1 class="text-2xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
@@ -297,9 +324,9 @@
                         width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen=""
                         aria-hidden="false" tabindex="0"></iframe> --}}
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.91530791730187!2d106.76547367125757!3d-6.178261943198367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f7aa08928935%3A0x7b5dee2089f038fe!2sJl.%20Palapa%20VII%20No.27%2C%20RT.11%2FRW.1%2C%20Kedoya%20Sel.%2C%20Kec.%20Kb.%20Jeruk%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2011520!5e0!3m2!1sid!2sid!4v1745753105882!5m2!1sid!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6385369508425!2d106.76107227545018!3d-6.179114493808332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f707449fca05%3A0x2ed8153d5bb2598b!2sAll%C3%A9%20Laundry!5e0!3m2!1sid!2sid!4v1750609919456!5m2!1sid!2sid"
                         width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-md"></iframe>
                 </div>
             </div>
         </div>
