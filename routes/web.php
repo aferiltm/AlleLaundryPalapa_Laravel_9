@@ -82,6 +82,8 @@ Route::get('/admin/transaksi-data', [DashboardController::class, 'getTransaction
 Route::get('/admin/reports/get-month', [ReportController::class, 'getMonth'])->name('admin.reports.getMonth');
 // Route::post('/admin/reports/print-analysis', [ReportController::class, 'printAnalysis'])->name('admin.reports.printAnalysis');
 Route::post('admin/reports/printAnalysis', [ReportController::class, 'printAnalysis'])->name('admin.reports.printAnalysis');
+
+
 // routes/web.php
 
 

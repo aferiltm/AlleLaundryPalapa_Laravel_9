@@ -22,6 +22,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use App\Enums\Role;
 
 class TransactionController extends Controller
 {
@@ -414,5 +417,74 @@ class TransactionController extends Controller
         $transaction->save();
 
         return response()->json();
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:transactions,id',
+            'status_id' => 'required|integer',
+        ]);
+
+        $transaction = Transaction::with('member')->findOrFail($request->id); // pastikan relasi member di-load
+        $transaction->status_id = $request->status_id;
+        $transaction->save();
+
+        if ($transaction->status_id == 3) {
+            try {
+                $this->sendWhatsAppMessage($transaction);
+            } catch (\Exception $e) {
+                Log::error('WA Error: ' . $e->getMessage());
+                return response()->json(['message' => 'Gagal mengirim WA'], 500);
+            }
+        }
+
+        return response()->json(['message' => 'Status berhasil diperbarui.'], 200);
+    }
+
+    protected function sendWhatsAppMessage($transaction)
+    {
+        $member = $transaction->member;
+
+        if (!$member || $member->role !== Role::Member) {
+            Log::info("WA not sent: member tidak valid atau bukan role 2", [
+                'member_id' => $member?->id,
+                'role' => $member?->role
+            ]);
+            return;
+        }
+
+        $original = $member->phone_number;
+        $phone = preg_replace('/[^0-9]/', '', $original); // Hapus semua karakter non-digit
+
+        if (strpos($phone, '08') === 0) {
+            $phone = '62' . substr($phone, 1);
+        } elseif (strpos($phone, '620') === 0) {
+            $phone = '62' . substr($phone, 3);
+        }
+
+        Log::info("Mengirim WA ke: " . $phone); // Tambahkan ini untuk memastikan nomor sudah benar
+
+        $name = $member->name;
+        $code = $transaction->transaction_code;
+
+        $message = "Halo $name, pesanan laundry Anda dengan kode *$code* telah *SELESAI*. Silakan datang ke Alle Laundry Palapa untuk mengambilnya. Terima kasih. \n Alamat Laundry: Jl. Palapa Raya, RT.4/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520";
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => env('FONNTE_API_KEY'), // Dari .env
+            ])->post('https://api.fonnte.com/send', [
+                'target' => $phone,
+                'message' => $message,
+            ]);
+
+            if (!$response->successful()) {
+                Log::error('Fonnte gagal: ' . $response->body());
+                throw new \Exception('Fonnte error');
+            }
+        } catch (\Exception $e) {
+            Log::error('Exception kirim WA: ' . $e->getMessage());
+            throw $e;
+        }
     }
 }

@@ -139,7 +139,8 @@
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('admin.transactions.show', $item->id) }}"><i
                                                                 class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
@@ -175,19 +176,14 @@
                                                         @if ($item->status_id == 3)
                                                             <span class="text-success">Selesai</span>
                                                         @else
-                                                            <select name="" id="status"
+                                                            <select name="" class="select-status px-2 rounded"
                                                                 data-id="{{ $item->id }}"
-                                                                data-val="{{ $item->status_id }}"
-                                                                class="select-status px-2 rounded">
+                                                                data-val="{{ $item->status_id }}">
                                                                 @foreach ($status as $s)
-                                                                    @if ($item->status_id == $s->id)
-                                                                        <option selected value="{{ $s->id }}">
-                                                                            {{ $s->name }}</option>
-                                                                    @else
-                                                                        <option value="{{ $s->id }}">
-                                                                            {{ $s->name }}
-                                                                        </option>
-                                                                    @endif
+                                                                    <option value="{{ $s->id }}"
+                                                                        {{ $item->status_id == $s->id ? 'selected' : '' }}>
+                                                                        {{ $s->name }}
+                                                                    </option>
                                                                 @endforeach
                                                             </select>
                                                         @endif
@@ -198,7 +194,8 @@
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('admin.transactions.show', $item->id) }}"><i
                                                                 class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
@@ -259,7 +256,8 @@
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('admin.transactions.show', $item->id) }}"><i
                                                                 class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
@@ -317,7 +315,8 @@
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                            data-id="{{ $item->id }}"
+                                                            data-url="{{ route('admin.transactions.show', $item->id) }}"><i
                                                                 class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
@@ -354,6 +353,29 @@
             $('#tbl-transaksi-reguler').DataTable();
             $('#tbl-transaksi-express').DataTable();
             $('#tbl-transaksi-kilat').DataTable();
+        });
+    </script>
+
+    <script>
+        $(document).on('change', '.select-status', function() {
+            const statusId = $(this).val();
+            const transactionId = $(this).data('id');
+
+            $.ajax({
+                url: '{{ route('admin.transactions.updateStatus') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: transactionId,
+                    status_id: statusId
+                },
+                success: function(response) {
+                    alert('Status berhasil diperbarui!');
+                },
+                error: function() {
+                    alert('Terjadi kesalahan.');
+                }
+            });
         });
     </script>
 @endsection
