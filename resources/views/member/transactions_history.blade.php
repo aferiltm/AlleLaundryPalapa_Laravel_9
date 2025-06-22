@@ -28,6 +28,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -38,6 +39,7 @@
                                     @foreach ($transactions as $transaction)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $transaction->transaction_code }}</td>
                                             <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
                                             <td>
                                                 @if ($transaction->status_id == 3)
@@ -67,6 +69,18 @@
                                                             Ulasan <i class="fa-solid fa-star"></i>
                                                         </button>
                                                     @endif
+
+                                                    @if ($transaction->hasFeedback())
+                                                        <button class="btn bg-gray-500 text-white" disabled>
+                                                            Sudah Komplain <i class="fa-solid fa-circle-check"></i>
+                                                        </button>
+                                                    @else
+                                                        <button class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#formSaranKomplainModal{{ $transaction->id }}">
+                                                            Beri Saran/Komplain <i
+                                                                class="fa-solid fa-circle-exclamation"></i>
+                                                        </button>
+                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
@@ -80,15 +94,15 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title"
-                                                                id="reviewModalLabel{{ $transaction->id }}">Beri Ulasan/Review
+                                                                id="reviewModalLabel{{ $transaction->id }}">Beri
+                                                                Ulasan/Review
                                                             </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{ route('member.review.store') }}"
-                                                            method="POST">
+                                                        <form action="{{ route('member.review.store') }}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="transaction_id"
@@ -115,6 +129,57 @@
                                                             </div>
                                                         </form>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($transaction->status_id == 3 && !$transaction->hasReview())
+                                            <!-- Modal Saran atau Komplain -->
+                                            <div class="modal fade" id="formSaranKomplainModal{{ $transaction->id }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="formSaranKomplainLabel{{ $transaction->id }}"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <form method="POST" action="{{ route('member.complaints.store') }}">
+                                                        @csrf
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-warning text-white">
+                                                                <h5 class="modal-title"
+                                                                    id="formSaranKomplainLabel{{ $transaction->id }}">Beri
+                                                                    Saran atau
+                                                                    Komplain</h5>
+                                                                <button type="button" class="close text-white"
+                                                                    data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-sm">
+                                                                <input type="hidden" name="transaction_id"
+                                                                    value="{{ $transaction->id }}">
+
+                                                                <div class="form-group">
+                                                                    <label for="type">Tipe</label>
+                                                                    <select name="type" id="type-{{ $transaction->id }}"
+                                                                        class="form-control" required>
+                                                                        <option value="">-- Pilih Tipe --</option>
+                                                                        <option value="Saran">Saran</option>
+                                                                        <option value="Komplain">Komplain</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="feedback">Isi Feedback</label>
+                                                                    <textarea name="feedback" id="feedback-{{ $transaction->id }}" class="form-control" rows="4" required></textarea>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn bg-gray-600 text-white"
+                                                                    data-dismiss="modal">Batal</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Kirim</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         @endif

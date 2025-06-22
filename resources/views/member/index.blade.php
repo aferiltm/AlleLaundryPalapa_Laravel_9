@@ -85,6 +85,21 @@
                 </div>
             </div>
 
+            @if (session('success'))
+                <div class="alert alert-success mt-2">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger mt-2">{{ session('error') }}</div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger mt-2">
+                    @foreach ($errors->all() as $error)
+                        <div>{{ $error }}</div>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card">
@@ -96,6 +111,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>Kode Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -106,6 +122,7 @@
                                     @foreach ($latestTransactions as $item)
                                         <tr>
                                             <td style="padding-top: 20px;">{{ $loop->iteration }}</td>
+                                            <td style="padding-top: 20px;">{{ $item->transaction_code }}</td>
                                             <td style="padding-top: 20px;">
                                                 {{ date('d F Y', strtotime($item->created_at)) }}
                                             </td>
@@ -135,6 +152,17 @@
                                                         <button class="btn btn-success" data-toggle="modal"
                                                             data-target="#reviewModal{{ $item->id }}">
                                                             Ulasan <i class="fa-solid fa-star"></i>
+                                                        </button>
+                                                    @endif
+
+                                                    @if ($item->hasFeedback())
+                                                        <button class="btn bg-gray-500 text-white" disabled>
+                                                            Sudah Komplain <i class="fa-solid fa-circle-check"></i>
+                                                        </button>
+                                                    @else
+                                                        <button class="btn btn-warning" data-toggle="modal"
+                                                            data-target="#formSaranKomplainModal{{ $item->id }}">
+                                                            Beri Saran/Komplain <i class="fa-solid fa-circle-exclamation"></i>
                                                         </button>
                                                     @endif
                                                 @endif
@@ -191,6 +219,49 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    @endforeach
+
+    @foreach ($latestTransactions as $item)
+        <!-- Modal Saran atau Komplain -->
+        <div class="modal fade" id="formSaranKomplainModal{{ $item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="formSaranKomplainLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="POST" action="{{ route('member.complaints.store') }}">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning text-white">
+                            <h5 class="modal-title" id="formSaranKomplainLabel{{ $item->id }}">Beri Saran atau
+                                Komplain</h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-sm">
+                            <input type="hidden" name="transaction_id" value="{{ $item->id }}">
+
+                            <div class="form-group">
+                                <label for="type">Tipe</label>
+                                <select name="type" id="type-{{ $item->id }}" class="form-control" required>
+                                    <option value="">-- Pilih Tipe --</option>
+                                    <option value="Saran">Saran</option>
+                                    <option value="Komplain">Komplain</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedback">Isi Feedback</label>
+                                <textarea name="feedback" id="feedback-{{ $item->id }}" class="form-control" rows="4" required></textarea>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn bg-gray-600 text-white" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Kirim</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     @endforeach

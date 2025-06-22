@@ -44,9 +44,8 @@ class ComplaintSuggestionController extends Controller
     {
         $request->validate([
             'feedback'       => ['required'],
-            'type'       => ['required'],
-            // 'review'     => 'required|string|max:200',
-            'transaction_id' => 'required|exists:transactions,id', // Pastikan transaksi valid
+            'type'           => ['required'],
+            'transaction_id' => ['required', 'exists:transactions,id'],
         ]);
 
         $user = Auth::user();
@@ -55,18 +54,27 @@ class ComplaintSuggestionController extends Controller
             abort(403);
         }
 
+        // Cek apakah user sudah pernah mengirim komplain untuk transaksi ini
+        $alreadyExists = ComplaintSuggestion::where('user_id', $user->id)
+            ->where('transaction_id', $request->transaction_id)
+            ->exists();
+
+        if ($alreadyExists) {
+            return redirect()->back()->with('error', 'Anda sudah mengirim feedback untuk transaksi ini.');
+        }
+
         ComplaintSuggestion::create([
-            'feedback'          => $request->input('feedback'),
-            'type'          => $request->input('type'),
-            // 'review'        => $request->input('review'),
-            'user_id'       => $user->id,
-            'transaction_id' => $request->input('transaction_id'), // Simpan ID transaksi
-            'reply'         => '',
+            'feedback'       => $request->input('feedback'),
+            'type'           => $request->input('type'),
+            'user_id'        => $user->id,
+            'transaction_id' => $request->input('transaction_id'),
+            'reply'          => '',
         ]);
 
-        return redirect()->route('member.complaints.index')
-            ->with('success', 'Ulasan berhasil dikirim!');
+        return redirect()->back()->with('success', 'Komplain berhasil dikirim.');
     }
+
+
 
 
 

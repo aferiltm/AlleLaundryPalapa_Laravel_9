@@ -19,7 +19,7 @@ class ComplaintSuggestionController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-
+  
         $suggestions = ComplaintSuggestion::where('type', 'Saran')
             ->where(function($q) {
                 $q->whereNull('reply')->orWhere('reply', '');
@@ -34,10 +34,14 @@ class ComplaintSuggestionController extends Controller
             ->with('transaction', 'user')
             ->get();
 
+        $repliedFeedbacks = ComplaintSuggestion::whereIn('type', ['Saran', 'Komplain'])
+            ->where('reply', '!=', '')
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         $count = $suggestions->count() + $complaints->count();
 
-        return view('admin.complaint_suggestion', compact('user', 'suggestions', 'complaints', 'count'));
+        return view('admin.complaint_suggestion', compact('user', 'suggestions', 'complaints', 'repliedFeedbacks', 'count'));
     }
 
 
@@ -50,9 +54,19 @@ class ComplaintSuggestionController extends Controller
      */
     public function show(ComplaintSuggestion $complaintSuggestion): JsonResponse
     {
-         $complaintSuggestion->load('transaction');
-        return response()->json($complaintSuggestion);
+        $complaintSuggestion->load('transaction');
+
+        return response()->json([
+            'id' => $complaintSuggestion->id,
+            'feedback' => $complaintSuggestion->feedback,
+            'type' => $complaintSuggestion->type,
+            'reply' => $complaintSuggestion->reply,
+            'user_name' => $complaintSuggestion->user->name,
+            'transaction_code' => $complaintSuggestion->transaction->transaction_code ?? '-',
+            'created_at' => $complaintSuggestion->created_at->format('d/m/Y H:i'),
+        ]);
     }
+
 
     /**
      * Send complaint suggestion reply
@@ -61,7 +75,7 @@ class ComplaintSuggestionController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, ComplaintSuggestion $complaintSuggestion): JsonResponse
+    public function update(ComplaintSuggestion $complaintSuggestion, Request $request): JsonResponse
     {
         $request->validate([
             'reply' => 'required|string|max:1000',
@@ -70,7 +84,10 @@ class ComplaintSuggestionController extends Controller
         $complaintSuggestion->reply = $request->input('reply');
         $complaintSuggestion->save();
 
-        return response()->json(['message' => 'Reply saved successfully.']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Balasan berhasil dikirim'
+        ]);
     }
 
 }

@@ -468,7 +468,7 @@ class TransactionController extends Controller
         $name = $member->name;
         $code = $transaction->transaction_code;
 
-        $message = "Halo $name, pesanan laundry Anda dengan kode *$code* telah *SELESAI*. Silakan datang ke Alle Laundry Palapa untuk mengambilnya. Terima kasih. \n Alamat Laundry: Jl. Palapa Raya, RT.4/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520";
+        $message = "Halo $name, \n Pesanan laundry Anda dengan kode *$code* telah *SELESAI*!. Silakan datang ke Alle Laundry Palapa untuk mengambilnya. \n Jam Operasional: \n - Senin - Jumat (07:00 - 19:00 WIB) \n Sabtu - Minggu (08:00 - 16:00 WIB) \n Alamat Laundry: Jl. Palapa Raya, RT.4/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520 \n Terima kasih telah menggunakan layanan kami!";
 
         try {
             $response = Http::withHeaders([

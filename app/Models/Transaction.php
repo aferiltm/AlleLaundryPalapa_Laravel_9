@@ -137,4 +137,9 @@ class Transaction extends Model
         return $this->reviews()->exists(); // Mengecek apakah transaksi sudah memiliki ulasan
     }
 
+    public function hasFeedback(): bool
+    {
+        return $this->complaint_suggestion()->exists(); // Mengecek apakah transaksi sudah memiliki ulasan
+    }
+
 }

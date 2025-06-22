@@ -26,7 +26,7 @@
                             <h5>Daftar Saran atau Komplain</h5>
                             <div class="row">
                                 <div class="col-sm-6">
-
+                                    <h6 class="text-danger">Belum Dibalas ({{ $count }})</h6>
                                     <table class="table">
                                         <thead class="thead-light">
                                             <tr>
@@ -87,6 +87,41 @@
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <h6 class="text-success mt-3">Sudah Dibalas</h6>
+                                    <table class="table-sm table">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Kode</th>
+                                                <th>Nama</th>
+                                                <th>Kategori</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($repliedFeedbacks as $replied)
+                                                <tr class="bg-light">
+                                                    <td>{{ $replied->transaction->transaction_code }}</td>
+                                                    <td>{{ $replied->user->name }}</td>
+                                                    <td>{{ $replied->type == 1 ? 'Saran' : 'Komplain' }}</td>
+                                                    {{-- <td>{{ Str::limit($replied->body, 30) }}</td> --}}
+                                                    <td>
+                                                        <button
+                                                            class="lihat-isi rounded bg-gray-500 px-2 py-1 text-base text-white duration-200 hover:bg-gray-700"
+                                                            data-id="{{ $replied->id }}">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @if ($repliedFeedbacks->count() == 0)
+                                                <tr>
+                                                    <td colspan="4" class="text-muted text-center">Belum ada feedback
+                                                        yang dibalas</td>
+                                                </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -114,7 +149,7 @@
 
 @section('scripts')
     <script src="{{ asset('js/ajax-saran.js') }}"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
@@ -177,5 +212,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endsection

@@ -61,7 +61,7 @@
                                                     <button class="btn btn-secondary" disabled>Sudah Dikirim</button>
                                                 @else
                                                     <button class="btn btn-warning btn-open-form"
-                                                        data-id="{{ $item->id }}">Beri Saran/Komplain</button>
+                                                        data-id="{{ $item->id }}">Beri Saran/Komplain <i class="fa-solid fa-circle-exclamation"></i></button>
                                                 @endif
 
 
