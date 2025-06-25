@@ -315,7 +315,7 @@
                     </p> --}}
                     <p class="font-poppins text-lg mt-2 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
                         data-aos="fade-up">
-                        <a href="https://wa.me/6281383004378" target="_blank">(+62) 813-8300-4378 </a>
+                        <a href="https://wa.me/6281383004378" target="_blank">(+62) 815-1315-3355 </a>
                     </p>
                 </div>
 

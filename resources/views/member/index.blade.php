@@ -63,7 +63,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Whatsapp</td>
-                                                <td>0813-8300-4378</td>
+                                                <td>0815-1315-3355</td>
                                             </tr>
                                             <tr>
                                                 <td>Telepon</td>
