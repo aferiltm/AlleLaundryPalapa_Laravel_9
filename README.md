@@ -1,4 +1,4 @@
-<p align="center"><img src="https://ibb.co/FM4tnTx" width="500"></p>
+<p align="center"><img src="https://imgur.com/efAXYaV" width="500"></p>
 
 # Aplikasi Laundry Sederhana
 
