@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/g3v2FCI.png" width="500"></p>
+<p align="center"><img src="https://ibb.co/FM4tnTx" width="500"></p>
 
 # Aplikasi Laundry Sederhana
 
@@ -23,7 +23,7 @@ Beberapa fitur diantaranya:
 Khusus Admin Daftar / Register dengan url `/register-admin`. Secret key dapat diubah di env atau default "admin123".
 
 Login admin:  
-Email : admin@laundryxyz.com  
+Email : admin@gmail.com  
 Password : admin123
 
 Login admin:  
@@ -36,7 +36,7 @@ Dalam perancangan Aplikasi ini, kami menggunakan PHP versi 8.1 dan Framework Lar
 
 ### Landing Page
 
-<img src="https://i.imgur.com/JCmeLQt.png" style="width:100%;" />
+<img src="https://ibb.co/twKZ3x2D" style="width:100%;" />
 
 ### Dashboard Admin
 
