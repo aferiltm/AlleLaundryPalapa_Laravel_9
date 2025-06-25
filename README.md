@@ -1,6 +1,4 @@
-<p align="center"><img src="https://freeimage.host/i/Fu0EMps" width="500"></p>
-
-# Aplikasi Laundry Sederhana
+# Aplikasi Alle Laundry Palapa
 
 Aplikasi ini merupakan aplikasi laundry sederhana yang dirancang untuk memberikan kemudahan dalam proses pencucian pakaian Anda. Dengan antarmuka pengguna yang intuitif dan proses pemesanan yang cepat, CleanLaundry menyediakan solusi praktis untuk kebutuhan laundry Anda.
 
@@ -31,28 +29,6 @@ Email : member@gmail.com
 Password : member123
 
 Dalam perancangan Aplikasi ini, kami menggunakan PHP versi 8.1 dan Framework Laravel 9.
-
-## Screenshot
-
-### Landing Page
-
-<img src="https://ibb.co/twKZ3x2D" style="width:100%;" />
-
-### Dashboard Admin
-
-<img src="https://i.imgur.com/FrNOQiu.png" style="width:100%;" />
-
-### Dashboard Member
-
-<img src="https://i.imgur.com/QgKYdGp.png" style="width:100%;" />
-
-### Fitur Cetak Bukti Transaksi [ Admin ]
-
-<img src="https://i.imgur.com/5Aj0yNv.png" style="width:100%;" />
-
-### Fitur Cetak Laporan Keuangan [ Admin ]
-
-<img src="https://i.imgur.com/t69mpps.png" style="width:100%;" />
 
 ## Cara Instalasi
 
@@ -106,7 +82,7 @@ Silahkan buka browser dan ketikkan : http://localhost:8000
 
 3. **Riwayat Transaksi:** Pantau dan kelola riwayat transaksi Anda untuk melacak semua pesanan sebelumnya.
 
-CleanLaundry bertujuan untuk memberikan layanan pencucian pakaian yang berkualitas dan mudah diakses. Kami berkomitmen untuk membuat pengalaman laundry Anda menjadi lebih efisien dan menyenangkan. Selamat mencuci bersih dengan CleanLaundry!
+Alle Laundry Palapa bertujuan untuk memberikan layanan pencucian pakaian yang berkualitas dan mudah diakses. Kami berkomitmen untuk membuat pengalaman laundry Anda menjadi lebih efisien dan menyenangkan. Selamat mencuci bersih dengan Alle Laundry Palapa!
 
 ## Informasi Tambahan
 
