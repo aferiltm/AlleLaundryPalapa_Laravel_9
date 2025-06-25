@@ -1,6 +1,6 @@
 # Aplikasi Alle Laundry Palapa
 
-Aplikasi ini merupakan aplikasi laundry sederhana yang dirancang untuk memberikan kemudahan dalam proses pencucian pakaian Anda. Dengan antarmuka pengguna yang intuitif dan proses pemesanan yang cepat, CleanLaundry menyediakan solusi praktis untuk kebutuhan laundry Anda.
+Aplikasi ini merupakan aplikasi laundry sederhana yang dirancang untuk memberikan kemudahan dalam proses pencucian pakaian Anda. Dengan antarmuka pengguna yang intuitif dan proses pemesanan yang cepat, Alle Laundry Palapa menyediakan solusi praktis untuk kebutuhan laundry Anda.
 
 Beberapa fitur diantaranya:
 
