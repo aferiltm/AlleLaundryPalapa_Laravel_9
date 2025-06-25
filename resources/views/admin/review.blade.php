@@ -90,7 +90,7 @@
                                         <label for="balas">Balas</label>
                                         <textarea class="form-control" id="balas" rows="3" disabled></textarea>
                                     </div>
-                                    <button id="btn-kirim-balasan" class="btn btn-success" data-id="">Kirim</button>
+                                    <button id="btn-kirim-balasan" class="btn text-white bg-blue-900 hover:bg-blue-950" data-id="">Kirim</button>
                                 </div>
                             </div>
                         </div>

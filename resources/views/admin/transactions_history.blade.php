@@ -54,7 +54,7 @@
                                         </select>
                                     </div>
                                     <div class="col-auto">
-                                        <button type="submit" id="btn-filter" class="btn btn-success">Filter</button>
+                                        <button type="submit" id="btn-filter" class="btn text-white bg-blue-900 hover:bg-blue-950">Filter</button>
                                     </div>
                                 </div>
                             </form>

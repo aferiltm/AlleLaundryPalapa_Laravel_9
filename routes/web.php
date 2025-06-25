@@ -97,12 +97,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/', [PriceListController::class, 'store'])->name('store');
         Route::get('/{priceList}', [PriceListController::class, 'show'])->name('show');
         Route::patch('/{priceList}', [PriceListController::class, 'update'])->name('update');
+        Route::delete('/{priceList}', [PriceListController::class, 'destroy'])->name('destroy');
 
         // Untuk Kiloan
         Route::prefix('kiloan')->name('kiloan.')->group(function () {
             Route::post('/', [PriceListKiloanController::class, 'store'])->name('store');
             Route::patch('/{priceListKiloan}', [PriceListKiloanController::class, 'update'])->name('update');
             Route::get('/{priceListKiloan}', [PriceListKiloanController::class, 'show'])->name('show');
+            Route::delete('/{priceListKiloan}', [PriceListController::class, 'destroy'])->name('destroy');
         });
     });
 });

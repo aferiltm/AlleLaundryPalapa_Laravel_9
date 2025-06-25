@@ -1,6 +1,7 @@
 @extends('auth.main')
 
-@section('title', config('app.name') . ' - ' . __('auth.reg_title'))
+{{-- @section('title', config('app.name') . ' - ' . __('auth.reg_title')) --}}
+@section('title', 'Alle Laundry Palapa - Register')
 
 @section('container')
     <div class="container">
@@ -8,7 +9,12 @@
             <div class="col-lg-5">
                 <div class="card bg-light o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-5">
-                        <h3 class="text-center mb-3">@lang('auth.reg_title')</h3>
+                        {{-- <h3 class="text-center mb-3">@lang('auth.reg_title')</h3> --}}
+                        <div class="flex justify-center mb-4">
+                            <a href="#">
+                                <img src="{{ asset('img/dashboard/logo_alle.jpg') }}" class="w-40" alt="ENC Logo">
+                            </a>
+                        </div>
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ session('error') }}
@@ -86,12 +92,12 @@
                                     </div>
                                 @enderror
                             </div>
-                            <button class="btn btn-success btn-block" type="submit">@lang('auth.reg_title')</button>
+                            <button class="btn bg-blue-900 hover:bg-blue-950 btn-block text-white rounded-lg"
+                                type="submit">REGISTRASI</button>
                         </form>
                         <hr>
                         <div class="text-center pt-3">
-                            <p>Sudah memiliki akun? <a class="text-blue-500"
-                                    href="{{ url('login') }}">@lang('auth.login_link')</a></p>
+                            <p>Sudah memiliki akun? <a class="text-blue-800" href="{{ url('login') }}">Login!</a></p>
                         </div>
                     </div>
                 </div>

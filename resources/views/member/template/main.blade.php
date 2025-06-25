@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>{{ config('app.name') }} - Member</title>
+    <title>Alle Laundry Palapa - Member</title>
     {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
-    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
+    {{-- <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico"> --}}
+    <link href="{{ asset('/img/dashboard/logo_alle.jpg') }}" rel="icon" type="image/png">
 
     {{-- Tailwind CSS --}}
     {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}

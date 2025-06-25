@@ -127,7 +127,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <button type="submit" id="tambah-transaksi"
-                                                    class="btn btn-success">Tambah
+                                                    class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah
                                                     Pesanan Satuan</button>
                                             </div>
                                         </div>
@@ -145,26 +145,6 @@
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        {{-- <tbody>
-                                            @if (isset($sessionTransaction))
-                                                @foreach ($sessionTransaction as $transaction)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $transaction['itemName'] ?? 'N/A' }}</td>
-                                                        <td>{{ $transaction['serviceName'] ?? 'N/A' }}</td>
-                                                        <td>{{ $transaction['categoryName'] ?? 'N/A' }}</td>
-                                                        <td>{{ $transaction['quantity'] ?? 0 }}</td>
-                                                        <td>{{ $transaction['subTotal'] ?? 0 }}</td>
-                                                        <td>
-                                                            <a href="#"
-                                                                onclick="confirmAndDelete('{{ route('admin.transactions.session.destroy', ['rowId' => $transaction['rowId']]) }}');"
-                                                                class="bg-red-600 hover:bg-red-900 duration-200 text-white rounded text-base px-2 py-2"><i
-                                                                    class="fa-solid fa-trash-can"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                        </tbody> --}}
                                         <tbody>
                                             @if (isset($sessionTransaction))
                                                 @foreach ($sessionTransaction as $transaction)
@@ -239,7 +219,7 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <button type="submit" id="tambah-transaksi-kiloan"
-                                                    class="btn btn-success">Tambah
+                                                    class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah
                                                     Pesanan Kiloan</button>
                                             </div>
                                         </div>
@@ -279,7 +259,7 @@
                                 </div>
                             </div>
                             @if (isset($sessionTransaction))
-                                <button id="btn-bayar" class="btn btn-success" data-toggle="modal"
+                                <button id="btn-bayar" class="btn text-white bg-blue-900 hover:bg-blue-950" data-toggle="modal"
                                     data-target="#paymentModal">Bayar</button>
                             @endif
                         </div>

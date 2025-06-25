@@ -46,7 +46,7 @@
                     @endif
                     <div class="card">
                         <div class="card-body">
-                            <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addVoucherModal">Tambah
+                            <button class="btn text-white bg-blue-900 hover:bg-blue-950 mb-3" data-toggle="modal" data-target="#addVoucherModal">Tambah
                                 Voucher</button>
                             <h3>Daftar Voucher</h3>
                             <table id="tbl-members" class="table dt-responsive nowrap" style="width: 100%">

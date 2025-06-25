@@ -25,7 +25,7 @@
                         <div class="card-body">
 
                             <div class="mb-3">
-                                <a href="#" class="btn btn-primary" data-toggle="modal"
+                                <a href="#" class="btn text-white bg-blue-900 hover:bg-blue-950" data-toggle="modal"
                                     data-target="#modalTambahMember">
                                     <i class="fas fa-plus"></i> Tambah Member
                                 </a>

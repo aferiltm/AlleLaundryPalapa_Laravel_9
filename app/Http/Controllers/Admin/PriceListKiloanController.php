@@ -53,4 +53,13 @@ class PriceListKiloanController extends Controller
     {
         return response()->json($priceListKiloan);
     }
+
+    public function destroyK(PriceListKiloan $priceListKiloan): RedirectResponse
+    {
+        $priceListKiloan->delete();
+
+        return redirect()
+            ->route('admin.price-lists.index')
+            ->with('success', 'Harga Kiloan berhasil dihapus!');
+    }
 }

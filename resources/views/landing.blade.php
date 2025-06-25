@@ -8,9 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ config('app.name', 'Alle Laundry Palapa') }}</title>
+    <title>Alle Laundry Palapa</title>
     {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
-    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
+    {{-- <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico"> --}}
+    <link href="{{ asset('/img/dashboard/logo_alle.jpg') }}" rel="icon" type="image/png">
 
     <!-- Bootstrap core CSS -->
     {{-- <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
@@ -50,7 +51,7 @@
             class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
             <div class="p-4 flex flex-row items-center justify-between">
                 <a href="#"
-                    class="text-lg font-semibold tracking-widest text-blue-600 uppercase rounded-lg focus:outline-none focus:shadow-outline">Alle
+                    class="text-lg font-semibold tracking-widest text-blue-900 uppercase rounded-lg focus:outline-none focus:shadow-outline">Alle
                     Laundry Palapa
                 </a>
                 <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -66,7 +67,7 @@
             </div>
             <nav :class="{ 'flex': open, 'hidden': !open }"
                 class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-                <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 bg-blue-900 text-white border-blue-900 hover:bg-white border-2 hover:border-blue-600 hover:text-blue-600"
+                <a class="px-4 py-2 mt-2 text-sm font-semibold rounded-lg md:mt-0 bg-blue-900 text-white border-blue-900 hover:bg-white border-2 hover:border-blue-900 hover:text-blue-900"
                     href="{{ url('login') }}">Masuk / Daftar</a>
 
             </nav>

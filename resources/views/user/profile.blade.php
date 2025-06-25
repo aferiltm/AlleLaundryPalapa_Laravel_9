@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-success" type="submit">Simpan Profil</button>
+                                <button class="btn text-white bg-blue-900 hover:bg-blue-950" type="submit">Simpan Profil</button>
                             </form>
                         </div>
                     </div>
