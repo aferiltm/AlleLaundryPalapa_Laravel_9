@@ -137,27 +137,6 @@
                                 </div>
                             </a>
                         @endauth
-                        {{-- <div class="carousel-item flex-shrink-0 w-64">
-                            <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
-                                data-aos="fade-up">
-                                <h1 class="font-semibold text-sm md:text-md text-black mb-4">
-                                    {{ $voucher->details }}
-                                </h1>
-                                @guest
-                                    <a href="{{ route('login.show') }}"
-                                        class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
-                                        Klaim
-                                    </a>
-                                @endguest
-
-                                @auth
-                                    <a href="{{ route('member.points.index') }}"
-                                        class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
-                                        Klaim
-                                    </a>
-                                @endauth
-                            </div>
-                        </div> --}}
                     @endforeach
                 </div>
 
@@ -167,6 +146,65 @@
                     <i class="fa-solid fa-arrow-right ml-2"></i>
                 </p>
             </div>
+        </div>
+    </section>
+
+    <section id="promo" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- Judul --}}
+            <h2 class="text-center text-3xl font-bold text-cyan-600 mb-2">🎉 PROMO MENARIK 🎉</h2>
+            <p class="text-center text-sm text-gray-500 mb-6 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                Geser untuk lihat promo lainnya
+                <i class="fa-solid fa-arrow-right"></i>
+            </p>
+
+            {{-- Carousel Promo --}}
+            <div
+                class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-2 md:px-6 lg:px-10
+                    scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent ">
+                @foreach ($vouchers as $voucher)
+                    @php
+                        $isNew = \Carbon\Carbon::parse($voucher->created_at)->diffInDays(now()) <= 7;
+                    @endphp
+
+                    <div
+                        class="card w-72 bg-white shadow-lg hover:shadow-xl transition-all duration-300 snap-center flex-shrink-0 border border-blue-200 hover:scale-105 transition-transform duration-300 mt-5">
+                        <div class="card-body items-center text-center ">
+                            {{-- Badge jika baru --}}
+                            @if ($isNew)
+                                <div class="badge badge-error mb-2 animate-pulse">Baru!</div>
+                            @endif
+
+                            <h3 class="card-title text-base-content leading-snug text-md md:text-lg font-semibold">
+                                {{ $voucher->details }}
+                            </h3>
+
+                            <div class="mt-4">
+                                @guest
+                                    <a href="{{ route('login.show') }}" class="btn btn-sm btn-outline btn-info">
+                                        Login untuk Klaim
+                                    </a>
+                                @endguest
+
+                                @auth
+                                    <a href="{{ route('member.points.index') }}" class="btn btn-sm btn-primary">
+                                        Klaim Sekarang
+                                    </a>
+                                @endauth
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Petunjuk Swipe Bawah --}}
+            <p class="text-center text-sm text-gray-500 mt-8 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                Geser untuk lihat promo lainnya
+                <i class="fa-solid fa-arrow-right"></i>
+            </p>
         </div>
     </section>
 
