@@ -47,24 +47,25 @@
                                             </td>
                                             <td>{{ $item->complaint_suggestion->type ?? '-' }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-detail" data-toggle="modal"
-                                                    data-target="#detailUlasanModal"
-                                                    data-kode-transaksi="{{ $item->transaction_code }}"
-                                                    data-nama="{{ $item->member->name ?? '-' }}"
-                                                    data-tanggal-dibuat="{{ \Carbon\Carbon::parse($item->created_at)->locale('id')->timezone('Asia/Jakarta')->translatedFormat('l, d F Y H:i') }}"
-                                                    data-tanggal-selesai="{{ \Carbon\Carbon::parse($item->finish_date)->locale('id')->timezone('Asia/Jakarta')->translatedFormat('l, d F Y H:i') }}"
-                                                    data-tipe="{{ $item->complaint_suggestion->type ?? '-' }}"
-                                                    data-isi="{{ $item->complaint_suggestion->feedback ?? '-' }}"
-                                                    data-balasan="{{ $item->complaint_suggestion->reply ?? '-' }}">
-                                                    Detail
-                                                </button> | @if ($item->complaint_suggestion)
-                                                    <button class="btn btn-secondary" disabled>Sudah Dikirim</button>
-                                                @else
-                                                    <button class="btn btn-warning btn-open-form"
-                                                        data-id="{{ $item->id }}">Beri Saran/Komplain <i class="fa-solid fa-circle-exclamation"></i></button>
+                                                @if ($item->status_id == 3)
+                                                    <button class="btn btn-info btn-detail" data-toggle="modal"
+                                                        data-target="#detailUlasanModal"
+                                                        data-kode-transaksi="{{ $item->transaction_code }}"
+                                                        data-nama="{{ $item->member->name ?? '-' }}"
+                                                        data-tanggal-dibuat="{{ \Carbon\Carbon::parse($item->created_at)->locale('id')->timezone('Asia/Jakarta')->translatedFormat('l, d F Y H:i') }}"
+                                                        data-tanggal-selesai="{{ \Carbon\Carbon::parse($item->finish_date)->locale('id')->timezone('Asia/Jakarta')->translatedFormat('l, d F Y H:i') }}"
+                                                        data-tipe="{{ $item->complaint_suggestion->type ?? '-' }}"
+                                                        data-isi="{{ $item->complaint_suggestion->feedback ?? '-' }}"
+                                                        data-balasan="{{ $item->complaint_suggestion->reply ?? '-' }}">
+                                                        Detail
+                                                    </button> | @if ($item->complaint_suggestion)
+                                                        <button class="btn btn-secondary" disabled>Sudah Dikirim</button>
+                                                    @else
+                                                        <button class="btn btn-warning btn-open-form"
+                                                            data-id="{{ $item->id }}">Beri Saran/Komplain <i
+                                                                class="fa-solid fa-circle-exclamation"></i></button>
+                                                    @endif
                                                 @endif
-
-
                                             </td>
                                         </tr>
                                     @endforeach
