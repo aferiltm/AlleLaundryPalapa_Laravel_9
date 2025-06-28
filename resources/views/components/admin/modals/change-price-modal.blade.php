@@ -20,8 +20,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Ubah Harga</button>
+                <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn text-yellow-700 border-yellow-700 hover:text-white hover:bg-yellow-700">Ubah Harga</button>
                 </form>
             </div>
         </div>

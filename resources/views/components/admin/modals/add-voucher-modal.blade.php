@@ -28,8 +28,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Tambah</button>
+                    <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-red-700 border-red-700 hover:text-white hover:bg-red-700">Tambah</button>
                 </div>
             </form>
         </div>

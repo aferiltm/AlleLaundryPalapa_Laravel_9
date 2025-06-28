@@ -17,8 +17,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Tambah Servis</button>
+                <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn text-red-700 border-red-700 hover:text-white hover:bg-red-700">Tambah Servis</button>
                 </form>
             </div>
         </div>

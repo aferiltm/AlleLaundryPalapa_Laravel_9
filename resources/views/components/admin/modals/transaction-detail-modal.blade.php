@@ -53,7 +53,7 @@
                 <h5>Kembalian: <span id="kembalian"></span></h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
