@@ -58,8 +58,8 @@ Route::group([
 ], function () {
     Route::get('/', [VoucherController::class, 'index'])->name('index');
     Route::post('/', [VoucherController::class, 'store'])->name('store');
-    Route::patch('/{voucher}', [VoucherController::class, 'update'])->name('update');
-    Route::delete('/{voucher}', [VoucherController::class, 'destroy'])->name('destroy');
+    Route::patch('/{voucher}', [VoucherController::class, 'toggleStatus'])->name('toggleStatus');
+    Route::put('/{voucher}', [VoucherController::class, 'update'])->name('update');
 });
 
 Route::group([

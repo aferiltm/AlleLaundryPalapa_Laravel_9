@@ -177,7 +177,7 @@
                                 <div class="badge badge-error mb-2 animate-pulse">Baru!</div>
                             @endif
 
-                            <h3 class="card-title text-base-content leading-snug text-md md:text-lg font-semibold">
+                            <h3 class="card-title text-base-content leading-snug text-md md:text-lg font-semibold text-black">
                                 {{ $voucher->details }}
                             </h3>
 
