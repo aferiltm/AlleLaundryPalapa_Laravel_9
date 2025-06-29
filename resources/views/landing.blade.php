@@ -31,15 +31,11 @@
 
     {{-- Tailwind CSS --}}
     <script defer src="https://cdn.tailwindcss.com"></script>
-    {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <link defer href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet"
         type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-
-    {{-- DaisyUI --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 </head>
 
@@ -75,81 +71,34 @@
     </div>
 
     <div class="bg-blue-600 h-auto pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
-                <h1 class="text-5xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                    data-aos="fade-up">Alle Laundry Palapa</h1>
-                <h1 class="text-5xl font-bold tracking-widest text-white rounded-lg focus:outline-none focus:shadow-outline"
-                    data-aos="fade-up">Dry Cleaning</h1>
-                <p class="font-poppins text-lg mt-3 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                    data-aos="fade-up">
-                    "Segar, Bersih, Wangi – Laundry Tanpa Worry!"
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto px-6 md:px-12">
+            <!-- Left Content -->
+            <div class="mt-14 mb-10 md:mt-0 text-left md:pt-20 md:pb-10 space-y-6" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-widest text-white leading-tight">
+                    Alle Laundry Palapa
+                </h1>
+                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-wide">
+                    Layanan Dry Cleaning Profesional
+                </h2>
+                <p class="text-lg text-white leading-relaxed max-w-xl">
+                    <span class="italic">"Segar, Bersih, Wangi – Laundry Tanpa Worry!"</span>
                 </p>
 
-                <a href="#games"
-                    class="font-poppins bg-blue-900 hover:bg-black duration-200 text-white rounded-full py-3 px-24 md:py-3 md:px-20 w-auto text-2xl md:text-xl"
-                    data-aos="zoom-out">Selengkapnya</a>
+                <a href="#promo"
+                    class="inline-block bg-white text-blue-700 hover:bg-black hover:text-white duration-300 font-semibold rounded-full px-10 py-3 text-lg shadow-md">
+                    Lihat Promo
+                </a>
             </div>
 
-            <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-20 md:pb-10 order-first md:order-last"
-                data-aos="fade-left">
-                <img src="{{ asset('img/landing/illustrator.png') }}" alt="wallpaper" />
+            <!-- Right Image -->
+            <div class="pt-10 md:pt-20 md:pb-10" data-aos="fade-left">
+                <img src="{{ asset('img/landing/illustrator.png') }}" alt="Laundry Illustration"
+                    class="w-full max-w-md mx-auto drop-shadow-lg" />
             </div>
         </div>
     </div>
 
-    <section class="promo section" id="promo">
-        <div class="bg-white h-auto">
-            <div class="mx-auto pb-10 pt-8">
-                <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">!!! PROMO !!!
-                </h1>
-
-                <p class="text-center text-sm text-gray-400 pb-4">
-                    <i class="fa-solid fa-arrow-left mr-2"></i>
-                    Geser untuk lihat promo lain
-                    <i class="fa-solid fa-arrow-right ml-2"></i>
-                </p>
-
-                <div class="carousel flex w-full overflow-x-auto space-x-4 px-4 md:px-10">
-                    @foreach ($vouchers as $voucher)
-                        @guest
-                            <a href="{{ route('login.show') }}">
-                                <div class="carousel-item flex-shrink-0 w-64">
-                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
-                                        data-aos="fade-up">
-                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
-                                            {{ $voucher->details }}
-                                        </h1>
-                                    </div>
-                                </div>
-                            </a>
-                        @endguest
-
-                        @auth
-                            <a href="{{ route('member.points.index') }}">
-                                <div class="carousel-item flex-shrink-0 w-64">
-                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
-                                        data-aos="fade-up">
-                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
-                                            {{ $voucher->details }}
-                                        </h1>
-                                    </div>
-                                </div>
-                            </a>
-                        @endauth
-                    @endforeach
-                </div>
-
-                <p class="text-center text-sm text-gray-400 pt-6">
-                    <i class="fa-solid fa-arrow-left mr-2"></i>
-                    Geser untuk lihat promo lain
-                    <i class="fa-solid fa-arrow-right ml-2"></i>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="promo" class="py-12 bg-white">
+    <section id="promo" class="promo section py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {{-- Judul --}}
@@ -176,11 +125,10 @@
                             @if ($isNew)
                                 <div class="badge badge-error mb-2 animate-pulse">Baru!</div>
                             @endif
-
-                            <h3 class="card-title text-base-content leading-snug text-md md:text-lg font-semibold text-black">
+                            <h3
+                                class="card-title text-base-content leading-snug text-md md:text-lg font-semibold text-black">
                                 {{ $voucher->details }}
                             </h3>
-
                             <div class="mt-4">
                                 @guest
                                     <a href="{{ route('login.show') }}" class="btn btn-sm btn-outline btn-info">
@@ -208,61 +156,161 @@
         </div>
     </section>
 
+    <section class="bg-cyan-600 py-20">
+        <div class="container mx-auto px-6">
+            <!-- Heading -->
+            <h2 class="text-center text-4xl font-extrabold text-white mb-16">Kenapa Memilih Layanan Kami?</h2>
 
-    <div class="bg-cyan-600 h-auto pb-20">
-        <div class="container mx-auto pt-10">
-
-            <h1 class="text-center text-4xl text-extrabold font-poppins pt-1 md:pt-1 pb-2 md:pb-2 px-20">
-                <strong class="font-semibold tracking-widest text-gray-900 dark:text-white">Kenapa memilih layanan
-                    laundry kami?</strong>
-            </h1>
-            {{-- <h1>Kenapa memilih layanan laundry kami?</h1> --}}
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
-                    <h5 class="text-xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                        data-aos="fade-up">Peralatan Lengkap dan Canggih</h5>
-                    <p class="font-poppins text-lg mt-2 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                        data-aos="fade-up">
-                        Laundry kami menggunakan peralatan yang cukup lengkap dan canggih. Peralatan kami memungkinkan
-                        baju tidak perlu dijemur dan mengurangi debu pada baju
-                    </p>
+            <!-- Keunggulan -->
+            <div class="grid md:grid-cols-3 gap-10">
+                <div data-aos="fade-up" class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Peralatan Lengkap &amp; Canggih</h3>
+                    <p class="text-gray-600">Kami menggunakan mesin modern yang mengurangi debu dan mempercepat proses
+                        pengeringan tanpa
+                        jemur.</p>
                 </div>
-                <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-20 md:pb-10 order-first md:order-last"
-                    data-aos="fade-left">
-                    <img src="{{ asset('img/landing/1.jpg') }}" alt="wallpaper" />
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Semua Jenis Pakaian</h3>
+                    <p class="text-gray-600">Dari baju harian hingga jas dan selimut tebal – semua kami tangani dengan
+                        teliti.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Pelayanan Kilat</h3>
+                    <p class="text-gray-600">Layanan express tersedia agar pakaian Anda selalu siap pakai tepat waktu.
+                    </p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
-                    <h5 class="text-xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                        data-aos="fade-up">Segala Tipe Pakaian</h5>
-                    <p class="font-poppins text-lg mt-2 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                        data-aos="fade-up">
-                        Laundry kami menerima segala tipe pakaian mulai dari baju, celana, jas, dan selimut.
-                    </p>
-                </div>
-                <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-20 md:pb-10 order-last md:order-first"
-                    data-aos="fade-left">
-                    <img src="{{ asset('img/landing/2.jpg') }}" alt="wallpaper" />
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="md:ml-20 md:mr-10 md:p-1 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-20 md:pb-10">
-                    <h5 class="text-xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
-                        data-aos="fade-up">Pelayanan Laundry Yang Cepat</h5>
-                    <p class="font-poppins text-lg mt-2 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                        data-aos="fade-up">
-                        Kami menghadirkan layanan laundry cepat, bersih, dan wangi dengan kualitas terbaik, memastikan
-                        pakaian Anda selalu segar dan siap pakai.
-                    </p>
-                </div>
-                <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-32 md:pb-10 order-first md:order-last"
-                    data-aos="fade-left">
-                    <img src="{{ asset('img/landing/3.jpg') }}" alt="wallpaper" />
+
+            <!-- Price List -->
+            <div class="mt-20" data-aos="fade-up">
+                <h2 class="text-center text-3xl font-bold text-white mb-10">Daftar Harga</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <!-- Kiloan -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Pesanan Kiloan</h3>
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-blue-700 border-b">
+                                    <th class="py-2">Berat</th>
+                                    <th class="py-2 text-right">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kiloanPrices ?? [] as $item)
+                                    <tr class="border-b last:border-none text-gray-600">
+                                        <td class="py-2">{{ $item->name }}</td>
+                                        <td class="py-2 text-right font-semibold">Rp
+                                            {{ number_format($item->price, 0, ',', '.') }}/kg</td>
+                                    </tr>
+                                @endforeach
+
+                                @if (empty($kiloanPrices))
+                                    {{-- <tr class="border-b text-gray-600">
+                                        <td class="py-2">Reguler (2 Hari)</td>
+                                        <td class="py-2 text-right font-semibold">Rp 8.000/kg</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Express (24 Jam)</td>
+                                        <td class="py-2 text-right font-semibold">Rp 10.000/kg</td>
+                                    </tr> --}}
+                                    <tr class="text-gray-600">
+                                        <td class="py-2 text-gray-600">1 kg</td>
+                                        <td class="py-2 text-right font-semibold">Rp 6.000</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Satuan -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-4">Pesanan Satuan</h3>
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-blue-700 border-b">
+                                    <th class="py-2">Item</th>
+                                    <th class="py-2 text-right">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($satuanPrices ?? [] as $item)
+                                    <tr class="border-b last:border-none text-gray-600">
+                                        <td class="py-2">{{ $item->name }}</td>
+                                        <td class="py-2 text-right font-semibold">Rp
+                                            {{ number_format($item->price, 0, ',', '.') }}</td>
+                                    </tr>
+                                @endforeach
+
+                                @if (empty($satuanPrices))
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Baju/Celana</td>
+                                        <td class="py-2 text-right font-semibold">Rp 5.000</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Kemeja</td>
+                                        <td class="py-2 text-right font-semibold">Rp 6.000</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Sweater</td>
+                                        <td class="py-2 text-right font-semibold">Rp 20.000</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Jas</td>
+                                        <td class="py-2 text-right font-semibold">Rp 35.000</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Gaun/Kebaya</td>
+                                        <td class="py-2 text-right font-semibold">Rp 40.000</td>
+                                    </tr>
+                                    <tr class="text-gray-600">
+                                        <td class="py-2 text-gray-600">Jaket</td>
+                                        <td class="py-2 text-right font-semibold">Rp 12.000</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Tipe Service -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        {{-- <h3 class="text-xl font-semibold text-blue-800 mb-4">Jenis Layanan</h3> --}}
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-blue-700 border-b">
+                                    <th class="py-2">Jenis Layanan</th>
+                                    <th class="py-2 text-right">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kiloanPrices ?? [] as $item)
+                                    <tr class="border-b last:border-none text-gray-600">
+                                        <td class="py-2">{{ $item->name }}</td>
+                                        <td class="py-2 text-right font-semibold">Rp
+                                            {{ number_format($item->price, 0, ',', '.') }}/kg</td>
+                                    </tr>
+                                @endforeach
+
+                                @if (empty($kiloanPrices))
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Reguler (3 Hari)</td>
+                                        <td class="py-2 text-right font-semibold">Rp 0</td>
+                                    </tr>
+                                    <tr class="border-b text-gray-600">
+                                        <td class="py-2">Express (2 Hari)</td>
+                                        <td class="py-2 text-right font-semibold">Rp 10.000</td>
+                                    </tr>
+                                    <tr class="text-gray-600">
+                                        <td class="py-2 text-gray-600">Kilat (1 hari)</td>
+                                        <td class="py-2 text-right font-semibold">Rp 15.000/kg</td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <section class="pakaian section" id="pakaian">
         <div class="bg-white h-auto">
@@ -281,7 +329,6 @@
                                 <img src="{{ asset('img/landing/Baju.jpg') }}" alt="game"
                                     class="rounded-t w-46" />
                                 <h1 class="mt-2 font-semibold text-center text-sm md:text-md text-black">Baju</h1>
-
                             </div>
                         </div>
                         <div class="carousel-item w-1/2 md:w-1/3">
@@ -310,20 +357,10 @@
                                 <h1 class="mt-2 mb-2 font-semibold text-center text-sm md:text-md text-black">Jas</h1>
                             </div>
                         </div>
-                        {{-- <div class="carousel-item w-1/2 md:w-1/4">
-                            <div class="border border-gray-200 dark:border-slate-300 rounded bg-gray-200 shadow-lg w-46 hover:border-blue-600 hover:text-blue-600 text-gray-500"
-                                data-aos="fade-up">
-                                <img src="{{ asset('img/landing/Baju.jpg') }}" alt="game"
-                                    class="rounded-t w-46" />
-                                <h1 class="mt-2 mb-2 font-semibold text-center text-sm md:text-md text-black">Wasilah</h1>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
-
                 <p class="text-center text-sm text-gray-400 pb-2 pt-2"><i class="fa-solid fa-arrow-left"></i> Geser
                     untuk lihat jenis pakaian lain <i class="fa-solid fa-arrow-right"></i></p>
-
             </div>
         </div>
     </section>
@@ -340,17 +377,8 @@
                         Jl. Palapa Raya, RT.4/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus
                         Ibukota Jakarta 11520
                     </p>
-
                     <h1 class="text-2xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
                         data-aos="fade-up">Kontak</h1>
-                    {{-- <p class="font-poppins text-lg mt-1 mb-2 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                        data-aos="fade-up">
-                        cleanlaundry@gmail.com
-                    </p> --}}
-                    {{-- <p class="font-poppins text-lg mt-2 mb-2 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
-                        data-aos="fade-up">
-                        (0361)123456
-                    </p> --}}
                     <p class="font-poppins text-lg mt-2 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
                         data-aos="fade-up">
                         <a href="https://wa.me/6281383004378" target="_blank">(+62) 815-1315-3355 </a>
@@ -358,10 +386,6 @@
                 </div>
 
                 <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-20 md:pb-10" data-aos="fade-left">
-                    {{-- <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.987975718024!2d110.80675027455068!3d-7.576286774840404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1677724790d5%3A0x8165748f42e56384!2sJl.%20Bhayangkara%2C%20Tipes%2C%20Kec.%20Serengan%2C%20Kota%20Surakarta%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1704006961476!5m2!1sid!2sid"
-                        width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0"></iframe> --}}
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6385369508425!2d106.76107227545018!3d-6.179114493808332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f707449fca05%3A0x2ed8153d5bb2598b!2sAll%C3%A9%20Laundry!5e0!3m2!1sid!2sid!4v1750609919456!5m2!1sid!2sid"
                         width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
@@ -384,176 +408,11 @@
         </div>
     </footer>
 
-    {{-- ================================================================================================================================================================= --}}
-
-    {{-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark
-    fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="">{{ config('app.name') }}</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="btn btn-success bg-green-600 text-white"
-                            href="{{ url('login') }}">@lang('landing.loginOrRegister')</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav> --}}
-
-    <!-- Header -->
-    {{-- <header class="py-5 position-relative">
-        <div class="background-blur"></div>
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-3 text-white mt-5 mb-2 with-border">@lang('landing.welcome')</h1>
-                    <p class="lead mb-5 text-white text-center">@lang('landing.tagline')</p>
-                </div>
-            </div>
-        </div>
-    </header> --}}
-
-    {{-- <section class="p-5 text-center">
-        <h3>@lang('landing.why')</h3>
-    </section> --}}
-
-    <!-- Page Content -->
-    {{-- <section class="kelebihan bg-blue text-white">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4>Peralatan Lengkap dan Canggih</h4>
-                    <p>Laundry kami menggunakan peralatan yang cukup lengkap dan canggih. Peralatan kami memungkinkan
-                        baju tidak perlu dijemur dan mengurangi debu pada baju</p>
-                </div>
-                <div class="col-lg-6">
-                    <img class="img-fluid d-none d-lg-block" src="{{ asset('img/landing/alat.png') }}"
-                        alt="" srcset="">
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    {{-- <section class="kelebihan bg-blue text-white">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <img class="img-fluid d-none d-lg-block" src="{{ asset('img/landing/tipebaju.png') }}"
-                        alt="" srcset="">
-                </div>
-                <div class="col-lg-6">
-                    <h4>Segala Tipe Pakaian</h4>
-                    <p>Laundry kami menerima segala tipe pakaian mulai dari baju, celana, jas, dan
-                        selimut.</p>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    {{-- <section class="kelebihan bg-blue text-white">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4>Pegawai Profesional</h4>
-                    <p>Laundry kami terdiri dari pegawai-pegawai yang profesional yang mampu bekerja dalam tim dengan
-                        cukup baik dan handal di bidangnya sehingga membuat laundry kami minim kesalahan</p>
-                </div>
-                <div class="col-lg-6">
-                    <img class="img-fluid d-none d-lg-block" src="{{ asset('img/landing/pegawai.png') }}"
-                        alt="" srcset="">
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    {{-- <section class="text-center p-5">
-        <h3>Apa saja yang bisa kami laundry?</h3>
-    </section> --}}
-
-    {{-- <section class="bg-blue p-5 text-center">
-        <div class="container">
-            <div class="row flex-row flex-nowrap kategori">
-                <div class="col-4 mb-2">
-                    <div class="card">
-                        <img src="{{ asset('img/landing/Baju.jpg') }}" class="card-img-top" alt="">
-                        <div class="card-body d-none d-lg-block">
-                            <p class="card-text">Baju</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mb-2">
-                    <div class="card">
-                        <img src="{{ asset('img/landing/Celana.jpg') }}" class="card-img-top" alt="">
-                        <div class="card-body d-none d-lg-block">
-                            <p class="card-text">Celana</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mb-2">
-                    <div class="card">
-                        <img src="{{ asset('img/landing/Jas.jpg') }}" class="card-img-top" alt="">
-                        <div class="card-body d-none d-lg-block">
-                            <p class="card-text">Jas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mb-2">
-                    <div class="card">
-                        <img src="{{ asset('img/landing/Selimut.jpg') }}" class="card-img-top" alt="">
-                        <div class="card-body d-none d-lg-block">
-                            <p class="card-text">Selimut</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    {{-- <section class="text-center p-5">
-        <h3>Temukan kami!</h3>
-    </section> --}}
-
-    {{-- <section class="text-white bg-blue">
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-md-6 mb-4 mb-sm-0">
-                    <h5>Alamat</h5>
-                    <p>Tipes, Kec. Serengan, Kota Surakarta, Jawa Tengah</p>
-                    <br>
-                    <h5>Kontak</h5>
-                    <p>cleanlaundry@gmail.com</p>
-                    <p>(0361)123456</p>
-                    <p>081234567890</p>
-                </div>
-                <div class="col-md-6">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.987975718024!2d110.80675027455068!3d-7.576286774840404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a1677724790d5%3A0x8165748f42e56384!2sJl.%20Bhayangkara%2C%20Tipes%2C%20Kec.%20Serengan%2C%20Kota%20Surakarta%2C%20Jawa%20Tengah!5e0!3m2!1sid!2sid!4v1704006961476!5m2!1sid!2sid"
-                        width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0"></iframe>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- /.container -->
-
-    <!-- Footer -->
-    {{-- <footer class="py-5 bg-dark">
-        <div class="container"> --}}
-    {{-- <p class="m-0 text-center text-white">Terima Kasih Telah Memilih {{ config('app.name') }} Sebagai
-                Kebersihan Pakaian Anda</p> --}}
-    {{-- </div> --}}
-    <!-- /.container -->
-    {{-- </footer> --}}
-
-    {{-- JavaScript --}}
-    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
-
-
+    {{-- JS --}}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
