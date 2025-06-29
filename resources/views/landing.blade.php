@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Laundry Berkualitas dan Terpercaya di Palapa">
+    <meta name="author" content="Alle Laundry Palapa">
     <title>Alle Laundry Palapa</title>
-    {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
-    {{-- <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico"> --}}
-    <link href="{{ asset('/img/dashboard/logo_alle.jpg') }}" rel="icon" type="image/png">
+    <link rel="icon" href="{{ asset('/img/dashboard/logo_alle.jpg') }}" type="image/png">
 
-    <!-- Bootstrap core CSS -->
-    {{-- <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
-
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-    <!-- Javascript -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-
-    <!-- Fontawesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    {{-- Tailwind CSS --}}
+    <!-- Tailwind & DaisyUI -->
     <script defer src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <link defer href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet"
-        type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
-<body>
-
+<body class="font-[Nunito] bg-white text-gray-800 overflow-x-hidden">
     <!-- Navigation -->
     <div class="w-full bg-white pt-3 pb-3 -mt-24">
         <div x-data="{ open: false }"
@@ -70,33 +51,24 @@
         </div>
     </div>
 
-    <div class="bg-blue-600 h-auto pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 items-center max-w-7xl mx-auto px-6 md:px-12">
-            <!-- Left Content -->
-            <div class="mt-14 mb-10 md:mt-0 text-left md:pt-20 md:pb-10 space-y-6" data-aos="fade-up">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-widest text-white leading-tight">
-                    Alle Laundry Palapa
-                </h1>
-                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-wide">
-                    Layanan Dry Cleaning Profesional
-                </h2>
-                <p class="text-lg text-white leading-relaxed max-w-xl">
-                    <span class="italic">"Segar, Bersih, Wangi – Laundry Tanpa Worry!"</span>
-                </p>
 
+    <!-- Hero Section -->
+    <section class="bg-blue-600 py-20 text-white">
+        <div class="grid md:grid-cols-2 gap-10 items-center max-w-7xl mx-auto px-6 md:px-12">
+            <div data-aos="fade-up" class="space-y-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-widest leading-tight">Alle Laundry Palapa</h1>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-wide">Layanan Dry Cleaning Profesional</h2>
+                <p class="text-lg italic max-w-xl">"Segar, Bersih, Wangi – Laundry Tanpa Worry!"</p>
                 <a href="#promo"
-                    class="inline-block bg-white text-blue-700 hover:bg-black hover:text-white duration-300 font-semibold rounded-full px-10 py-3 text-lg shadow-md">
-                    Lihat Promo
-                </a>
+                    class="inline-block bg-white text-blue-700 hover:bg-black hover:text-white transition font-semibold px-10 py-3 rounded-full shadow-md">Lihat
+                    Promo</a>
             </div>
-
-            <!-- Right Image -->
-            <div class="pt-10 md:pt-20 md:pb-10" data-aos="fade-left">
+            <div data-aos="fade-left" class="flex justify-center md:justify-end">
                 <img src="{{ asset('img/landing/illustrator.png') }}" alt="Laundry Illustration"
-                    class="w-full max-w-md mx-auto drop-shadow-lg" />
+                    class="w-full max-w-md drop-shadow-lg" />
             </div>
         </div>
-    </div>
+    </section>
 
     <section id="promo" class="promo section py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -369,7 +341,7 @@
         <div class="mx-auto pb-10 pt-8">
             <h1 class="font-semibold text-2xl text-white text-center">Temukan Kami!</h1>
             <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="md:ml-20 md:mr-10 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-16 md:pb-10">
+                <div class="ml-7 md:ml-20 md:mr-10 mt-14 mb-14 md:mt-15 md:mb-15 text-left md:pt-16 md:pb-10">
                     <h1 class="text-2xl font-extrabold tracking-widest text-gray-900 rounded-lg focus:outline-none focus:shadow-outline"
                         data-aos="fade-up">Alamat</h1>
                     <p class="font-poppins text-lg mt-1 mb-10 mr-5 md:ml-0 md:mr-0 tracking-widest text-white"
@@ -385,7 +357,7 @@
                     </p>
                 </div>
 
-                <div class="w-full pt-6 px-10 md:px-20 md:h-full md:pt-20 md:pb-10" data-aos="fade-left">
+                <div class="w-full pt-6 px-6 md:px-20 md:h-full md:pt-20 md:pb-10" data-aos="fade-left">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6385369508425!2d106.76107227545018!3d-6.179114493808332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f707449fca05%3A0x2ed8153d5bb2598b!2sAll%C3%A9%20Laundry!5e0!3m2!1sid!2sid!4v1750609919456!5m2!1sid!2sid"
                         width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
@@ -402,8 +374,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                &copy; <a href="#" class="text-white hover:text-blue-600">Alle Laundry Palapa</a> <i
-                    class="fa-solid fa-gamepad text-blue-600"></i></i>
+                &copy; <a href="#" class="text-white hover:text-blue-600">Alle Laundry Palapa</a>
             </p>
         </div>
     </footer>
