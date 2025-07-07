@@ -108,12 +108,13 @@
                                         <div class="form-group row">
                                             <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control" id="kategori" name="category">
+                                                <select class="form-control" id="kategori" name="category" disabled>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}">{{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                                <input type="hidden" name="category" value="1">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -209,7 +210,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="banyak" class="col-sm-2 col-form-label">Banyak</label>
+                                            <label for="banyak" class="col-sm-2 col-form-label">Berat</label>
                                             <div class="col-sm-1">
                                                 <div class="input-group">
                                                     <input type="text" id="heavy" name="heavy"
