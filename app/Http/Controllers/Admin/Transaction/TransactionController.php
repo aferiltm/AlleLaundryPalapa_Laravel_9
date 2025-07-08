@@ -419,18 +419,61 @@ class TransactionController extends Controller
         return response()->json();
     }
 
+    // public function updateStatus(Request $request)
+    // {
+    //     $request->validate([
+    //         'id' => 'required|exists:transactions,id',
+    //         'status_id' => 'required|integer',
+    //     ]);
+
+    //     $transaction = Transaction::with('member')->findOrFail($request->id); // pastikan relasi member di-load
+    //     $transaction->status_id = $request->status_id;
+    //     $transaction->save();
+
+    //     if ($transaction->status_id == 3) {
+    //         try {
+    //             $this->sendWhatsAppMessage($transaction);
+    //         } catch (\Exception $e) {
+    //             Log::error('WA Error: ' . $e->getMessage());
+    //             return response()->json(['message' => 'Gagal mengirim WA'], 500);
+    //         }
+    //     }
+
+    //     return response()->json(['message' => 'Status berhasil diperbarui.'], 200);
+    // }
+
     public function updateStatus(Request $request)
     {
         $request->validate([
-            'id' => 'required|exists:transactions,id',
+            'id'        => 'required|exists:transactions,id',
             'status_id' => 'required|integer',
         ]);
 
-        $transaction = Transaction::with('member')->findOrFail($request->id); // pastikan relasi member di-load
-        $transaction->status_id = $request->status_id;
+        $transaction = Transaction::with('member')->findOrFail($request->id);
+
+        // definisi transisi yang diizinkan (urutan wajib)
+        $allowedTransitions = [
+            1 => 2,   // Belum dikerjakan → Sedang dikerjakan
+            2 => 3,   // Sedang dikerjakan → Selesai
+        ];
+
+        $currentStatus = $transaction->status_id;
+        $newStatus     = $request->status_id;
+
+        // tolak jika tidak sesuai urutan
+        if (!isset($allowedTransitions[$currentStatus]) || $allowedTransitions[$currentStatus] != $newStatus) {
+            return response()->json(['message' => 'Perubahan status tidak valid / tidak berurutan.'], 422);
+        }
+
+        // update
+        $transaction->status_id   = $newStatus;
+        if ($newStatus == 3) {               // selesai → simpan finish_date
+            $transaction->finish_date = now();
+        }
         $transaction->save();
 
-        if ($transaction->status_id == 3) {
+        // kirim WA jika selesai
+        if ($newStatus == 3) {
             try {
                 $this->sendWhatsAppMessage($transaction);
             } catch (\Exception $e) {
