@@ -94,7 +94,7 @@
 </head>
 
 <body>
-    <h2 style="text-align: center;">Laporan Pendapatan dan Analisis Kepuasan Layanan pada Laundry</h2>
+    <h2 style="text-align: center;">Laporan Pendapatan dan Analisis Kepuasan Layanan pada Alle Laundry Palapa</h2>
     <p style="text-align: center;">Periode: {{ $namaBulanAwal }} - {{ $namaBulanAkhir }} {{ $tahun }}</p>
 
     <section>

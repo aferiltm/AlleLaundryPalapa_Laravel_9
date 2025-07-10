@@ -64,7 +64,7 @@
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="satuan" role="tabpanel"
                                     aria-labelledby="satuan-tab">
-                                    <form action="{{ route('admin.price-lists.store') }}" method="post">
+                                    <form id="priceForm" action="{{ route('admin.price-lists.store') }}" method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -80,7 +80,8 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
-                                                            <a id="tambah-barang" class="btn text-white bg-blue-900 hover:bg-blue-950"
+                                                            <a id="tambah-barang"
+                                                                class="btn text-white bg-blue-900 hover:bg-blue-950"
                                                                 data-toggle="modal" data-target="#addItemModal"><i
                                                                     class="fas fa-plus"></i>
                                                                 Tambah Barang</a>
@@ -100,7 +101,8 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
-                                                            <a id="tambah-servis" class="btn text-white bg-blue-900 hover:bg-blue-950"
+                                                            <a id="tambah-servis"
+                                                                class="btn text-white bg-blue-900 hover:bg-blue-950"
                                                                 data-toggle="modal" data-target="#addServiceModal"><i
                                                                     class="fas fa-plus"></i>
                                                                 Tambah Servis</a>
@@ -129,7 +131,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah Harga</button>
+                                        {{-- <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah Harga</button> --}}
+                                        <button id="submitBtn" type="button"
+                                            class="btn text-white bg-blue-900 hover:bg-blue-950">
+                                            <div class="flex items-center">
+                                                <svg id="spinner" class="hidden animate-spin size-5 mr-2"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24">
+                                                    <circle cx="12" cy="12" r="10" stroke="currentColor"
+                                                        stroke-width="4" class="opacity-25" />
+                                                    <path stroke="currentColor" stroke-width="4" d="M4 12a8 8 0 018-8" />
+                                                </svg>
+                                                <span id="submitText">Tambah Harga</span>
+                                            </div>
+                                        </button>
                                     </form>
                                     <br>
                                     <hr>
@@ -178,7 +193,9 @@
                                                                 class="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6 z-50">
                                                                 <h2 class="text-lg font-semibold mb-4">Konfirmasi Hapus
                                                                 </h2>
-                                                                <p class="text-sm text-gray-700">
+
+                                                                <p
+                                                                    class="text-sm text-gray-700 break-words whitespace-normal">
                                                                     Anda yakin ingin menghapus harga
                                                                     <strong>{{ $item->item->name }}</strong> dengan servis
                                                                     <strong>{{ $item->service->name }}</strong>?
@@ -186,7 +203,7 @@
 
                                                                 <div class="mt-6 flex justify-end gap-2">
                                                                     <button @click="openModal = false"
-                                                                        class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100">
+                                                                        class="px-4 py-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100">
                                                                         Batal
                                                                     </button>
 
@@ -210,7 +227,8 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="kiloan" role="tabpanel" aria-labelledby="kiloan-tab">
-                                    <form action="{{ route('admin.price-lists.kiloan.store') }}" method="post">
+                                    <form id="priceForm" action="{{ route('admin.price-lists.kiloan.store') }}"
+                                        method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -244,7 +262,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah Harga</button>
+                                        {{-- <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah
+                                            Harga</button> --}}
+                                        <button id="submitBtn" type="button"
+                                            class="btn text-white bg-blue-900 hover:bg-blue-950">
+                                            <div class="flex items-center">
+                                                <svg id="spinner" class="hidden animate-spin size-5 mr-2"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24">
+                                                    <circle cx="12" cy="12" r="10" stroke="currentColor"
+                                                        stroke-width="4" class="opacity-25" />
+                                                    <path stroke="currentColor" stroke-width="4" d="M4 12a8 8 0 018-8" />
+                                                </svg>
+                                                <span id="submitText">Tambah Harga</span>
+                                            </div>
+                                        </button>
                                     </form>
                                     <br>
                                     <hr>
@@ -400,6 +432,23 @@
                 $('#id-harga-modal').val(data.id);
                 $('#updatePriceForm').attr('action', `/admin/price-lists/kiloan/${data.id}`);
             });
+        });
+    </script>
+
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            const spinner = document.getElementById("spinner");
+            const submitText = document.getElementById("submitText");
+
+            // Tampilkan spinner & ubah teks
+            spinner.classList.remove("hidden");
+            submitText.textContent = "Memproses...";
+
+            // Disable tombol agar tidak diklik lagi
+            this.setAttribute("disabled", true);
+
+            // Submit form
+            document.getElementById("priceForm").submit();
         });
     </script>
 @endsection

@@ -71,7 +71,7 @@
                                                     </div>
                                                 </div>
                                                 <button type="submit" id="btn-cetak"
-                                                    class="mt-3 btn btn-success d-none">Cetak</button>
+                                                    class="mt-3 btn bg-blue-800 text-white hover:bg-blue-950 d-none">Cetak</button>
                                             </form>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                                     </div>
                                                 </div>
                                                 <button type="submit" id="btn-cetak2"
-                                                    class="mt-3 btn btn-success d-none">Cetak</button>
+                                                    class="mt-3 btn bg-blue-800 text-white hover:bg-blue-950 d-none">Cetak</button>
                                             </form>
                                         </div>
                                     </div>

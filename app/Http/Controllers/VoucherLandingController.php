@@ -19,8 +19,8 @@ class VoucherLandingController extends Controller
      */
     public function index(): View
     {
-        $vouchers = Voucher::all();
-
+        // $vouchers = Voucher::all();
+        $vouchers = Voucher::where('active_status', true)->latest()->get();
         return view('landing', compact( 'vouchers'));
     }
 

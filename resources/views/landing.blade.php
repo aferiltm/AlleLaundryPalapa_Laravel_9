@@ -71,7 +71,7 @@
     </section>
 
     <section id="promo" class="promo section py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
 
             {{-- Judul --}}
             <h2 class="text-center text-3xl font-bold text-cyan-600 mb-2">🎉 PROMO MENARIK 🎉</h2>
@@ -91,25 +91,31 @@
                     @endphp
 
                     <div
-                        class="card w-72 bg-white shadow-lg hover:shadow-xl transition-all duration-300 snap-center flex-shrink-0 border border-blue-200 hover:scale-105 transition-transform duration-300 mt-5">
-                        <div class="card-body items-center text-center ">
-                            {{-- Badge jika baru --}}
-                            @if ($isNew)
-                                <div class="badge badge-error mb-2 animate-pulse">Baru!</div>
-                            @endif
-                            <h3
-                                class="card-title text-base-content leading-snug text-md md:text-lg font-semibold text-black">
-                                {{ $voucher->details }}
-                            </h3>
+                        class="card w-72 h-64 bg-white shadow-lg hover:shadow-xl transition-all duration-300 snap-center flex-shrink-0 border border-blue-200 hover:scale-105 transition-transform duration-300 mt-5 flex flex-col justify-between">
+
+                        <div
+                            class="card-body text-center bg-[url('{{ asset('img/landing/promobg.png') }}')] bg-cover bg-center rounded-lg flex flex-col justify-between">
+
+                            {{-- Atas: Badge dan Text --}}
+                            <div>
+                                @if ($isNew)
+                                    <div class="badge badge-error mb-2 animate-pulse">Baru!</div>
+                                @endif
+                                <h3 class="text-base-content leading-snug text-md md:text-lg font-semibold text-white">
+                                    {{ $voucher->details }}
+                                </h3>
+                            </div>
+
+                            {{-- Bawah: Tombol --}}
                             <div class="mt-4">
                                 @guest
-                                    <a href="{{ route('login.show') }}" class="btn btn-sm btn-outline btn-info">
+                                    <a href="{{ route('login.show') }}" class="btn border border-white bg-transparent text-white hover:bg-white hover:text-blue-800 w-full">
                                         Login untuk Klaim
                                     </a>
                                 @endguest
 
                                 @auth
-                                    <a href="{{ route('member.points.index') }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('member.points.index') }}" class="btn border border-white bg-transparent text-white hover:bg-white hover:text-blue-800 w-full">
                                         Klaim Sekarang
                                     </a>
                                 @endauth
@@ -128,7 +134,7 @@
         </div>
     </section>
 
-    <section class="bg-cyan-600 py-20">
+    <section class="bg-blue-600 py-20">
         <div class="container mx-auto px-6">
             <!-- Heading -->
             <h2 class="text-center text-4xl font-extrabold text-white mb-16">Kenapa Memilih Layanan Kami?</h2>
@@ -367,7 +373,7 @@
         </div>
     </div>
 
-    <footer class="bg-blue-900 h-auto">
+    <footer class="bg-blue-700 h-auto">
         <div class="container mx-auto font-poppins">
             <p class="text-white text-center pt-5 pb-5">
                 Copyright

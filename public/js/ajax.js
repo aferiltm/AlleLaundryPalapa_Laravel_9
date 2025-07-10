@@ -117,9 +117,39 @@ $(document).on("change", ".select-status", function () {
     }
 });
 
+// $(document).on("change", "#tahun", function () {
+//     let year = $(this).val();
+//     let option = "";
+//     $.ajax({
+//         url: route("admin.reports.get-month"),
+//         data: {
+//             year: year,
+//         },
+//         method: "POST",
+//         dataType: "json",
+//         success: function (data) {
+//             $.each(data, function (i, val) {
+//                 option +=
+//                     '<option value="' +
+//                     val.Bulan +
+//                     '">' +
+//                     val.Bulan +
+//                     "</option>";
+//             });
+//             $("#bulan").html(option);
+//             $("#btn-cetak").removeClass("d-none");
+//         },
+//     });
+// });
+
 $(document).on("change", "#tahun", function () {
     let year = $(this).val();
     let option = "";
+    const namaBulan = [
+        "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
     $.ajax({
         url: route("admin.reports.get-month"),
         data: {
@@ -133,7 +163,7 @@ $(document).on("change", "#tahun", function () {
                     '<option value="' +
                     val.Bulan +
                     '">' +
-                    val.Bulan +
+                    namaBulan[parseInt(val.Bulan)] +
                     "</option>";
             });
             $("#bulan").html(option);
@@ -141,3 +171,4 @@ $(document).on("change", "#tahun", function () {
         },
     });
 });
+
