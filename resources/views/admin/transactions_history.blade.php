@@ -54,8 +54,7 @@
                                         </select>
                                     </div>
                                     <div class="col-auto">
-                                        <button type="submit" id="btn-filter"
-                                            class="btn text-white bg-blue-900 hover:bg-blue-950">Filter</button>
+                                        <button type="submit" id="btn-filter" class="btn btn-success">Filter</button>
                                     </div>
                                 </div>
                             </form>
@@ -92,8 +91,6 @@
                                 </li>
                             </ul>
                             <div class="tab-content mt-3" id="myTabContent">
-                                {{-- resources/views/admin/transactions/index.blade.php --}}
-                                {{-- ================= TAB 1 : KILAT SERVICE ================= --}}
                                 <div class="tab-pane fade show active" id="kilatService" role="tabpanel"
                                     aria-labelledby="kilatService-tab">
                                     <table id="tbl-transaksi-kilat" class="table dataTable dt-responsive nowrap"
@@ -115,56 +112,35 @@
                                                     <td>{{ $item->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                                     <td>{{ $item->member->name }}</td>
-
-                                                    {{-- ===================== STATUS CELL ===================== --}}
-                                                    {{-- ===== kolom Status ===== --}}
-                                                    @php
-                                                        // transisi legal
-                                                        $nextOf = [1 => 2, 2 => 3];
-                                                        $currentId = $item->status_id; // 1 atau 2 atau 3
-                                                        $nextId = $nextOf[$currentId] ?? null;
-
-                                                        // nama status
-                                                        $currentName = $status->firstWhere('id', $currentId)->name;
-                                                        $nextName = $nextId
-                                                            ? $status->firstWhere('id', $nextId)->name
-                                                            : null;
-                                                    @endphp
-
                                                     <td>
-                                                        {{-- ======= Selesai ======= --}}
-                                                        @if ($currentId == 3)
-                                                            <span class="text-success">{{ $currentName }}</span>
-
-                                                            {{-- ======= Belum dikerjakan / Sedang dikerjakan ======= --}}
+                                                        @if ($item->status_id == 3)
+                                                            <span class="text-success">Selesai</span>
                                                         @else
-                                                            <select class="select-status px-2 rounded"
+                                                            <select name="" id="status"
                                                                 data-id="{{ $item->id }}"
-                                                                data-val="{{ $currentId }}"> {{-- <-- kembalikan data‑val --}}
-                                                                {{-- option 1: status SEKARANG --}}
-                                                                <option value="{{ $currentId }}">{{ $currentName }}
-                                                                </option>
-
-                                                                {{-- option 2: status BERIKUTNYA --}}
-                                                                @if ($nextId)
-                                                                    <option value="{{ $nextId }}">
-                                                                        {{ $nextName }}</option>
-                                                                @endif
+                                                                data-val="{{ $item->status_id }}"
+                                                                class="select-status px-2 rounded">
+                                                                @foreach ($status as $s)
+                                                                    @if ($item->status_id == $s->id)
+                                                                        <option selected value="{{ $s->id }}">
+                                                                            {{ $s->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $s->id }}">
+                                                                            {{ $s->name }}
+                                                                        </option>
+                                                                    @endif
+                                                                @endforeach
                                                             </select>
                                                         @endif
                                                     </td>
-
-                                                    {{-- ======================================================= --}}
-
                                                     <td>{{ $item->getFormattedServiceCost() }}</td>
                                                     <td>{{ $item->getFormattedTotal() }}</td>
                                                     <td>
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}"
-                                                            data-url="{{ route('admin.transactions.show', $item->id) }}">
-                                                            <i class="fa-solid fa-circle-info"></i></a>
+                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                                class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
                                                             target="_blank"><i class="fa-solid fa-print"></i></a>
@@ -174,8 +150,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                {{-- ================= TAB 2 : EXPRESS SERVICE ================= --}}
                                 <div class="tab-pane fade" id="expressService" role="tabpanel"
                                     aria-labelledby="expressService-tab">
                                     <table id="tbl-transaksi-express" class="table dataTable dt-responsive nowrap"
@@ -197,57 +171,35 @@
                                                     <td>{{ $item->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                                     <td>{{ $item->member->name }}</td>
-
-                                                    {{-- ===================== STATUS CELL ===================== --}}
-                                                    {{-- ===== kolom Status ===== --}}
-                                                    @php
-                                                        // transisi legal
-                                                        $nextOf = [1 => 2, 2 => 3];
-                                                        $currentId = $item->status_id; // 1 atau 2 atau 3
-                                                        $nextId = $nextOf[$currentId] ?? null;
-
-                                                        // nama status
-                                                        $currentName = $status->firstWhere('id', $currentId)->name;
-                                                        $nextName = $nextId
-                                                            ? $status->firstWhere('id', $nextId)->name
-                                                            : null;
-                                                    @endphp
-
                                                     <td>
-                                                        {{-- ======= Selesai ======= --}}
-                                                        @if ($currentId == 3)
-                                                            <span class="text-success">{{ $currentName }}</span>
-
-                                                            {{-- ======= Belum dikerjakan / Sedang dikerjakan ======= --}}
+                                                        @if ($item->status_id == 3)
+                                                            <span class="text-success">Selesai</span>
                                                         @else
-                                                            <select class="select-status px-2 rounded"
+                                                            <select name="" id="status"
                                                                 data-id="{{ $item->id }}"
-                                                                data-val="{{ $currentId }}"> {{-- <-- kembalikan data‑val --}}
-                                                                {{-- option 1: status SEKARANG --}}
-                                                                <option value="{{ $currentId }}">{{ $currentName }}
-                                                                </option>
-
-                                                                {{-- option 2: status BERIKUTNYA --}}
-                                                                @if ($nextId)
-                                                                    <option value="{{ $nextId }}">
-                                                                        {{ $nextName }}</option>
-                                                                @endif
+                                                                data-val="{{ $item->status_id }}"
+                                                                class="select-status px-2 rounded">
+                                                                @foreach ($status as $s)
+                                                                    @if ($item->status_id == $s->id)
+                                                                        <option selected value="{{ $s->id }}">
+                                                                            {{ $s->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $s->id }}">
+                                                                            {{ $s->name }}
+                                                                        </option>
+                                                                    @endif
+                                                                @endforeach
                                                             </select>
                                                         @endif
                                                     </td>
-
-
-                                                    {{-- ======================================================= --}}
-
                                                     <td>{{ $item->getFormattedServiceCost() }}</td>
                                                     <td>{{ $item->getFormattedTotal() }}</td>
                                                     <td>
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}"
-                                                            data-url="{{ route('admin.transactions.show', $item->id) }}">
-                                                            <i class="fa-solid fa-circle-info"></i></a>
+                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                                class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
                                                             target="_blank"><i class="fa-solid fa-print"></i></a>
@@ -257,8 +209,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-                                {{-- ================= TAB 3 : REGULER SERVICE ================= --}}
                                 <div class="tab-pane fade" id="regulerService" role="tabpanel"
                                     aria-labelledby="regulerService-tab">
                                     <table id="tbl-transaksi-reguler" class="table dataTable dt-responsive nowrap"
@@ -282,56 +232,35 @@
                                                     <td>{{ $item->transaction_code }}</td>
                                                     <td>{{ date('d F Y', strtotime($item->created_at)) }}</td>
                                                     <td>{{ $item->member->name }}</td>
-
-                                                    {{-- ===================== STATUS CELL ===================== --}}
-                                                    {{-- ===== kolom Status ===== --}}
-                                                    @php
-                                                        // transisi legal
-                                                        $nextOf = [1 => 2, 2 => 3];
-                                                        $currentId = $item->status_id; // 1 atau 2 atau 3
-                                                        $nextId = $nextOf[$currentId] ?? null;
-
-                                                        // nama status
-                                                        $currentName = $status->firstWhere('id', $currentId)->name;
-                                                        $nextName = $nextId
-                                                            ? $status->firstWhere('id', $nextId)->name
-                                                            : null;
-                                                    @endphp
-
                                                     <td>
-                                                        {{-- ======= Selesai ======= --}}
-                                                        @if ($currentId == 3)
-                                                            <span class="text-success">{{ $currentName }}</span>
-
-                                                            {{-- ======= Belum dikerjakan / Sedang dikerjakan ======= --}}
+                                                        @if ($item->status_id == 3)
+                                                            <span class="text-success">Selesai</span>
                                                         @else
-                                                            <select class="select-status px-2 rounded"
+                                                            <select name="" id="status"
                                                                 data-id="{{ $item->id }}"
-                                                                data-val="{{ $currentId }}"> {{-- <-- kembalikan data‑val --}}
-                                                                {{-- option 1: status SEKARANG --}}
-                                                                <option value="{{ $currentId }}">{{ $currentName }}
-                                                                </option>
-
-                                                                {{-- option 2: status BERIKUTNYA --}}
-                                                                @if ($nextId)
-                                                                    <option value="{{ $nextId }}">
-                                                                        {{ $nextName }}</option>
-                                                                @endif
+                                                                data-val="{{ $item->status_id }}"
+                                                                class="select-status px-2 rounded">
+                                                                @foreach ($status as $s)
+                                                                    @if ($item->status_id == $s->id)
+                                                                        <option selected value="{{ $s->id }}">
+                                                                            {{ $s->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $s->id }}">
+                                                                            {{ $s->name }}
+                                                                        </option>
+                                                                    @endif
+                                                                @endforeach
                                                             </select>
                                                         @endif
                                                     </td>
-
-                                                    {{-- ======================================================= --}}
-
                                                     <td>{{ $item->getFormattedServiceCost() }}</td>
                                                     <td>{{ $item->getFormattedTotal() }}</td>
                                                     <td>
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}"
-                                                            data-url="{{ route('admin.transactions.show', $item->id) }}">
-                                                            <i class="fa-solid fa-circle-info"></i></a>
+                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                                class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
                                                             target="_blank"><i class="fa-solid fa-print"></i></a>
@@ -341,7 +270,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <div class="tab-pane fade" id="selesai" role="tabpanel" aria-labelledby="selesai-tab">
                                     <table id="tbl-transaksi-selesai" class="table dataTable dt-responsive nowrap"
                                         style="width:100%">
@@ -389,8 +317,7 @@
                                                         <a href="#"
                                                             class="bg-teal-600 hover:bg-teal-900 duration-200 text-white rounded text-base px-2 py-2 btn-detail"
                                                             data-toggle="modal" data-target="#transactionDetailModal"
-                                                            data-id="{{ $item->id }}"
-                                                            data-url="{{ route('admin.transactions.show', $item->id) }}"><i
+                                                            data-id="{{ $item->id }}" data-url="{{ route('admin.transactions.show', $item->id) }}"><i
                                                                 class="fa-solid fa-circle-info"></i></a>
                                                         <a href="{{ route('admin.transactions.print.index', ['transaction' => $item->id]) }}"
                                                             class="bg-blue-600 hover:bg-blue-900 duration-200 text-white rounded text-base px-2 py-2"
@@ -427,60 +354,6 @@
             $('#tbl-transaksi-reguler').DataTable();
             $('#tbl-transaksi-express').DataTable();
             $('#tbl-transaksi-kilat').DataTable();
-        });
-    </script>
-
-    {{-- <script>
-        $(document).on('change', '.select-status', function() {
-            const statusId = $(this).val();
-            const transactionId = $(this).data('id');
-
-            $.ajax({
-                url: '{{ route('admin.transactions.updateStatus') }}',
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: transactionId,
-                    status_id: statusId
-                },
-                success: function(response) {
-                    alert('Status berhasil diperbarui!');
-                },
-                error: function() {
-                    alert('Terjadi kesalahan.');
-                }
-            });
-        });
-    </script> --}}
-    <script>
-        $(document).ready(function() {
-            // set option ter‑selected sesuai data‑val
-            $('.select-status').each(function() {
-                $(this).val($(this).data('val'));
-            });
-
-            // kirim AJAX bila user memilih nilai baru (2 atau 3)
-            $('.select-status').on('change', function() {
-                let id = $(this).data('id');
-                let val = $(this).val(); // 1 tetap 1, atau 2 / 3 setelah diganti
-
-                $.ajax({
-                    url: '{{ route('admin.transactions.updateStatus') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: id,
-                        status_id: val
-                    },
-                    success: function(res) {
-                        Swal.fire('Berhasil', res.message, 'success').then(() => location
-                            .reload());
-                    },
-                    error: function(xhr) {
-                        Swal.fire('Gagal', xhr.responseJSON.message, 'error');
-                    }
-                });
-            });
         });
     </script>
 @endsection

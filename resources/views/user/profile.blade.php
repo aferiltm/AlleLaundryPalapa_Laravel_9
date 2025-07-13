@@ -67,7 +67,7 @@
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" id="email"
-                                                value="{{ $user->email }}">
+                                                value="{{ $user->email }}" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label for="user_code">Kode Member</label>
@@ -125,7 +125,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn text-white bg-blue-900 hover:bg-blue-950" type="submit">Simpan Profil</button>
+                                <button class="btn btn-success" type="submit">Simpan Profil</button>
                             </form>
                         </div>
                     </div>

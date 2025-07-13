@@ -28,55 +28,25 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    // public function authenticate(Request $request): RedirectResponse
-    // {
-    //     $credentials = $request->validate([
-    //         'email'    => ['required', 'email'],
-    //         'password' => ['required'],
-    //     ]);
-
-    //     $remember = $request->has('remember');
-
-    //     if (Auth::attempt($credentials, $remember)) {
-    //         $request->session()->regenerate();
-
-    //         $user = Auth::user();
-
-    //         if (!$user) {
-    //             return redirect()->route('login.show')
-    //                 ->with('error', Lang::get('auth.error_email_password'))
-    //                 ->withInput();
-    //         }
-
-    //         if ($user->role == Role::Admin) {
-    //             return redirect()->route('admin.index');
-    //         } else {
-    //             return redirect()->route('member.index');
-    //         }
-    //     }
-
-    //     return redirect()->route('login.show')
-    //         ->with('error', Lang::get('auth.error_email_password'))
-    //         ->withInput();
-    // }
-
     public function authenticate(Request $request): RedirectResponse
     {
-        // Validate the input
         $credentials = $request->validate([
-            'login'    => ['required'], // Change to a single 'login' field
+            'email'    => ['required', 'email'],
             'password' => ['required'],
         ]);
 
         $remember = $request->has('remember');
 
-        // Attempt to find the user by email or phone number
-        $user = \App\Models\User::where('email', $credentials['login'])
-                    ->orWhere('phone_number', $credentials['login'])
-                    ->first();
-
-        if ($user && Auth::attempt(['email' => $user->email, 'password' => $credentials['password']], $remember)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if (!$user) {
+                return redirect()->route('login.show')
+                    ->with('error', Lang::get('auth.error_email_password'))
+                    ->withInput();
+            }
 
             if ($user->role == Role::Admin) {
                 return redirect()->route('admin.index');

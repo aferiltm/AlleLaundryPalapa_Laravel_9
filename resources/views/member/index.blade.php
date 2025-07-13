@@ -63,7 +63,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Whatsapp</td>
-                                                <td>0815-1315-3355</td>
+                                                <td>0813-8300-4378</td>
                                             </tr>
                                             <tr>
                                                 <td>Telepon</td>
@@ -85,20 +85,51 @@
                 </div>
             </div>
 
-            @if (session('success'))
-                <div class="alert alert-success mt-2">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger mt-2">{{ session('error') }}</div>
-            @endif
+            {{-- <section class="pakaian section" id="pakaian">
+                <div class="bg-white h-auto">
+                    <div class="mx-auto pb-10 pt-8">
+                        <h1 class="font-semibold text-2xl text-cyan-600 text-center pb-3 sm:pb-3 md:pb-3 lg:pb-8">PROMO</h1>
 
-            @if ($errors->any())
-                <div class="alert alert-danger mt-2">
-                    @foreach ($errors->all() as $error)
-                        <div>{{ $error }}</div>
-                    @endforeach
+                        <p class="text-center text-sm text-gray-400 pb-4">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Geser untuk lihat promo lain
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </p>
+
+                        <div class="carousel flex w-full overflow-x-auto space-x-4 px-4 md:px-10">
+                            @foreach ($vouchers as $voucher)
+                                <div class="carousel-item flex-shrink-0 w-64">
+                                    <div class="flex flex-col justify-between items-center text-center h-full border border-gray-300 rounded-lg bg-gray-200 shadow-md p-4 hover:border-blue-600 hover:text-blue-600 text-gray-600"
+                                        data-aos="fade-up">
+                                        <h1 class="font-semibold text-sm md:text-md text-black mb-4">
+                                            {{ $voucher->details }}
+                                        </h1>
+                                        @guest
+                                            <a href="{{ route('login.show') }}"
+                                                class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
+                                                Klaim
+                                            </a>
+                                        @endguest
+
+                                        @auth
+                                            <a href="{{ route('member.points.index') }}"
+                                                class="bg-blue-900 hover:bg-black transition-colors duration-200 text-white rounded-full py-2 px-6 text-sm md:text-base">
+                                                Klaim
+                                            </a>
+                                        @endauth
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <p class="text-center text-sm text-gray-400 pt-6">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Geser untuk lihat promo lain
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </p>
+                    </div>
                 </div>
-            @endif
+            </section> --}}
 
             <div class="row mt-3">
                 <div class="col-md-12">
@@ -111,7 +142,6 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -122,11 +152,15 @@
                                     @foreach ($latestTransactions as $item)
                                         <tr>
                                             <td style="padding-top: 20px;">{{ $loop->iteration }}</td>
-                                            <td style="padding-top: 20px;">{{ $item->transaction_code }}</td>
                                             <td style="padding-top: 20px;">
                                                 {{ date('d F Y', strtotime($item->created_at)) }}
                                             </td>
                                             <td style="padding-top: 20px;">
+                                                {{-- @if ($item->status_id != '3')
+                                                    <span class="text-danger">{{ $item->status->name }}</span>
+                                                @else
+                                                    <span class="text-success">{{ $item->status->name }}</span>
+                                                @endif --}}
                                                 @if ($item->status_id == 3)
                                                     <span
                                                         class="p-1 bg-success text-white rounded">{{ $item->status->name }}</span>
@@ -154,17 +188,6 @@
                                                             Ulasan <i class="fa-solid fa-star"></i>
                                                         </button>
                                                     @endif
-
-                                                    @if ($item->hasFeedback())
-                                                        <button class="btn bg-gray-500 text-white" disabled>
-                                                            Sudah Komplain <i class="fa-solid fa-circle-check"></i>
-                                                        </button>
-                                                    @else
-                                                        <button class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#formSaranKomplainModal{{ $item->id }}">
-                                                            Beri Saran/Komplain <i class="fa-solid fa-circle-exclamation"></i>
-                                                        </button>
-                                                    @endif
                                                 @endif
                                             </td>
                                         </tr>
@@ -180,6 +203,8 @@
         </div><!-- /.container-fluid -->
     </div>
 
+
+
     @foreach ($latestTransactions as $item)
         <!-- Modal Ulasan -->
         <div class="modal fade" id="reviewModal{{ $item->id }}" tabindex="-1" role="dialog"
@@ -192,11 +217,9 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('member.review.store') }}" method="POST">
+                    <form action="{{ route('member.complaints.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
-                            <p class="mb-3 font-semibold"><span class="text-red-500">*</span>Sebelum mengisi ulasan harap
-                                periksa laundry anda, Terima Kasih</p>
                             <input type="hidden" name="transaction_id" value="{{ $item->id }}">
                             <div class="form-group">
                                 <label for="rating">Rating</label>
@@ -208,8 +231,19 @@
                                     <option value="1">⭐ - Buruk</option>
                                 </select>
                             </div>
+                            {{-- <div class="form-group">
+                                <label for="review">Ulasan Pelayanan</label>
+                                <textarea name="review" class="form-control" rows="3" required></textarea>
+                            </div> --}}
                             <div class="form-group">
-                                <textarea class="form-control" name="review" rows="4"></textarea>
+                                <label>Saran atau Komplain Laundry</label>
+                                <select class="form-control" id="tipe" name="type">
+                                    <option value="1">Saran</option>
+                                    <option value="2">Komplain</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="form_sarankomplain" rows="4" name="feedback"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -219,49 +253,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    @endforeach
-
-    @foreach ($latestTransactions as $item)
-        <!-- Modal Saran atau Komplain -->
-        <div class="modal fade" id="formSaranKomplainModal{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="formSaranKomplainLabel{{ $item->id }}" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <form method="POST" action="{{ route('member.complaints.store') }}">
-                    @csrf
-                    <div class="modal-content">
-                        <div class="modal-header bg-warning text-white">
-                            <h5 class="modal-title" id="formSaranKomplainLabel{{ $item->id }}">Beri Saran atau
-                                Komplain</h5>
-                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body text-sm">
-                            <input type="hidden" name="transaction_id" value="{{ $item->id }}">
-
-                            <div class="form-group">
-                                <label for="type">Tipe</label>
-                                <select name="type" id="type-{{ $item->id }}" class="form-control" required>
-                                    <option value="">-- Pilih Tipe --</option>
-                                    <option value="Saran">Saran</option>
-                                    <option value="Komplain">Komplain</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="feedback">Isi Feedback</label>
-                                <textarea name="feedback" id="feedback-{{ $item->id }}" class="form-control" rows="4" required></textarea>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn bg-gray-600 text-white" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     @endforeach

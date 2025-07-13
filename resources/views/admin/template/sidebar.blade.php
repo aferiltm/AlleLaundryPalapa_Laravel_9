@@ -41,22 +41,15 @@
             <li class="nav-item">
                 <a href="{{ route('admin.vouchers.index') }}"
                     class="nav-link text-white {{ request()->routeIs('admin.vouchers.index') ? 'active bg-white' : '' }}">
-                    <i class="nav-icon fa-solid fa-ticket"></i>
+                    <i class="nav-icon fas fa-star"></i>
                     <p>Voucher</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('admin.review.index') }}"
-                    class="nav-link text-white {{ request()->routeIs('admin.review.index') ? 'active bg-white' : '' }}">
-                    <i class="nav-icon fa-solid fa-star"></i>
-                    <p>Review</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.complaint-suggestions.index') }}"
                     class="nav-link text-white {{ request()->routeIs('admin.complaint-suggestions.index') ? 'active bg-white' : '' }}">
                     <i class="nav-icon fas fa-sticky-note"></i>
-                    <p>Feedback</p>
+                    <p>Saran / Komplain</p>
                 </a>
             </li>
             <li class="nav-item">

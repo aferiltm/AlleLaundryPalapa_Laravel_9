@@ -13,14 +13,12 @@ class ComplaintSuggestion extends Model
     protected $fillable = [
         'feedback',
         'type',
-        'reply',
+        'rating',
         // 'review',
         'transaction_id',
         'user_id',
 
     ];
-
-
 
     /**
      * User relation

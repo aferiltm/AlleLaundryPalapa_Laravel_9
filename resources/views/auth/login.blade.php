@@ -1,7 +1,6 @@
 @extends('auth.main')
 
-{{-- @section('title', config('app.name') . ' - ' . __('auth.log_title')) --}}
-@section('title', 'Alle Laundry Palapa - Login')
+@section('title', config('app.name') . ' - ' . __('auth.log_title'))
 
 @section('container')
     <div class="container">
@@ -9,12 +8,7 @@
             <div class="col-lg-5">
                 <div class="card bg-light o-hidden border-0 shadow-lg my-5 mx-auto">
                     <div class="card-body p-5">
-                        {{-- <h3 class="text-center mb-3">@lang('auth.log_title')</h3> --}}
-                        <div class="flex justify-center mb-4">
-                            <a href="#">
-                                <img src="{{ asset('img/dashboard/logo_alle.jpg') }}" class="w-40" alt="ENC Logo">
-                            </a>
-                        </div>
+                        <h3 class="text-center mb-3">@lang('auth.log_title')</h3>
                         @if (session('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{ session('error') }}
@@ -39,7 +33,7 @@
                         @endif
                         <form action="" method="POST">
                             @csrf
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="email">@lang('auth.email_label')</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     id="email" name="email" placeholder="@lang('auth.email_placeholder')"
@@ -59,27 +53,16 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div> --}}
-                            <div class="form-group">
-                                <label for="login">Email atau Nomor Telepon</label>
-                                <input type="text" name="login" class="form-control"
-                                    placeholder="Masukkan email/no.telepon anda" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" class="form-control"
-                                    placeholder="Masukkan password anda" required>
                             </div>
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                 <label class="form-check-label" for="remember">@lang('auth.remember_me')</label>
                             </div>
-                            <button class="btn bg-blue-900 hover:bg-blue-950 btn-block text-white rounded-lg" type="submit">LOGIN</button>
+                            <button class="btn btn-success btn-block" type="submit">@lang('auth.log_title')</button>
                         </form>
                         <hr>
-                        <div class="text-center mt-3">
-                            <p>Belum Punya Akun? <a class="text-blue-800" href="{{ url('register') }}">Registrasi!</a>
-                            </p>
+                        <div class="text-center mt-5">
+                            <p>Belum Punya Akun? <a class="text-blue-500" href="{{ url('register') }}">@lang('auth.register_link')</a></p>
                         </div>
                     </div>
                 </div>

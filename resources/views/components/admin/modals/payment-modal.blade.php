@@ -24,7 +24,7 @@
                                 <option value="" selected hidden disabled>Pilih tipe service</option>
                                 @foreach ($serviceTypes as $type)
                                     <option value="{{ $type->id }}" data-type-cost="{{ $type->cost }}">
-                                        {{ $type->name }} ({{ $type->getFormattedCost() }})
+                                        {{ $type->name }} ({{ $type->getFormattedCost() }}) 
                                     </option>
                                 @endforeach
                             </select>
@@ -60,8 +60,8 @@
                         <h4>Kembalian : <span id="kembalian"></span></h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Batal</button>
-                        <button type="submit" id="btn-simpan" type="button" class="btn text-blue-900 border-blue-900 hover:text-white hover:bg-blue-900">Bayar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" id="btn-simpan" type="button" class="btn btn-success">Bayar</button>
                     </div>
                 </form>
             </div>

@@ -15,18 +15,9 @@ class PriceListKiloanController extends Controller
     {
         $request->validate([
             'category' => 'required|exists:categories_kiloan,id',
-            'heavy'    => 'required|numeric|min:0.1',
+            'heavy'   => 'required|numeric|min:0.1',
             'price'    => 'required|numeric|min:0',
         ]);
-
-        // Cek apakah kombinasi category_kiloan_id dan heavy sudah ada
-        $existing = PriceListKiloan::where('category_kiloan_id', $request->category)
-            ->where('heavy', $request->heavy)
-            ->exists();
-
-        if ($existing) {
-            return redirect()->back()->with('error', 'Berat tersebut sudah terdaftar didalam harga yang dipilih.');
-        }
 
         PriceListKiloan::create([
             'category_kiloan_id' => $request->category,
@@ -36,7 +27,6 @@ class PriceListKiloanController extends Controller
 
         return redirect()->route('admin.price-lists.index')->with('success', 'Harga kiloan berhasil ditambahkan!');
     }
-
     public function update(PriceListKiloan $priceListKiloan, Request $request): RedirectResponse
     {
         $request->validate([
@@ -54,12 +44,9 @@ class PriceListKiloanController extends Controller
         return response()->json($priceListKiloan);
     }
 
-    public function destroyK(PriceListKiloan $priceListKiloan): RedirectResponse
+    public function destroyk(PriceListKiloan $priceListKiloan): RedirectResponse
     {
         $priceListKiloan->delete();
-
-        return redirect()
-            ->route('admin.price-lists.index')
-            ->with('success', 'Harga Kiloan berhasil dihapus!');
+        return redirect()->route('admin.price-lists.index')->with('success', 'Harga kiloan berhasil dihapus!');
     }
 }

@@ -23,14 +23,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-
-                            <div class="mb-3">
-                                <a href="#" class="btn text-white bg-blue-900 hover:bg-blue-950" data-toggle="modal"
-                                    data-target="#modalTambahMember">
-                                    <i class="fas fa-plus"></i> Tambah Member
-                                </a>
-                            </div>
-
                             <table id="tbl-members" class="table dt-responsive nowrap" style="width: 100%">
                                 <thead class="thead-light">
                                     <tr>
@@ -64,45 +56,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            <!-- Modal Tambah Member -->
-                            <div class="modal fade" id="modalTambahMember" tabindex="-1" role="dialog"
-                                aria-labelledby="modalTambahMemberLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <form action="{{ route('admin.members.store') }}" method="POST">
-                                        @csrf
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalTambahMemberLabel">Tambah Member</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Tutup">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="name">Nama</label>
-                                                    <input type="text" name="name" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <input type="email" name="email" class="form-control" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="phone_number">Nomor Telepon</label>
-                                                    <input type="text" name="phone_number" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Batal</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>

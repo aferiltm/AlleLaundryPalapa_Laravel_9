@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Alle Laundry Palapa - Admin</title>
+    <title>{{ config('app.name') }} - Admin</title>
     {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
-    {{-- <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico"> --}}
-    <link href="{{ asset('/img/dashboard/logo_alle.jpg') }}" rel="icon" type="image/png">
+    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
@@ -37,7 +36,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-light-primary elevation-4 bg-blue-900">
+        <aside class="main-sidebar sidebar-light-primary elevation-4 bg-blue-700">
             <!-- Brand Logo -->
             <a href="" class="brand-link mt-2">
                 <div class="row text-white">
@@ -46,7 +45,7 @@
                     </div> --}}
                     <div class="col-11">
                         {{-- <h4 class="brand-text text-center -mr-3">{{ config('app.name') }}</h4> --}}
-                        <h4 class="brand-text text-center">Alle Laundry Palapa</h4>
+                        <h4 class="brand-text text-center">Kantil Laundry</h4>
                     </div>
                 </div>
                 {{-- <i class="fas fa-tshirt brand-image mt-1 ml-3"></i> --}}

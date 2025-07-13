@@ -19,32 +19,21 @@ class ComplaintSuggestionController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-  
-        $suggestions = ComplaintSuggestion::where('type', 'Saran')
-            ->where(function($q) {
-                $q->whereNull('reply')->orWhere('reply', '');
-            })
-            ->with('transaction', 'user')
-            ->get();
 
-        $complaints = ComplaintSuggestion::where('type', 'Komplain')
-            ->where(function($q) {
-                $q->whereNull('reply')->orWhere('reply', '');
-            })
-            ->with('transaction', 'user')
-            ->get();
+        $suggestions = ComplaintSuggestion::where([
+            'type'  => 1,
+            'reply' => null,
+        ])->get();
 
-        $repliedFeedbacks = ComplaintSuggestion::whereIn('type', ['Saran', 'Komplain'])
-            ->where('reply', '!=', '')
-            ->orderBy('updated_at', 'desc')
-            ->get();
+        $complaints = ComplaintSuggestion::where([
+            'type'  => 2,
+            'reply' => null,
+        ])->get();
 
-        $count = $suggestions->count() + $complaints->count();
+        $count = ComplaintSuggestion::whereNull('reply', '')->count();
 
-        return view('admin.complaint_suggestion', compact('user', 'suggestions', 'complaints', 'repliedFeedbacks', 'count'));
+        return view('admin.complaint_suggestion', compact('user', 'suggestions', 'complaints', 'count'));
     }
-
-
 
     /**
      * Get complaint suggestion by id
@@ -54,19 +43,8 @@ class ComplaintSuggestionController extends Controller
      */
     public function show(ComplaintSuggestion $complaintSuggestion): JsonResponse
     {
-        $complaintSuggestion->load('transaction');
-
-        return response()->json([
-            'id' => $complaintSuggestion->id,
-            'feedback' => $complaintSuggestion->feedback,
-            'type' => $complaintSuggestion->type,
-            'reply' => $complaintSuggestion->reply,
-            'user_name' => $complaintSuggestion->user->name,
-            'transaction_code' => $complaintSuggestion->transaction->transaction_code ?? '-',
-            'created_at' => $complaintSuggestion->created_at->format('d/m/Y H:i'),
-        ]);
+        return response()->json($complaintSuggestion);
     }
-
 
     /**
      * Send complaint suggestion reply
@@ -77,17 +55,9 @@ class ComplaintSuggestionController extends Controller
      */
     public function update(ComplaintSuggestion $complaintSuggestion, Request $request): JsonResponse
     {
-        $request->validate([
-            'reply' => 'required|string|max:1000',
-        ]);
-
         $complaintSuggestion->reply = $request->input('reply');
         $complaintSuggestion->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Balasan berhasil dikirim'
-        ]);
+        return response()->json();
     }
-
 }

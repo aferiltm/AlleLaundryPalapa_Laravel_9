@@ -11,8 +11,8 @@
                 Apakah anda yakin ingin keluar?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn text-gray-700 border-gray-700 hover:text-white hover:bg-gray-700" data-dismiss="modal">Batal</button>
-                <a href="{{ route('login.logout') }}" class="btn text-red-700 border-red-700 hover:text-white hover:bg-red-700">Keluar</a>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                <a href="{{ route('login.logout') }}" class="btn btn-success">Keluar</a>
             </div>
         </div>
     </div>

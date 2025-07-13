@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Alle Laundry Palapa - Member</title>
+    <title>{{ config('app.name') }} - Member</title>
     {{-- <link href="{{ asset('/img/dashboard/favicon.png') }}" rel="icon" type="image/png"> --}}
-    {{-- <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico"> --}}
-    <link href="{{ asset('/img/dashboard/logo_alle.jpg') }}" rel="icon" type="image/png">
+    <link rel="icon" type="image/png" href="https://laravel.com/img/favicon/favicon.ico">
 
     {{-- Tailwind CSS --}}
     {{-- <script src="https://unpkg.com/@tailwindcss/browser@4"></script> --}}
@@ -40,7 +39,7 @@
             <a href="" class="brand-link mt-2 text-white">
                 {{-- <i class="fas fa-tshirt brand-image mt-1 ml-3"></i> --}}
                 {{-- <h4 class="brand-text text-center">{{ config('app.name') }}</h4> --}}
-                <h4 class="brand-text text-center">Alle Laundry Palapa</h4>
+                <h4 class="brand-text text-center">Kantil Laundry</h4>
             </a>
 
             <!-- Sidebar -->

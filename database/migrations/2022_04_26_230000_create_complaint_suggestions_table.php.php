@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->text('feedback');
             $table->char('type');
+            $table->integer('rating')->check('rating BETWEEN 1 AND 5');
             // $table->text('review');
             $table->foreignId('user_id')->constrained();
             $table->unsignedBigInteger('transaction_id');

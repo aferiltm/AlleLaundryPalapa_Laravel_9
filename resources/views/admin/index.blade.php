@@ -31,7 +31,7 @@
             <div class="row">
                 <div class="col-3">
                     <!-- small box -->
-                    <div class="small-box bg-blue-700 text-white">
+                    <div class="small-box bg-primary">
                         <div class="inner">
                             <p>Jumlah Member</p>
 
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-3">
                     <!-- small box -->
-                    <div class="small-box bg-orange-500 text-white">
+                    <div class="small-box bg-yellow-500 text-white">
                         <div class="inner">
                             <p class="text-white">Transaksi Berjalan</p>
 
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-3">
                     <!-- small box -->
-                    <div class="small-box bg-emerald-600 text-white">
+                    <div class="small-box bg-success">
                         <div class="inner">
                             <p>Transaksi Selesai</p>
 
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-3">
                     <!-- small box -->
-                    <div class="small-box bg-cyan-600 text-white">
+                    <div class="small-box bg-info">
                         <div class="inner">
                             <p>Jumlah Transaksi</p>
 
@@ -89,21 +89,6 @@
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-                {{-- <div class="col-3">
-                    <!-- small box -->
-                    <div class="small-box bg-primary">
-                        <div class="inner">
-                            <p>Jumlah Member</p>
-
-                            <h3>{{ $membersCount }}</h3>
-                        </div>
-                        <div class="icon">
-                            <i class="fa-solid fa-user-group" style="font-size:500%;"></i>
-                        </div>
-                        <a href="{{ route('admin.members.index') }}" class="small-box-footer">Lihat member <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div> --}}
             </div>
 
             <div class="row">

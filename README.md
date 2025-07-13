@@ -1,6 +1,8 @@
-# Aplikasi Alle Laundry Palapa
+<p align="center"><img src="https://i.imgur.com/g3v2FCI.png" width="500"></p>
 
-Aplikasi ini merupakan aplikasi laundry sederhana yang dirancang untuk memberikan kemudahan dalam proses pencucian pakaian Anda. Dengan antarmuka pengguna yang intuitif dan proses pemesanan yang cepat, Alle Laundry Palapa menyediakan solusi praktis untuk kebutuhan laundry Anda.
+# Aplikasi Laundry Sederhana
+
+Aplikasi ini merupakan aplikasi laundry sederhana yang dirancang untuk memberikan kemudahan dalam proses pencucian pakaian Anda. Dengan antarmuka pengguna yang intuitif dan proses pemesanan yang cepat, CleanLaundry menyediakan solusi praktis untuk kebutuhan laundry Anda.
 
 Beberapa fitur diantaranya:
 
@@ -21,7 +23,7 @@ Beberapa fitur diantaranya:
 Khusus Admin Daftar / Register dengan url `/register-admin`. Secret key dapat diubah di env atau default "admin123".
 
 Login admin:  
-Email : admin@gmail.com  
+Email : admin@laundryxyz.com  
 Password : admin123
 
 Login admin:  
@@ -29,6 +31,28 @@ Email : member@gmail.com
 Password : member123
 
 Dalam perancangan Aplikasi ini, kami menggunakan PHP versi 8.1 dan Framework Laravel 9.
+
+## Screenshot
+
+### Landing Page
+
+<img src="https://i.imgur.com/JCmeLQt.png" style="width:100%;" />
+
+### Dashboard Admin
+
+<img src="https://i.imgur.com/FrNOQiu.png" style="width:100%;" />
+
+### Dashboard Member
+
+<img src="https://i.imgur.com/QgKYdGp.png" style="width:100%;" />
+
+### Fitur Cetak Bukti Transaksi [ Admin ]
+
+<img src="https://i.imgur.com/5Aj0yNv.png" style="width:100%;" />
+
+### Fitur Cetak Laporan Keuangan [ Admin ]
+
+<img src="https://i.imgur.com/t69mpps.png" style="width:100%;" />
 
 ## Cara Instalasi
 
@@ -82,7 +106,7 @@ Silahkan buka browser dan ketikkan : http://localhost:8000
 
 3. **Riwayat Transaksi:** Pantau dan kelola riwayat transaksi Anda untuk melacak semua pesanan sebelumnya.
 
-Alle Laundry Palapa bertujuan untuk memberikan layanan pencucian pakaian yang berkualitas dan mudah diakses. Kami berkomitmen untuk membuat pengalaman laundry Anda menjadi lebih efisien dan menyenangkan. Selamat mencuci bersih dengan Alle Laundry Palapa!
+CleanLaundry bertujuan untuk memberikan layanan pencucian pakaian yang berkualitas dan mudah diakses. Kami berkomitmen untuk membuat pengalaman laundry Anda menjadi lebih efisien dan menyenangkan. Selamat mencuci bersih dengan CleanLaundry!
 
 ## Informasi Tambahan
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan Alle Laundry Palapa</title>
+    <title>Laporan Analisis Layanan, Kepuasan, dan Pendapatan Kantil Laundry</title>
     <style>
         table {
             width: 100%;
@@ -94,7 +94,7 @@
 </head>
 
 <body>
-    <h2 style="text-align: center;">Laporan Pendapatan dan Analisis Kepuasan Layanan pada Alle Laundry Palapa</h2>
+    <h2 style="text-align: center;">Laporan Pendapatan dan Analisis Kepuasan Layanan pada Laundry</h2>
     <p style="text-align: center;">Periode: {{ $namaBulanAwal }} - {{ $namaBulanAkhir }} {{ $tahun }}</p>
 
     <section>

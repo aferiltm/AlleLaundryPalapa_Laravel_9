@@ -33,22 +33,15 @@
             <li class="nav-item">
                 <a href="{{ route('member.points.index') }}"
                     class="nav-link text-white {{ request()->routeIs('member.points.index') ? 'active bg-white text-cyan-700' : '' }}">
-                    <i class="nav-icon fas fa-ticket"></i>
-                    <p>Tukar Poin</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('member.review.index') }}"
-                    class="nav-link text-white {{ request()->routeIs('member.review.index') ? 'active bg-white text-cyan-700' : '' }}">
                     <i class="nav-icon fas fa-star"></i>
-                    <p>Review</p>
+                    <p>Tukar Poin</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('member.complaints.index') }}"
                     class="nav-link text-white {{ request()->routeIs('member.complaints.index') ? 'active bg-white text-cyan-700' : '' }}">
                     <i class="nav-icon fas fa-sticky-note"></i>
-                    <p>Feedback</p>
+                    <p>Saran / Komplain</p>
                 </a>
             </li>
             <li class="nav-item">

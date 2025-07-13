@@ -54,7 +54,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            {{-- <th>Keterangan</th> --}}
+                                            <th>Keterangan</th>
                                             <th>Details</th>
                                             <th>Poin</th>
                                             <th>Aksi</th>
@@ -65,7 +65,7 @@
                                             <tr>
                                                 <td style="padding-top: 20px;">{{ $loop->iteration }}</td>
                                                 <td style="padding-top: 20px;">{{ $voucher->name }}</td>
-                                                {{-- <td style="padding-top: 20px;">{{ $voucher->description }}</td> --}}
+                                                <td style="padding-top: 20px;">{{ $voucher->description }}</td>
                                                 <td style="padding-top: 20px;">{{ $voucher->details }}</td>
                                                 <td style="padding-top: 20px;">{{ $voucher->point_need }}</td>
                                                 <td><a href="{{ route('member.vouchers.store', ['voucher' => $voucher->id]) }}"
@@ -89,7 +89,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Voucher</th>
-                                        <th>Detail</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,7 +97,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $voucher->voucher->name }}</td>
-                                            <td>{{ $voucher->voucher->details }}</td>
+                                            <td>{{ $voucher->voucher->description }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

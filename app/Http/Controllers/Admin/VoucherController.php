@@ -68,51 +68,20 @@ class VoucherController extends Controller
      * @param  \App\Models\Voucher $voucher
      * @return \Illuminate\Http\JsonResponse
      */
-    // public function update(Voucher $voucher): JsonResponse
-    // {
-    //     // Jika 1 maka ubah ke 0
-    //     if ($voucher->active_status == 1) {
-    //         $voucher->active_status = 0;
-    //         $voucher->save();
-    //     } else {
-    //         // Ubah ke 1
-    //         $voucher->active_status = 1;
-    //         $voucher->save();
-    //     }
-
-    //     return response()->json();
-    // }
-
-    /* ==========  TOGGLE STATUS  ========== */
-    public function toggleStatus(Voucher $voucher): JsonResponse
+    public function update(Voucher $voucher): JsonResponse
     {
-        $voucher->active_status = $voucher->active_status ? 0 : 1;
-        $voucher->save();
+        // Jika 1 maka ubah ke 0
+        if ($voucher->active_status == 1) {
+            $voucher->active_status = 0;
+            $voucher->save();
+        } else {
+            // Ubah ke 1
+            $voucher->active_status = 1;
+            $voucher->save();
+        }
 
         return response()->json();
     }
-
-    /* ==========  UPDATE POINT NEED  ========== */
-    public function update(Request $request, Voucher $voucher): RedirectResponse
-    {
-        $data = $request->validate([
-            'discount_value' => ['required', 'numeric', 'min:0'],
-            'point_need'     => ['required', 'integer', 'min:0'],
-            'details'        => ['required', 'string'],
-        ]);
-
-        $voucher->update([
-            'discount_value' => $data['discount_value'],
-            'point_need'     => $data['point_need'],
-            'details'        => $data['details'],
-            'name'           => 'Potongan ' . number_format($data['discount_value'], 0, ',', '.'),
-            'description'    => 'Mendapatkan potongan harga ' . number_format($data['discount_value'], 0, ',', '.'),
-        ]);
-
-        return redirect()->route('admin.vouchers.index')
-                        ->with('success', 'Voucher berhasil diperbarui!');
-    }
-
 
     public function destroy(Voucher $voucher): RedirectResponse
     {

@@ -84,18 +84,14 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetailKiloan::class);
     }
     public function price_list_kiloan()
-    {
-        return $this->belongsTo(PriceListKiloan::class);
-    }
+{
+    return $this->belongsTo(PriceListKiloan::class);
+}
     public function category_kiloan()
     {
         return $this->belongsTo(Category::class , 'category_kiloan_id');
     }
 
-    public function complaint_suggestion()
-    {
-        return $this->hasOne(ComplaintSuggestion::class, 'transaction_id');
-    }
 
     /**
      * Get formatted number of total
@@ -129,17 +125,12 @@ class Transaction extends Model
 
     public function reviews(): HasMany
     {
-        return $this->hasMany(Review::class, 'transaction_id');
+        return $this->hasMany(ComplaintSuggestion::class, 'transaction_id');
     }
 
     public function hasReview(): bool
     {
         return $this->reviews()->exists(); // Mengecek apakah transaksi sudah memiliki ulasan
-    }
-
-    public function hasFeedback(): bool
-    {
-        return $this->complaint_suggestion()->exists(); // Mengecek apakah transaksi sudah memiliki ulasan
     }
 
 }

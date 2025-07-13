@@ -6,7 +6,6 @@
     <link href="{{ asset('vendor/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables-responsive/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 @endsection
 
 @section('main-content')
@@ -64,7 +63,7 @@
                             <div class="tab-content mt-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="satuan" role="tabpanel"
                                     aria-labelledby="satuan-tab">
-                                    <form id="priceForm" action="{{ route('admin.price-lists.store') }}" method="post">
+                                    <form action="{{ route('admin.price-lists.store') }}" method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -80,8 +79,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
-                                                            <a id="tambah-barang"
-                                                                class="btn text-white bg-blue-900 hover:bg-blue-950"
+                                                            <a id="tambah-barang" class="text-white btn btn-success"
                                                                 data-toggle="modal" data-target="#addItemModal"><i
                                                                     class="fas fa-plus"></i>
                                                                 Tambah Barang</a>
@@ -101,8 +99,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-4">
-                                                            <a id="tambah-servis"
-                                                                class="btn text-white bg-blue-900 hover:bg-blue-950"
+                                                            <a id="tambah-servis" class="text-white btn btn-success"
                                                                 data-toggle="modal" data-target="#addServiceModal"><i
                                                                     class="fas fa-plus"></i>
                                                                 Tambah Servis</a>
@@ -131,20 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah Harga</button> --}}
-                                        <button id="submitBtn" type="button"
-                                            class="btn text-white bg-blue-900 hover:bg-blue-950">
-                                            <div class="flex items-center">
-                                                <svg id="spinner" class="hidden animate-spin size-5 mr-2"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24">
-                                                    <circle cx="12" cy="12" r="10" stroke="currentColor"
-                                                        stroke-width="4" class="opacity-25" />
-                                                    <path stroke="currentColor" stroke-width="4" d="M4 12a8 8 0 018-8" />
-                                                </svg>
-                                                <span id="submitText">Tambah Harga</span>
-                                            </div>
-                                        </button>
+                                        <button type="submit" class="btn btn-success">Tambah Harga</button>
                                     </form>
                                     <br>
                                     <hr>
@@ -162,64 +146,27 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($satuan as $item)
-                                                <tr x-data="{ openModal: false }">
+                                                <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->item->name }}</td>
                                                     <td>{{ $item->service->name }}</td>
                                                     <td>{{ $item->getFormattedPrice() }} /PCS</td>
-                                                    <td class="whitespace-no-wrap">
-                                                        <!-- Tombol Ubah Harga -->
+                                                    <td>
                                                         <a href="#"
-                                                            class="btn bg-amber-600 hover:bg-amber-800 duration-200 text-white rounded btn-ubah-harga"
+                                                            class="bg-orange-600 hover:bg-orange-900 duration-200 text-white rounded text-base px-2 py-2 btn-ubah-harga"
                                                             data-id="{{ $item->id }}" data-toggle="modal"
                                                             data-target="#changePriceModal"><i
                                                                 class="fa-solid fa-pen-to-square"></i></a>
-
-                                                        <!-- Tombol Hapus (Trigger Modal) -->
-                                                        <button type="button" @click="openModal = true"
-                                                            class="btn bg-red-600 hover:bg-red-900 duration-200 text-white rounded text-base ml-1">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-
-                                                        <!-- Modal Konfirmasi -->
-                                                        <div x-show="openModal" x-cloak
-                                                            class="fixed inset-0 z-50 flex items-center justify-center">
-                                                            <!-- Overlay -->
-                                                            <div class="absolute inset-0 bg-black/50"
-                                                                @click="openModal = false"></div>
-
-                                                            <!-- Konten Modal -->
-                                                            <div
-                                                                class="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6 z-50">
-                                                                <h2 class="text-lg font-semibold mb-4">Konfirmasi Hapus
-                                                                </h2>
-
-                                                                <p
-                                                                    class="text-sm text-gray-700 break-words whitespace-normal">
-                                                                    Anda yakin ingin menghapus harga
-                                                                    <strong>{{ $item->item->name }}</strong> dengan servis
-                                                                    <strong>{{ $item->service->name }}</strong>?
-                                                                </p>
-
-                                                                <div class="mt-6 flex justify-end gap-2">
-                                                                    <button @click="openModal = false"
-                                                                        class="px-4 py-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100">
-                                                                        Batal
-                                                                    </button>
-
-                                                                    <form
-                                                                        action="{{ route('admin.price-lists.destroy', $item->id) }}"
-                                                                        method="POST" @submit="openModal = false">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit"
-                                                                            class="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white">
-                                                                            Ya, Hapus
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <form action="{{ route('admin.price-lists.destroy', $item->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Yakin ingin menghapus harga ini?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="bg-red-600 hover:bg-red-800 duration-200 text-white rounded text-base px-2 py-2 border-0">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -227,8 +174,7 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="kiloan" role="tabpanel" aria-labelledby="kiloan-tab">
-                                    <form id="priceForm" action="{{ route('admin.price-lists.kiloan.store') }}"
-                                        method="post">
+                                    <form action="{{ route('admin.price-lists.kiloan.store') }}" method="post">
                                         @csrf
                                         <div class="row">
                                             <div class="col-6">
@@ -262,21 +208,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <button type="submit" class="btn text-white bg-blue-900 hover:bg-blue-950">Tambah
-                                            Harga</button> --}}
-                                        <button id="submitBtn" type="button"
-                                            class="btn text-white bg-blue-900 hover:bg-blue-950">
-                                            <div class="flex items-center">
-                                                <svg id="spinner" class="hidden animate-spin size-5 mr-2"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24">
-                                                    <circle cx="12" cy="12" r="10" stroke="currentColor"
-                                                        stroke-width="4" class="opacity-25" />
-                                                    <path stroke="currentColor" stroke-width="4" d="M4 12a8 8 0 018-8" />
-                                                </svg>
-                                                <span id="submitText">Tambah Harga</span>
-                                            </div>
-                                        </button>
+                                        <button type="submit" class="btn btn-success">Tambah Harga</button>
                                     </form>
                                     <br>
                                     <hr>
@@ -293,65 +225,27 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($kiloan as $item)
-                                                {{-- Tiap baris punya modal-nya sendiri --}}
-                                                <tr x-data="{ openKD: false }">
+                                                <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $item->heavy }} KG</td>
                                                     <td>{{ $item->getFormattedPrice() }} /KG</td>
-
-                                                    <td class="whitespace-no-wrap">
-                                                        <!-- Tombol Edit (tetap) -->
+                                                    <td>
                                                         <a href="#"
-                                                            class="btn bg-amber-600 hover:bg-amber-800 duration-200 text-white btn-ubah-harga-kiloan"
+                                                            class="btn btn-warning btn-ubah-harga-kiloan text-white"
                                                             data-id="{{ $item->id }}"
                                                             data-url="{{ route('admin.price-lists.kiloan.show', $item->id) }}"
                                                             data-toggle="modal" data-target="#changePriceModal">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                            Edit
                                                         </a>
-
-                                                        <!-- Tombol Hapus -->
-                                                        <button type="button" @click="openKD = true"
-                                                            class="btn bg-red-600 hover:bg-red-900 duration-200 text-white rounded text-base ml-1">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </button>
-
-                                                        <!-- Modal Konfirmasi -->
-                                                        <div x-show="openKD" x-cloak
-                                                            class="fixed inset-0 z-50 flex items-center justify-center">
-                                                            <!-- Overlay -->
-                                                            <div class="absolute inset-0 bg-black/50"
-                                                                @click="openKD = false"></div>
-
-                                                            <!-- Kotak Modal -->
-                                                            <div class="relative bg-white rounded-lg shadow-lg w-full max-w-md p-6 z-50"
-                                                                @keydown.escape.window="openKD=false">
-                                                                <h2 class="text-lg font-semibold mb-4">Konfirmasi Hapus
-                                                                </h2>
-                                                                <p class="text-sm text-gray-700">
-                                                                    Yakin hapus harga <strong>{{ $item->heavy }}
-                                                                        KG</strong>?
-                                                                </p>
-
-                                                                <div class="mt-6 flex justify-end gap-2">
-                                                                    <button type="button"
-                                                                        class="px-4 py-2 rounded border border-gray-300 hover:bg-gray-100"
-                                                                        @click="openKD = false">
-                                                                        Batal
-                                                                    </button>
-
-                                                                    <form
-                                                                        action="{{ route('admin.price-lists.kiloan.destroy', $item->id) }}"
-                                                                        method="POST" @submit="openKD = false">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit"
-                                                                            class="px-4 py-2 rounded bg-red-600 hover:bg-red-700 text-white">
-                                                                            Ya, Hapus
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <form
+                                                            action="{{ route('admin.price-lists.kiloan.destroy', $item->id) }}"
+                                                            method="POST" style="display:inline;"
+                                                            onsubmit="return confirm('Yakin ingin menghapus harga ini?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-danger text-white">Hapus</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -382,7 +276,7 @@
                                                 <td>{{ $serviceType->getFormattedCost() }}</td>
                                                 <td>
                                                     <a href="#"
-                                                        class="btn bg-amber-600 hover:bg-amber-800 duration-200 text-white rounded text-base btn-update-cost"
+                                                        class="bg-orange-600 hover:bg-orange-900 duration-200 text-white rounded text-base px-2 py-2 btn-update-cost"
                                                         data-id="{{ $serviceType->id }}" data-toggle="modal"
                                                         data-target="#updateCostModal"><i
                                                             class="fa-solid fa-pen-to-square"></i></a>
@@ -432,23 +326,6 @@
                 $('#id-harga-modal').val(data.id);
                 $('#updatePriceForm').attr('action', `/admin/price-lists/kiloan/${data.id}`);
             });
-        });
-    </script>
-
-    <script>
-        document.getElementById("submitBtn").addEventListener("click", function() {
-            const spinner = document.getElementById("spinner");
-            const submitText = document.getElementById("submitText");
-
-            // Tampilkan spinner & ubah teks
-            spinner.classList.remove("hidden");
-            submitText.textContent = "Memproses...";
-
-            // Disable tombol agar tidak diklik lagi
-            this.setAttribute("disabled", true);
-
-            // Submit form
-            document.getElementById("priceForm").submit();
         });
     </script>
 @endsection
